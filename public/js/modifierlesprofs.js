@@ -104,6 +104,10 @@ function ajouterprof(event,ojbet)
 
 	var $tel = $("#telduprof").val();
 
+	var $cycle = $("#cycleduprof").val();
+
+	var $matiere = $("#matiereduprof").val();
+
 	var new_id = $(ojbet).attr('id');
 
 	var xx=new_id;
@@ -114,13 +118,28 @@ function ajouterprof(event,ojbet)
 
 	console.log(new_id);
 	
+	var currentdate = new Date(); 
+	
+	var datetime =  currentdate.getDate() + "/"
+	                + (currentdate.getMonth()+1)  + "/" 
+	                + currentdate.getFullYear() + " "  
+	                + currentdate.getHours() + ":"  
+	                + currentdate.getMinutes() + ":" 
+	                + currentdate.getSeconds();
+
 	var to_append = '<tr class="alert alert-success" id="prof'+new_id+'"><form>{{ csrf_field() }} <td>'+new_id+'</td>'
 
-	to_append+='<td> <input type="text" class="form-control" id="nomprof'+new_id+'" value="'+$nom+'"> <span style="display: none;"> '+$nom+' </span></td>'
+	to_append+='<td> <span> '+$nom+' </span></td>'
 
-	to_append+='<td> <input type="number" class="form-control" id="nb_min'+new_id+'" value="'+$min+'"> <span style="display: none;"> '+$min+' </span></td>'
+	to_append+='<td> <span> '+$prenom+' </span></td>'
 
-	to_append+='<td> <input type="number" class="form-control" id="nb_max'+new_id+'" value="'+$max+'"> <span style="display: none;"> '+$max+' </span></td>'
+	to_append+='<td> <input type="text" id="telprof'+new_id+'" class="form-control" value="'+$tel+'">  <span style="display: none;">'+$tel+'</span></td>'
+
+	to_append+='<td> <span> '+$cycle+' </span></td>'
+
+	to_append+='<td> <span> '+$matiere+' </span></td>'
+
+	to_append+='<td> <span> '+datetime+' </span></td>'
 
 	to_append+='<td><button style="margin-right:2%;" class="btn btn-primary btn-sm" id="'+new_id+'" onclick="modifierprof(event,this)"> Enregistrer</button>'
 
@@ -153,9 +172,7 @@ function ajouterprof(event,ojbet)
 	$(xxx).attr('id',newest);
 
 	$("#nomduprof").val("");
-	$("#minduprof").val("25");
-	$("#maxduprof").val("35");	
-
+	
     $.ajax({
         headers: 
         {
@@ -163,7 +180,7 @@ function ajouterprof(event,ojbet)
         },                    
         type:"POST",
         url:"/home/profs/ajouter/ajax",
-        data:{min:$min,nom:$nom,max:$max},
+        data:{nom:$nom,prenom:$prenom,tel:$tel,cycle:$cycle,matiere:$matiere},
 
         success:function(data) 
         {

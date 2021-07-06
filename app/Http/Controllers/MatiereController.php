@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Prof;
+use App\Matiere;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -13,17 +13,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 
-class ProfController extends Controller
+class MatiereController extends Controller
 {
 
-    public function profs()
+    public function matieres()
     {
         
-        $profs=Prof::all_profs();
+        $matieres=Matiere::all_matieres();
 
-        $last_id = Prof::last_ids();
+        $last_id = Matiere::last_ids();
 
-        return view('Home.profs',compact('profs','last_id'));
+        return view('Home.matieres',compact('matieres','last_id'));
 
 
         # code...
@@ -32,7 +32,7 @@ class ProfController extends Controller
     public function modifier(Request $request)
     {
 
-    	DB::update("update profs set tel = \"$request->tel\" where id = \"$request->id\" ");
+    	DB::update("update matieres set tel = \"$request->tel\" where id = \"$request->id\" ");
 
     	# code...
     }
@@ -40,7 +40,7 @@ class ProfController extends Controller
     public function supprimer(Request $request)
     {
 
-    	DB::update("update profs set visible = 0 where id = \"$request->id\" ");
+    	DB::update("update matieres set visible = 0 where id = \"$request->id\" ");
 
     	# code...
     }
@@ -49,12 +49,8 @@ class ProfController extends Controller
     {   
         
     	$nom = ($request->nom);
-        $prenom = ($request->prenom);
-        $tel = ($request->tel);
-        $cycle = ($request->cycle);
-        $matiere = ($request->matiere);
 
-    	DB::insert("insert into profs(nom,prenom,cycle,tel,matiere) values(\"$nom\",\"$prenom\",\"$cycle\",\"$tel\",\"$matiere\")");
+    	DB::insert("insert into matieres(nom) values(\"$nom\")");
 
     	# code...
     }

@@ -17,9 +17,7 @@ class CreateMatieresTable extends Migration
         {
             $table->bigIncrements('id');
             $table->string('nom');
-            $table->string('desc');
-            $table->string('type');
-            $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

@@ -24,6 +24,20 @@ Route::post('/home/classes/modifier/ajax','ClasseController@modifier');
 Route::post('/home/classes/supprimer/ajax','ClasseController@supprimer');
 Route::post('/home/classes/ajouter/ajax','ClasseController@ajouter');
 
+//niveaux :
+Route::get('/home/niveaux', 'NiveauController@niveaux');
+Route::post('/home/niveaux/modifier/ajax','NiveauController@modifier');
+Route::post('/home/niveaux/supprimer/ajax','NiveauController@supprimer');
+Route::post('/home/niveaux/ajouter/ajax','NiveauController@ajouter');
+
+
+//matiéres :
+Route::get('/home/matiéres', 'MatiereController@matieres');
+Route::post('/home/matieres/modifier/ajax','MatiereController@modifier');
+Route::post('/home/matieres/supprimer/ajax','MatiereController@supprimer');
+Route::post('/home/matieres/ajouter/ajax','MatiereController@ajouter');
+
+
 //Profs :
 Route::get('/home/Enseignants', 'ProfController@profs');
 Route::post('/home/profs/modifier/ajax','ProfController@modifier');

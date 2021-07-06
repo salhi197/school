@@ -121,12 +121,12 @@
 
 
                                     <li aria-haspopup="true"><a href="/home/classes" class=""><i class="pe-7s-culture"></i> Salles</a></li>
-
-                                    <li aria-haspopup="true"><a href="/home/Enseignants" class=""><i class="fa fa-mortar-board"></i> Enseignants</a></li>
                                     
                                     <li aria-haspopup="true"><a href="/home/niveaux" class=""><i class="ti-server"></i> Niveaux</a></li>
                                     
                                     <li aria-haspopup="true"><a href="/home/matiéres" class=""><i class="ti-book"></i> Matiéres</a></li>
+
+                                    <li aria-haspopup="true"><a href="/home/Enseignants" class=""><i class="fa fa-mortar-board"></i> Enseignants</a></li>
                                     
                                     <li aria-haspopup="true"><a href="/home/groupes" class=""><i class="mdi mdi-account-multiple"></i> Groupes</a></li>
                                     
@@ -159,7 +159,7 @@
                 <div class="container">
                     <div class="row align-items-center flex-row-reverse">
                         <div class="col-md-12 col-sm-12 text-center">
-                            Copyright © 2021 <a href="#">LS Web</a> Designed by <a href="#">LS WEB</a> All rights reserved.
+                            Copyright © 2021 <a href="#">Lotfi</a> Designed by <a href="#">Lotfi</a> All rights reserved.
                         </div>
                     </div>
                 </div>

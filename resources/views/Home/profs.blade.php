@@ -71,34 +71,36 @@
                         {{--  --}}
                     </div>
 
+                    
                     <div style="margin-top: 2%;" class="form-group col-md-6 col-sm-12">
 
                         <label for="cycleduprof">Cycle </label>
 
-                        <select name="cycle" id="cycleduprof" class="form-control select2 w-100 p-3" multiple="multiple">
+                        <select name="cycle" id="cycleduprof" class="form-control col-md-7">
                             
+                            
+                            <option value="Secondaire"> Secondaire </option>
                             <option value="Primaire"> Primaire </option>
                             <option value="Moyen"> Moyen </option>
-                            <option value="Secondaire"> Secondaire </option>
-                            <option value="Univairsitaire"> Univairsitaire </option>
+                            <option value="Universitaire"> Universitaire </option>
                             
                             {{--  --}}                            
                         </select>                        
 
-                        {{--  --}}
                     </div>
 
-                    <div style="margin-top: 2%;" class="form-group col-md-6 col-sm-12">
+                    <div style="margin-top: 2%;" class="form-group col-md-6">
 
                         <label for="matiereduprof">Matière </label>
 
-                        <select name="matiere" id="matiereduprof" class="form-control select2 w-100" multiple="multiple">
+                        <select name="matiere" id="matiereduprof" class="form-control col-md-6 ">
                             
-                            <option value="Primaire"> Arabe </option>
-                            <option value="Moyen"> Français </option>
-                            <option value="Secondaire"> Anglais </option>
-                            <option value="Univairsitaire"> Math </option>
-                            <option value="Univairsitaire"> Physique </option>
+                            
+                            <option value="Arabe"> Arabe </option>
+                            <option value="Français"> Français </option>
+                            <option value="Anglais"> Anglais </option>
+                            <option value="Math"> Math </option>
+                            <option value="Physique"> Physique </option>
                             
                             {{--  --}}
                         </select>
@@ -199,6 +201,7 @@
 								<th style="cursor: pointer;" class="wd-15p">Num Tél</th>
                                 <th style="cursor: pointer;" class="wd-15p">Cycle</th>
                                 <th style="cursor: pointer;" class="wd-15p">Matière</th>
+                                <th style="cursor: pointer;" class="wd-15p">Date Ajout</th>
 								<th style="cursor: pointer;" class="wd-15p">Actions</th>
 							</tr>
 						</thead>
@@ -250,6 +253,12 @@
                                             
                                             {{-- <input type="text" id="nomprof{{$profs[$i]->id}}" class="form-control" value="{!! $profs[$i]->matiere !!}">   --}}
                                             <span>{!! $profs[$i]->matiere !!}</span>
+                                        </td>
+
+
+                                        <td> 
+                                            
+                                            <span>{!! date('d/m/Y H:i:s',strtotime($profs[$i]->created_at)) !!}</span>
                                         </td>
 
                                         <td> 
