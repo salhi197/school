@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('lang');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -43,3 +43,5 @@ Route::get('/home/Enseignants', 'ProfController@profs');
 Route::post('/home/profs/modifier/ajax','ProfController@modifier');
 Route::post('/home/profs/supprimer/ajax','ProfController@supprimer');
 Route::post('/home/profs/ajouter/ajax','ProfController@ajouter');
+
+Route::get('/lang/{lang}', 'LangController@setLang');
