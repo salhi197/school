@@ -24,18 +24,19 @@ class CreateGroupesTable extends Migration
             $table->string('annee_scolaire');
 
 
-            $table->unsignedBigInteger('id_classe');
-            $table->unsignedBigInteger('id_prof');
-            $table->unsignedBigInteger('id_niveau');
-            $table->unsignedBigInteger('id_matiere');
+            $table->string('classe');
+            $table->string('prof');
+            $table->string('niveau');
+            $table->string('matiere');
             
-            $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
-            $table->foreign('id_classe')->references('id')->on('classes');
+/*            $table->foreign('id_classe')->references('id')->on('classes');
             $table->foreign('id_prof')->references('id')->on('profs');
             $table->foreign('id_niveau')->references('id')->on('niveaux');
             $table->foreign('id_matiere')->references('id')->on('id_matiere');
-        });
+*/        });
     }
 
     /**

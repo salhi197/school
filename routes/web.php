@@ -44,4 +44,24 @@ Route::post('/home/profs/modifier/ajax','ProfController@modifier');
 Route::post('/home/profs/supprimer/ajax','ProfController@supprimer');
 Route::post('/home/profs/ajouter/ajax','ProfController@ajouter');
 
+
+//Groupes : 
+Route::get('/home/groupes','GroupeController@groupes');
+Route::get('/home/groupes/{id}','GroupeController@afficher_groupe');
+Route::post('/home/groupes/modifier/ajax','GroupeController@modifier');
+Route::post('/home/groupes/supprimer/ajax','GroupeController@supprimer');
+Route::post('/home/groupes/ajouter/ajax','GroupeController@ajouter');
+Route::post('/home/groupes/get_profs/ajax','GroupeController@get_profs');
+Route::post('/home/groupes/fit_salle/ajax','GroupeController@fit_salles');
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/lang/{lang}', 'LangController@setLang');

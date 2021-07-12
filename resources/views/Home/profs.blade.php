@@ -95,13 +95,13 @@
 
                         <select name="matiere" id="matiereduprof" class="form-control col-md-6 ">
                             
-                            
-                            <option value="Arabe"> Arabe </option>
-                            <option value="Français"> Français </option>
-                            <option value="Anglais"> Anglais </option>
-                            <option value="Math"> Math </option>
-                            <option value="Physique"> Physique </option>
-                            
+                            @foreach ($matieres as $matiere)
+                                
+                                <option value="{{ $matiere->nom }}">{!! $matiere->nom !!}</option>
+
+                                {{-- expr --}}
+                            @endforeach
+                                                        
                             {{--  --}}
                         </select>
 

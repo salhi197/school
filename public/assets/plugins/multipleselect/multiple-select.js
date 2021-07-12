@@ -206,7 +206,7 @@
                 );
             }
 
-            if (this.options.selectAll && !this.options.single) {
+/*            if (this.options.selectAll && !this.options.single) {
                 $ul.append([
                     '<li class="ms-select-all">',
                     '<label>',
@@ -218,7 +218,7 @@
                     '</li>'
                 ].join(''));
             }
-
+*/
             $.each(this.$el.children(), function (i, elm) {
                 $ul.append(that.optionToHtml(i, elm));
             });
@@ -742,7 +742,7 @@
         filterAcceptOnEnter: false,
         hideOptgroupCheckboxes: false,
 
-        selectAllText: 'Select all',
+        selectAllText: '----',
         allSelected: 'All selected',
         countSelected: '# of % selected',
         noMatchesFound: 'No matches found',

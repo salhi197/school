@@ -23,7 +23,9 @@ class ProfController extends Controller
 
         $last_id = Prof::last_ids();
 
-        return view('Home.profs',compact('profs','last_id'));
+        $matieres = DB::select("select * from matieres order by nom");
+
+        return view('Home.profs',compact('profs','last_id','matieres'));
 
 
         # code...

@@ -35,6 +35,7 @@
 
         <!-- Skin css-->
         <link href="{{ asset('../../assets/skins/skins-modes/color1.css') }}"  id="theme" rel="stylesheet" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('../../assets/plugins/multipleselect/multiple-select.css') }}">
 
     </head>
 
@@ -120,7 +121,7 @@
                                     <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Profile</a></li>                                    
 
 
-                                    <li aria-haspopup="true"><a href="/home/classes" class=""><i class="pe-7s-culture"></i> Salles</a></li>
+                                    <li aria-haspopup="true"><a href="/home/classes" class=""><i class="pe-7s-culture"></i> {{ trans('main.Salles') }}</a></li>
                                     
                                     <li aria-haspopup="true"><a href="/home/niveaux" class=""><i class="ti-server"></i> Niveaux</a></li>
                                     
@@ -143,6 +144,17 @@
                     </div>
                 </div>
                 <!-- HORIZONTAL-MENU END -->
+
+                @if ((session()->has('notification.message')))
+
+                    <div id="nnotif" class="alert alert-{{ session()->get('notification.type') }}" style="text-align: center;">
+
+                        {{ session()->get('notification.message') }}
+                    </div>
+
+                  {{--  --}}
+                @endif               
+
 
                 <!-- CONTAINER -->
                 <div class="container content-area relative">
@@ -257,6 +269,9 @@
         <!-- SWEET-ALERT PLUGIN -->
         <script src="{{ asset('../../assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
         <script src="{{ asset('../../assets/js/sweet-alert.js') }}"></script>        
+
+        <script src="{{ asset('../../assets/plugins/multipleselect/multiple-select.js') }}"></script>
+        <script src="{{ asset('../../assets/plugins/multipleselect/multi-select.js') }}"></script>
 
 
     </body>
