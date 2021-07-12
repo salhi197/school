@@ -128,11 +128,24 @@
                                     <div class="row profie-img">
                                         <div class="col-md-12">
                                             <div class="media-heading">
-                                                <h5 class="text-uppercase"><strong>Biography</strong></h5>
+                                                <h5 class="text-uppercase"><strong>Information de connexion :</strong></h5>
                                             </div>
                                             <hr class="m-0 mb-3">
-                                            <p>Omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
-                                            <p class="mb-0">We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection</p>
+                                                <form class="form-inline">
+                                                {{ csrf_field() }}  
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label for="nomduclasse">Nouveau Mot de passe  </label>
+                                                    <input type="text" id="nomduclasse" required="true" name="password" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label for="minduclasse">Confirm Password</label>
+                                                    <input type="number" min="1" value="25" id="minduclasse" required name="min" class="form-control">
+                                                </div>
+                                                <a style="color: #2070F5; margin-top: 5%;" id="" data-dismiss="modal"  class="btn btn-outline-primary col-md-12">Ajouter</a>
+                                                </form>
+
+
+
                                         </div>
                                     </div>
                                 </div>
