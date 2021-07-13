@@ -132,7 +132,11 @@ class GroupeController extends Controller
 
         $groupe = $groupe[0];
 
-        return view('Home.single_groupe',compact('groupe'));
+        $seances_eleves = DB::select("select s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.num_seance as num_seance_eleve,se.paye,se.presence,se.date,se.heure,e.nom,e.prenom from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) ");
+
+        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) ");
+
+        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves'));
 
         // code...
     }
