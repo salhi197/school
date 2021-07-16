@@ -133,10 +133,76 @@ class GroupeController extends Controller
         $groupe = $groupe[0];
 
         $seances_eleves = DB::select("select s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.num_seance as num_seance_eleve,se.paye,se.presence,se.date,se.heure,e.nom,e.prenom from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) ");
+        
+        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) ");
 
-        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) ");
+        $nbr_seance_mois = (DB::select("select max(num) as numero_de_la_seance_dans_le_mois from seances where id_groupe = \"$id\" "));
 
-        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves'));
+        if (count($nbr_seance_mois)>0) 
+        {
+
+            $numero_de_la_seance_dans_le_mois=$nbr_seance_mois[0]->numero_de_la_seance_dans_le_mois;
+
+            // code...
+        }
+        else
+        {
+
+            $numero_de_la_seance_dans_le_mois=0;
+
+            //
+        }
+
+        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id'));
+
+        // code...
+    }
+
+    public function ajouter_eleve($id,Request $request)
+    {
+
+        /*dd($id);*/
+
+        $dernier_seance_du_groupe = (DB::select("select max(num) as derniere_seance from seances where id_groupe = \"$id\" "));
+
+        if(count($dernier_seance_du_groupe)>0)
+        {
+            $dernier_seance_du_groupe = $dernier_seance_du_groupe[0]->derniere_seance;
+            //
+        }
+        else
+        {
+            $dernier_seance_du_groupe = 0;
+        }
+
+        
+
+        $id_dernier_seance_du_groupe = (DB::select("select max(id) as id_derniere_seance from seances where id_groupe = \"$id\" "));
+        
+        if(count($id_dernier_seance_du_groupe)>0)
+        {
+            $id_dernier_seance_du_groupe = $id_dernier_seance_du_groupe[0]->id_derniere_seance;
+            //
+        }
+        else
+        {
+            dd("makach seance");
+        }
+
+        DB::insert("insert into eleves(nom,prenom,num_tel) values(\"$request->nom\",\"$request->prenom\",\"$request->num_tel\") ");
+
+        $last = DB::select("select * from eleves order by id desc");
+
+        $id_eleve = $last[0]->id;
+
+        DB::insert("insert into seances_eleves (num_seance,paye,payement,presence,id_seance,id_eleve) values (0,1,\"$request->payment\",0,\"$id_dernier_seance_du_groupe\",\"$id_eleve\") ");
+
+        
+        session()->flash('notification.message' , 'Elève : '.$last[0]->nom.' , '.$last[0]->prenom.' ajoutée avec succés');
+
+        session()->flash('notification.type' , 'success'); 
+
+        return back();
 
         // code...
     }

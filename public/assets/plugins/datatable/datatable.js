@@ -5,14 +5,14 @@ $(function(e) {
 	
 	//datatable-2
 	var table = $('#datatable-2').DataTable();
-	$('button').on("click", function(e) {
-		var data = table.$('input, select').serialize();
-		alert(
-			"The following data would have been submitted to the server: \n\n"+
-			data.substr( 0, 120 )+'...'
-		);
-		return false;
-	});
+	// $('button').on("click", function(e) {
+	// 	var data = table.$('input, select').serialize();
+	// 	alert(
+	// 		"The following data would have been submitted to the server: \n\n"+
+	// 		data.substr( 0, 120 )+'...'
+	// 	);
+	// 	return false;
+	// });
 	
 	//datatable-3
 	$('#datatable-3').DataTable( {

@@ -48,6 +48,9 @@ Route::post('/home/profs/ajouter/ajax','ProfController@ajouter');
 //Groupes : 
 Route::get('/home/groupes','GroupeController@groupes');
 Route::get('/home/groupes/{id}','GroupeController@afficher_groupe');
+Route::post('/home/groupes/{id}/ajouter','GroupeController@ajouter_eleve');
+Route::post('/home/single_groupe/valider_coches/ajax','SingleGroupeController@valider_coches');
+
 Route::post('/home/groupes/modifier/ajax','GroupeController@modifier');
 Route::post('/home/groupes/supprimer/ajax','GroupeController@supprimer');
 Route::post('/home/groupes/ajouter/ajax','GroupeController@ajouter');

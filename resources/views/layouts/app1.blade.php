@@ -193,9 +193,9 @@
         <!-- SPARKLINE -->
         <script src="{{ asset('../../assets/js/vendors/jquery.sparkline.min.js') }}"></script>
 
-        <!-- CHART-CIRCLE -->
+{{--         <!-- CHART-CIRCLE -->
         <script src="{{ asset('../../assets/js/vendors/circle-progress.min.js') }}"></script>
-
+ --}}
         <!-- RATING STAR -->
         <script src="{{ asset('../../assets/plugins/rating/jquery.rating-stars.js') }}"></script>
 
@@ -204,9 +204,9 @@
         <script src="{{ asset('../../assets/js/select2.js') }}"></script>
 
         <!-- CHARTJS CHART -->
-        <script src="{{ asset('../../assets/plugins/chart/Chart.bundle.js') }}"></script>
+{{--         <script src="{{ asset('../../assets/plugins/chart/Chart.bundle.js') }}"></script>
         <script src="{{ asset('../../assets/plugins/chart/utils.js') }}"></script>
-
+ --}}
         <!-- PIETY CHART -->
         <script src="{{ asset('../../assets/plugins/peitychart/jquery.peity.min.js') }}"></script>
         <script src="{{ asset('../../assets/plugins/peitychart/peitychart.init.js') }}"></script>
@@ -215,8 +215,6 @@
         <script src="{{ asset('../../assets/plugins/horizontal-menu/horizontal-menu.js') }}"></script>
 
         <!-- PERFECT SCROLL BAR JS-->
-        <script src="{{ asset('../../assets/plugins/pscrollbar/perfect-scrollbar.js') }}"></script>
-        <script src="{{ asset('../../assets/plugins/pscrollbar/pscroll-1.js') }}"></script>
 
         <!-- SIDEBAR JS -->
         <script src="{{ asset('../../assets/plugins/sidebar/sidebar.js') }}"></script>
@@ -232,7 +230,6 @@
         <script src="{{ asset('../../assets/js/stiky.js') }}"></script>
 
         <!-- CUSTOM JS -->
-        <script src="{{ asset('../../assets/js/custom.js') }}"></script>
 
         <!-- C3.JS CHART PLUGIN -->
         <script src="{{ asset('../../assets/plugins/charts-c3/d3.v5.min.js') }}"></script>
@@ -260,7 +257,6 @@
         <script src="{{ asset('../../assets/plugins/select2/select2.full.min.js') }}"></script>
 
         <!-- STICKY JS -->
-        <script src="{{ asset('../../assets/js/stiky.js') }}"></script>
 
         <!-- SIDEBAR JS -->
         <script src="{{ asset('../../assets/plugins/sidebar/sidebar.js') }}"></script>

@@ -5,6 +5,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
+				
 				<div class="card-body">
 					<div class="clearfix">
 						<div class="float-left">
@@ -35,6 +36,114 @@
 					</div>
 				</div>
 
+			
+			<a type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary col-md-3" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un élève </a>
+
+			<div id="myModal" class="modal fade" role="dialog">
+
+			    <div class="modal-dialog modal-lg">
+
+			        <div class="modal-content">
+
+			           	<div class="modal-header">
+
+			                <h4 class="modal-title">Nouveau Groupe</h4>
+			          	</div>
+
+			            <div class="modal-body">
+
+			                <form class="form-inline" method="POST" action="/home/groupes/{{$id}}/ajouter">
+
+			                	{{ csrf_field() }}  
+
+			                    <div class="form-group col-md-6 col-sm-12">
+
+			                        <label for="nom">nom</label>
+
+			                        <input type="text" id="nom" required name="nom" class="form-control col-md-12" autofocus>
+
+			                        {{--  --}}
+			                    </div>
+
+			                    <div class="form-group col-md-6 col-sm-12">
+
+			                        <label for="prenom">Prenom</label>
+
+			                        <input type="text" id="prenom" required name="prenom" class="form-control col-md-12">
+
+			                        {{--  --}}
+			                    </div>
+
+			                    <div class="form-group col-md-6 col-sm-12">
+
+			                        <label for="num_tel">Num Tel</label>
+
+			                        <input type="tel" id="num_tel" name="num_tel" class="form-control col-md-12">
+
+			                        {{--  --}}
+			                    </div>
+
+			                    <div class="form-group col-md-6 col-sm-12">
+
+			                        <label for="payment">Payment</label>
+
+			                        <input type="number" min="0" id="payment" name="payment" class="form-control col-md-12">
+
+			                        {{--  --}}
+			                    </div>
+
+
+			                    <div style="margin-top:3%;" class="selectgroup selectgroup-pills col-md-12">
+
+									<label class="selectgroup-item col-md-7">
+										<input type="radio" name="quelle_seance" value="cette" class="selectgroup-input" checked>
+										<span class="selectgroup-button">Cette Séance</span>
+									</label>
+
+									<label class="selectgroup-item">
+										<input type="radio" name="quelle_seance" value="suivante" class="selectgroup-input">
+										<span class="selectgroup-button">Prochaine Séance</span>
+									</label>
+
+								</div>
+
+
+								<input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter">
+			                </form>
+			            </div> 
+
+			          	<div class="modal-footer">
+
+			                <a type="button" style="color: #ffffff;" class="btn btn-warning" data-dismiss="modal">Fermer</a>
+
+			          	</div>
+
+
+			        </div>
+
+			    </div>
+		    
+			</div>           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			<div class="card-body">
 				
@@ -46,6 +155,7 @@
 								<th style="cursor: pointer;" class="wd-15p">N°</th>
 								<th style="cursor: pointer;" class="wd-15p">Nom</th>
 								<th style="cursor: pointer;" class="wd-15p">Prénom</th>
+								<th style="cursor: pointer;" class="wd-15p">Num tel</th>
 								<th style="cursor: pointer;" class="wd-15p">Séances</th>
 								<th style="cursor: pointer;" class="wd-15p">Payé</th>
 								<th style="cursor: pointer;" class="wd-15p">Retard</th>
@@ -77,61 +187,18 @@
 											{!! $eleves_groupe[$i]->prenom !!}
                                         </td>
 
-                                        <td>
-                                        												
-                                        	<span style="margin-right:2%; border-right: black solid 1px;"  >
-
-	                                        	@for ($m = 0; $m <4 ; $m++)
-
-													<label class="form-check-label" for="inlineCheckbox1">{!! $m+1 !!}</label>
-
-													<div class="form-check form-check-inline">
-													  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>
-                                        		
-	                                        	@endfor
-
-											</span>
-											
-                                        	<span style="margin-right:2%; border-right: black solid 1px;"  >
-
-	                                        	@for ($m = 0; $m <4 ; $m++)
-
-													<label class="form-check-label" for="inlineCheckbox1">{!! $m+1 !!}</label>
-
-													<div class="form-check form-check-inline">
-													  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>
-	                                        	@endfor
-											
-											</span>
+                                        <td> 
                                         	
-                                        	<span style="margin-right:2%; border-right: black solid 1px;"  >
-
-	                                        	@for ($m = 0; $m <4 ; $m++)
-
-													<label class="form-check-label" for="inlineCheckbox1">{!! $m+1 !!}</label>
-
-													<div class="form-check form-check-inline">
-													  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>                                  		
-	                                        	@endfor
-
-											</span>
+											{!! $eleves_groupe[$i]->num_tel !!}
+                                        </td>
 
 
-                                        	<span >
+                                        <td>
+                                        		
+                                        	@include('includes.seances',['eleves_groupe'=>$eleves_groupe,
+                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois])
 
-	                                        	@for ($m = 0; $m <4 ; $m++)
-
-													<label class="form-check-label" for="inlineCheckbox1">{!! $m+1 !!}</label>
-
-													<div class="form-check form-check-inline">
-													  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-													</div>                                  		
-	                                        	@endfor
-
-											</span>
+                                        	{{--  --}}																						
                                         </td>
 
                                         <td>
@@ -150,17 +217,25 @@
                         </tbody>
  					</table>
 				</div>
-			</div>
+				</div>
 
 
 				<div class="card-footer text-right">
 					
 					<button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i class="si si-wallet"></i> Pay Invoice</button>
-					<button type="button" class="btn btn-success mb-1" onclick="javascript:window.print();"><i class="si si-paper-plane"></i> Send Invoice</button>
-					<button type="button" class="btn btn-info mb-1" onclick="javascript:window.print();"><i class="si si-printer"></i> Print Invoice</button>
+
+					<a style="color:#ffffff;" groupe="{{ json_encode($groupe) }}" 
+					value="{{ json_encode($eleves_groupe) }}"
+					seances_eleves="{{ json_encode($seances_eleves) }}"
+					numero_de_la_seance_dans_le_mois="{{ json_encode($numero_de_la_seance_dans_le_mois) }}"
+					class="btn btn-primary mb-1" onclick="valider_coches(this);">Valider les coches</a>
+
+					{{--  --}}
 				</div>
 			</div>
 		</div><!-- COL-END -->
+
+		<script src="{{ asset('js/gerer_groupe.js') }}"></script>
 	</div>
 	<!-- ROW-1 CLOSED -->
 

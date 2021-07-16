@@ -160,7 +160,7 @@
 
                         <label for="pourcentage_profdugroupe"> % Prof </label>
 
-                        <input onkeydown="return false;" type="number" onchange="fit_prctg(this);" value="50" min="30" max="100" id="pourcentage_profdugroupe" required name="pourcentage_prof" class="form-control col-md-12">
+                        <input type="number" onchange="fit_prctg(this);" value="50" min="30" max="100" id="pourcentage_profdugroupe" required name="pourcentage_prof" class="form-control col-md-12">
 
                         {{--  --}}
                     </div>
