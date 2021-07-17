@@ -17,8 +17,8 @@ class CreateSeancesTable extends Migration
         {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_groupe');
-            $table->string('num');
-            $table->timestamps()->useCurrent();
+            $table->unsignedBigInteger('num');
+            $table->timestamp('created_at')->useCurrent();
 
             $table->foreign('id_groupe')->references('id')->on('groupes');
         });

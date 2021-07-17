@@ -25,9 +25,45 @@ class SingleGroupeController extends Controller
         $seances_eleves = $data["seances_eleves"];
         $numero_de_la_seance_dans_le_mois = $data["numero_de_la_seance_dans_le_mois"];
         $les_coches = $data["les_coches"];
+        $id_groupe = ($groupe["id"]);
+
+        $id_dernier_seance_du_groupe = (DB::select("select max(id) as id_derniere_seance from seances where id_groupe = \"$id_groupe\" "));
+        
+        $num_seance_groupe = DB::select("select max(num) as numero_de_la_derniere_seance_du_groupe from seances where id_groupe = \"$id_groupe\" ");
+
+        $num_seance_groupe = $num_seance_groupe[0]->numero_de_la_derniere_seance_du_groupe;
+
+        $seance_prochaine = $num_seance_groupe+1;
+
+        if(count($id_dernier_seance_du_groupe)>0)
+        {
+            $id_dernier_seance_du_groupe = $id_dernier_seance_du_groupe[0]->id_derniere_seance;
+            //
+        }
+
         
 
-        //DB::update("update")
+        DB::insert("insert into seances (id_groupe,num) values (\"$id_groupe\",\"$seance_prochaine\" ) ");        
+        
+        $last = DB::select("select max(id) as last_id from seances where id_groupe = \"$id_groupe\" ");
+
+        $last_id_seance = $last[0]->last_id;
+
+
+        for ($i=0; $i<count($les_coches); $i++) 
+        {
+            
+            $presence = $les_coches[$i];
+
+            $id_eleve = (int)$eleves_groupe[$i]["id"]; 
+            
+            (DB::update("update seances_eleves set presence = \"$presence\" ,num_seance =num_seance+1 where id_eleve = \"$id_eleve\" and id_seance = \"$id_dernier_seance_du_groupe\" "));
+
+            dump(DB::insert("insert into seances_eleves(num_seance,paye,payement,id_seance,id_eleve) values(\"$num_seance_groupe\",1,2000,\"$last_id_seance\",\"$id_eleve\") "));
+
+            // code...
+        }
+
 
         // code...
     }

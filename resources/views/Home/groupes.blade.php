@@ -346,7 +346,7 @@
 
                                         <td> 
 
-                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$groupes[$i]->id}}" style="color: #fff;"> Archiver</a>
+                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$groupes[$i]->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
 
                                             <div id="myModalsup-{{$groupes[$i]->id}}" class="modal fade" role="dialog">
 

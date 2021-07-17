@@ -1,6 +1,8 @@
 function valider_coches(objet) 
 {
 
+	$(objet).hide(100);
+
 	var eleves_groupe = JSON.parse($(objet).attr('value'));
 
 	var groupe = JSON.parse($(objet).attr('groupe'));
@@ -41,13 +43,14 @@ function valider_coches(objet)
         success:function(data) 
         {
 
-
+        	location.reload();
 
         	//
 		}
 	});	
 
-
-
 	// body...
 }
+
+
+  	

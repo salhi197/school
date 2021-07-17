@@ -100,6 +100,12 @@ class GroupeController extends Controller
 
         DB::insert("insert into groupes(jour,heure_debut,heure_fin,classe,matiere,niveau,prof,pourcentage_prof,pourcentage_ecole,annee_scolaire) values(\"$request->jour\",\"$request->heure_debut\",\"$request->heure_fin\",\"$request->salle\",\"$request->matiere\",\"$request->niveau\",\"$request->prof\",\"$request->pourcentage_prof\",\"$prctg_ecole\",\"$annee_scolaire\")");
 
+        $last = DB::select("select * from groupes order by id desc");
+
+        $id_last_groupe = $last[0]->id;
+
+        DB::insert("insert into seances(id_groupe,num) values (\"$id_last_groupe\",1)");
+
        
        session()->flash('notification.message' , 'Groupe : '.$request->matiere.' , '.$request->niveau.' Prof : '.$request->prof.' ajoutée avec succés');
 
@@ -132,7 +138,7 @@ class GroupeController extends Controller
 
         $groupe = $groupe[0];
 
-        $seances_eleves = DB::select("select s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.num_seance as num_seance_eleve,se.paye,se.presence,se.date,se.heure,e.nom,e.prenom from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) ");
+        $seances_eleves = DB::select("select e.id as id_eleve,s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.num_seance as num_seance_eleve,se.paye,se.presence,se.created_at,se.created_at,e.nom,e.prenom from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) order by e.id,s.num");
         
         $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) ");
 
@@ -152,6 +158,7 @@ class GroupeController extends Controller
 
             //
         }
+
 
         return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id'));
 

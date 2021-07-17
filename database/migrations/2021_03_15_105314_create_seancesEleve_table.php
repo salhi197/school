@@ -19,12 +19,10 @@ class CreateSeancesEleveTable extends Migration
         {
 
             $table->bigIncrements('id');
-            $table->string('num_seance');
+            $table->unsignedBigInteger('num_seance');
             $table->boolean('paye');
             $table->string('payement');
-            $table->boolean('presence');
-            $table->date('date')->default(date("Y-m-d"));
-            $table->time('heure')->default(date("H:i:s"));
+            $table->boolean('presence')->default(0);
             $table->unsignedBigInteger('id_seance');
             $table->unsignedBigInteger('id_eleve');
             $table->timestamp('created_at')->useCurrent();

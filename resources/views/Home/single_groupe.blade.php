@@ -56,7 +56,7 @@
 
 			                	{{ csrf_field() }}  
 
-			                    <div class="form-group col-md-6 col-sm-12">
+			                    <div class="form-group col-md-3 col-sm-12">
 
 			                        <label for="nom">nom</label>
 
@@ -65,7 +65,7 @@
 			                        {{--  --}}
 			                    </div>
 
-			                    <div class="form-group col-md-6 col-sm-12">
+			                    <div class="form-group col-md-3 col-sm-12">
 
 			                        <label for="prenom">Prenom</label>
 
@@ -74,7 +74,7 @@
 			                        {{--  --}}
 			                    </div>
 
-			                    <div class="form-group col-md-6 col-sm-12">
+			                    <div class="form-group col-md-3 col-sm-12">
 
 			                        <label for="num_tel">Num Tel</label>
 
@@ -83,7 +83,7 @@
 			                        {{--  --}}
 			                    </div>
 
-			                    <div class="form-group col-md-6 col-sm-12">
+			                    <div class="form-group col-md-3 col-sm-12">
 
 			                        <label for="payment">Payment</label>
 
@@ -92,20 +92,6 @@
 			                        {{--  --}}
 			                    </div>
 
-
-			                    <div style="margin-top:3%;" class="selectgroup selectgroup-pills col-md-12">
-
-									<label class="selectgroup-item col-md-7">
-										<input type="radio" name="quelle_seance" value="cette" class="selectgroup-input" checked>
-										<span class="selectgroup-button">Cette Séance</span>
-									</label>
-
-									<label class="selectgroup-item">
-										<input type="radio" name="quelle_seance" value="suivante" class="selectgroup-input">
-										<span class="selectgroup-button">Prochaine Séance</span>
-									</label>
-
-								</div>
 
 
 								<input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter">
@@ -196,12 +182,13 @@
                                         <td>
                                         		
                                         	@include('includes.seances',['eleves_groupe'=>$eleves_groupe,
-                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois])
+                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves])
 
                                         	{{--  --}}																						
                                         </td>
 
                                         <td>
+                                        	3000 DA
                                         </td>
 
 
@@ -224,7 +211,7 @@
 					
 					<button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i class="si si-wallet"></i> Pay Invoice</button>
 
-					<a style="color:#ffffff;" groupe="{{ json_encode($groupe) }}" 
+					<a id="valider_les_coches" style="color:#ffffff;" groupe="{{ json_encode($groupe) }}" 
 					value="{{ json_encode($eleves_groupe) }}"
 					seances_eleves="{{ json_encode($seances_eleves) }}"
 					numero_de_la_seance_dans_le_mois="{{ json_encode($numero_de_la_seance_dans_le_mois) }}"
@@ -239,6 +226,79 @@
 	</div>
 	<!-- ROW-1 CLOSED -->
 
-	
 
+	<script type="text/javascript">
+		
+		var numero_de_la_seance_dans_le_mois = {{ $numero_de_la_seance_dans_le_mois }};
+
+		quel_mois = ( parseInt((numero_de_la_seance_dans_le_mois-1)/4))+1;
+
+		var nb_eleves = {{ count($eleves_groupe) }};
+
+		console.log(numero_de_la_seance_dans_le_mois);
+
+		for (var i = 0; i <nb_eleves; i++) 
+		{
+			
+			for (var j = 1; j <= 12; j++) 
+			{
+				
+				var le_mois = "etudiant"+i+"-le_mois"+j;
+
+				document.getElementById(le_mois).style.display = "none";
+
+				//
+			}
+
+			//
+		}
+
+		if (quel_mois >= 3) 
+		{
+
+			for (var i = 0; i <nb_eleves; i++) 
+			{
+				
+				for (var j = quel_mois-1; j <= quel_mois; j++) 
+				{
+					
+					var le_mois = "etudiant"+i+"-le_mois"+j;
+
+					document.getElementById(le_mois).style.display = "inline-block";
+
+					//
+				}
+
+				//
+			}
+
+			//
+		}
+		else
+		{
+
+			for (var i = 0; i <nb_eleves; i++) 
+			{
+				
+				for (var j = 1; j <= 2; j++) 
+				{
+					
+					var le_mois = "etudiant"+i+"-le_mois"+j;
+
+					document.getElementById(le_mois).style.display = "inline-block";
+
+					//
+				}
+
+				//
+			}
+
+			//
+		}
+
+		//
+	</script>
+
+	
+	{{--  --}}
 @endsection
