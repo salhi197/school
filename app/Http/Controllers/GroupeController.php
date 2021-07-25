@@ -93,12 +93,12 @@ class GroupeController extends Controller
 
     public function ajouter(Request $request)
     {   
-        
+
         $annee_scolaire=(Groupe::get_annee_scolaire());
 
         $prctg_ecole = 100-$request->pourcentage_prof;
 
-        DB::insert("insert into groupes(jour,heure_debut,heure_fin,classe,matiere,niveau,prof,pourcentage_prof,pourcentage_ecole,annee_scolaire) values(\"$request->jour\",\"$request->heure_debut\",\"$request->heure_fin\",\"$request->salle\",\"$request->matiere\",\"$request->niveau\",\"$request->prof\",\"$request->pourcentage_prof\",\"$prctg_ecole\",\"$annee_scolaire\")");
+        DB::insert("insert into groupes(jour,heure_debut,heure_fin,classe,matiere,niveau,prof,pourcentage_prof,pourcentage_ecole,tarif,annee_scolaire) values(\"$request->jour\",\"$request->heure_debut\",\"$request->heure_fin\",\"$request->salle\",\"$request->matiere\",\"$request->niveau\",\"$request->prof\",\"$request->pourcentage_prof\",\"$prctg_ecole\",\"$request->tarif\",\"$annee_scolaire\")");
 
         $last = DB::select("select * from groupes order by id desc");
 
@@ -137,7 +137,7 @@ class GroupeController extends Controller
         $groupe = (DB::select("select * from groupes where id = \"$id\" "));
 
         $groupe = $groupe[0];
-
+        
         $seances_eleves = DB::select("select e.id as id_eleve,s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.num_seance as num_seance_eleve,se.paye,se.presence,se.created_at,se.created_at,e.nom,e.prenom from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) order by e.id,s.num");
         
         $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) ");
@@ -158,17 +158,22 @@ class GroupeController extends Controller
 
             //
         }
+        
+        $le_mois = (Groupe::get_the_month($id));
 
+        $payments = DB::select("select id_eleve,id_groupe,num_mois,sum(payement) as payment_du_mois from payment_groupes_eleves where id_groupe =\"$id\" and num_mois = \"$le_mois\" group by id_eleve,id_groupe,num_mois order by id_eleve,num_mois"); 
 
-        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id'));
+        /*dd($payments);*/
+
+        $ancien_payments = DB::select("select pg.id_eleve,pg.id_groupe,pg.num_mois,sum(payement) as payment_du_mois from payment_groupes_eleves pg where id_groupe =\"$id\" and num_mois <> \"$le_mois\" group by pg.id_eleve,pg.id_groupe,pg.num_mois having (sum(payement) <> (select tarif from groupes where id = \"$id\") ) order by id_eleve,num_mois"); 
+
+        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois'));
 
         // code...
     }
 
     public function ajouter_eleve($id,Request $request)
     {
-
-        /*dd($id);*/
 
         $dernier_seance_du_groupe = (DB::select("select max(num) as derniere_seance from seances where id_groupe = \"$id\" "));
 
@@ -201,6 +206,8 @@ class GroupeController extends Controller
         $last = DB::select("select * from eleves order by id desc");
 
         $id_eleve = $last[0]->id;
+
+        DB::insert("insert into payment_groupes_eleves (id_groupe,id_eleve,num_seance,payement) values (\"$id\",\"$id_eleve\",\"$dernier_seance_du_groupe\",\"$request->payment\")");
 
         DB::insert("insert into seances_eleves (num_seance,paye,payement,presence,id_seance,id_eleve) values (0,1,\"$request->payment\",0,\"$id_dernier_seance_du_groupe\",\"$id_eleve\") ");
 

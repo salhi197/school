@@ -166,7 +166,7 @@
                     </div>
 
 
-                    <div class="form-group col-md-4 col-sm-12">
+                    <div style="display:none;" class="form-group col-md-4 col-sm-12">
 
                         <label for="pourcentage_ecoledugroupe"> % Ecole </label>
 
@@ -174,6 +174,16 @@
 
                         {{--  --}}
                     </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+
+                        <label for="tarif"> Tarif </label>
+
+                        <input type="number" min="0" value="1800" id="tarif" required name="tarif" class="form-control col-md-12">
+
+                        {{--  --}}
+                    </div>
+
 
 
                     <input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter">

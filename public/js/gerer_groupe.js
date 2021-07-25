@@ -13,6 +13,8 @@ function valider_coches(objet)
 
 	var les_coches = [];
 
+	var les_input_payement = [];	
+
 	for (var i = 0; i < eleves_groupe.length; i++) 
 	{
 
@@ -26,7 +28,10 @@ function valider_coches(objet)
 			les_coches[i]=0;
 			//
 		}
-		
+
+		les_input_payement[i] = $("#input_payement"+eleves_groupe[i].id).val();
+
+		//
 	}
 	console.log(seances_eleves);
 	console.log(les_coches);
@@ -38,7 +43,7 @@ function valider_coches(objet)
         },                    
         type:"POST",
         url:"/home/single_groupe/valider_coches/ajax",
-        data:{eleves_groupe:eleves_groupe,groupe:groupe,seances_eleves:seances_eleves,numero_de_la_seance_dans_le_mois:numero_de_la_seance_dans_le_mois,les_coches:les_coches},
+        data:{eleves_groupe:eleves_groupe,groupe:groupe,seances_eleves:seances_eleves,numero_de_la_seance_dans_le_mois:numero_de_la_seance_dans_le_mois,les_coches:les_coches,les_input_payement:les_input_payement},
 
         success:function(data) 
         {

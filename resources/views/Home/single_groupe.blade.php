@@ -143,8 +143,8 @@
 								<th style="cursor: pointer;" class="wd-15p">Prénom</th>
 								<th style="cursor: pointer;" class="wd-15p">Num tel</th>
 								<th style="cursor: pointer;" class="wd-15p">Séances</th>
-								<th style="cursor: pointer;" class="wd-15p">Payé</th>
-								<th style="cursor: pointer;" class="wd-15p">Retard</th>
+								<th style="cursor: pointer; color: green;" class="wd-15p">Payé</th>
+								<th style="cursor: pointer; color: red;" class="wd-15p">Retard</th>
 							</tr>
 						</thead>
                         
@@ -152,7 +152,7 @@
 
                             @for($i=0 ; $i < count($eleves_groupe) ; $i++)
 
-                                <tr id="eleve{{$eleves_groupe[$i]->id}}">
+                                <tr style="cursor:pointer;"  id="eleve{{$eleves_groupe[$i]->id}}">
 
                                     <form>
 
@@ -188,13 +188,24 @@
                                         </td>
 
                                         <td>
-                                        	3000 DA
+
+                                        	@include('includes.payement',['eleves_groupe'=>$eleves_groupe,
+                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'payments'=>$payments,'le_mois'=>$le_mois])
+
+
+                                        	{{--  --}}
                                         </td>
 
 
                                         <td>
+                                        	
+                                        	@include('includes.retard',['eleves_groupe'=>$eleves_groupe,
+                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'ancien_payments'=>$ancien_payments,'le_mois'=>$le_mois])
+
+                                        	
                                         </td>
 
+		                            	{{--  --}}
                                     </form>
                                     {{--  --}}
                                 </tr>

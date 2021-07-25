@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNumMoisToGroupesTable extends Migration
+class AddNumMoisToPaymentGroupesElevesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddNumMoisToGroupesTable extends Migration
      */
     public function up()
     {
-        Schema::table('groupes', function (Blueprint $table) 
+        Schema::table('payment_groupes_eleves', function (Blueprint $table) 
         {   
-            $table->string('jour');
+
+            $table->integer('num_mois')->default(1);
+            
             //
         });
     }
@@ -27,9 +29,10 @@ class AddNumMoisToGroupesTable extends Migration
      */
     public function down()
     {
-        Schema::table('groupes', function (Blueprint $table) 
+        Schema::table('payment_groupes_eleves', function (Blueprint $table) 
         {
-            $table->dropColumn('jour');
+
+            $table->dropColumn('num_mois');
             //
         });
     }

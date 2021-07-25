@@ -77,9 +77,15 @@ class Groupe extends Model
         // code...
     }
 
+    public static function get_the_month($id_groupe)
+    {
 
+        $last_seance = DB::select("select max(num) as num_derniere_seance from seances where id_groupe = \"$id_groupe\" ");
 
+        return (floor(($last_seance[0]->num_derniere_seance-1)/4)+1);
 
+        // code...
+    }
 
 
 
