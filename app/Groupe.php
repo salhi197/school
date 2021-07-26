@@ -87,7 +87,19 @@ class Groupe extends Model
         // code...
     }
 
+    public static function current_seance($id_groupe)
+    {
+        
+        $last =  DB::select("select max(num) as last from seances where id_groupe = \"$id_groupe\" ");
 
+        $last = $last[0]->last;
+
+        $next = $last/*+1*/;
+
+        return $next;
+
+       // code...
+    }
 
     //use HasFactory;
 }

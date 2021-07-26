@@ -23,6 +23,7 @@
 								Année scolaire : {!! $groupe->annee_scolaire !!}<br>
 								Niveau : {!! $groupe->niveau !!} <br>
 								Matière : {!! $groupe->matiere !!} <br>
+								Tarif : {!! $groupe->tarif !!} DA 
 							</address>
 						</div>
 						<div class="col-lg-6 text-right">
@@ -152,7 +153,7 @@
 
                             @for($i=0 ; $i < count($eleves_groupe) ; $i++)
 
-                                <tr style="cursor:pointer;"  id="eleve{{$eleves_groupe[$i]->id}}">
+                                <tr>
 
                                     <form>
 
@@ -192,13 +193,13 @@
                                         	@include('includes.payement',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'payments'=>$payments,'le_mois'=>$le_mois])
 
-
                                         	{{--  --}}
                                         </td>
 
 
-                                        <td>
-                                        	
+                                        <td style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleves_groupe[$i]->id}}" groupe="{{ $groupe->id }}">
+
+
                                         	@include('includes.retard',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'ancien_payments'=>$ancien_payments,'le_mois'=>$le_mois])
 
@@ -220,8 +221,6 @@
 
 				<div class="card-footer text-right">
 					
-					<button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i class="si si-wallet"></i> Pay Invoice</button>
-
 					<a id="valider_les_coches" style="color:#ffffff;" groupe="{{ json_encode($groupe) }}" 
 					value="{{ json_encode($eleves_groupe) }}"
 					seances_eleves="{{ json_encode($seances_eleves) }}"

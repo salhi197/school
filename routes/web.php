@@ -57,6 +57,12 @@ Route::post('/home/groupes/ajouter/ajax','GroupeController@ajouter');
 Route::post('/home/groupes/get_profs/ajax','GroupeController@get_profs');
 Route::post('/home/groupes/fit_salle/ajax','GroupeController@fit_salles');
 
+//payement : 
+
+Route::get('/home/groupes/{id_groupe}/eleve/{id_eleve}','SingleGroupeController@historique_payement');
+Route::post('/home/single_eleve/exoneree/ajax','SingleGroupeController@exonerer');
+Route::post('/home/single_eleve/completer_payement/ajax','SingleGroupeController@completer_payement');
+
 
 
 

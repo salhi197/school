@@ -57,5 +57,18 @@ function valider_coches(objet)
 	// body...
 }
 
+function goto_the_link(objet) 
+{
+
+	var id_eleve = (objet.id.substr(5));
+
+	var id_groupe = $(objet).attr("groupe")
+
+	window.location.href = '/home/groupes/'+id_groupe+'/eleve/'+id_eleve;
+	
+	// body...
+}
+
+
 
   	

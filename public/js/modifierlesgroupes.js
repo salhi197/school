@@ -1,8 +1,6 @@
 document.getElementById("modif_effectue").style.display = 'none';
 document.getElementById("suppression_effectue").style.display = 'none';
 
-
-
 function goto_the_link(objet) 
 {
 
