@@ -20,6 +20,7 @@
 					<hr>
 
 					<div class="row">
+
 						<div class="col-lg-6 ">
 							<p class="h3">Informations sur l'élève : </p>
 							<address>
@@ -28,6 +29,13 @@
 								Numéro tel : {!! $eleve->num_tel !!}<br>
 							</address>
 						</div>
+
+						<div class="col-md-3">
+							<button type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary"  id="btnPrint"> Imprimer </button>
+						</div>
+
+
+
  						{{--<div class="col-lg-6 text-right">
 							<p class="h3">Invoice To:</p>
 							<address>
@@ -37,55 +45,45 @@
 								ypurdomain@example.com
 							</address>
 						</div> --}}
+
 					</div>
 					
 					<div class="table-responsive push">
 						
-						<table class="table table-bordered table-hover mb-0">
+						<table class="table table-bordered table-hover mb-0" id="table-print">
 							
 							<tbody>
-
 								<tr class=" ">
 									<th class="text-center">Mois</th>
 									<th class="text-center">Cochages</th>
-									{{-- 
-									<th class="text-center">Présences</th>
-									<th class="text-center">Absences</th>  
-									--}}
 									<th class="text-center">Payé</th>
 									<th class="text-center">Retard</th>
 								</tr>
 
 								@for ($i = 0; $i <$le_mois-1; $i++)
-									
 									<tr>
-										<td class="text-center col-md-1">{!! $i+1 !!}</td>
-										
-										<td class="text-left col-md-3">
-
+										<td class="text-center ">{!! $i+1 !!}</td>
+										<td class="text-left ">
                                         	@include('includes.single_eleve.cochages',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
-
-
-                                        	{{--  --}}
 										</td>
 										{{-- 
- 										<td class="text-center col-md-1">
+ 										<td class="text-center ">
 
 											@include('includes.single_eleve.presences',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
 										</td>
-										<td class="text-center col-md-1">
+										<td class="text-center ">
 
 											@include('includes.single_eleve.absences',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
 										</td>--}}										
 
- 										<td class="text-center col-md-4">
+ 										<td class="text-center ">
 											
 											@include('includes.single_eleve.payement',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
 
 											{{--  --}}
 										</td>
 										
-										<td class="text-left col-md-4">			
+										<td class="text-left">			
 
 											@include('includes.single_eleve.retards',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
 
@@ -109,4 +107,18 @@
 
 	<script src="{{ asset('js/gerer_retard.js') }}"></script>
 
+@endsection
+@section('scripts')
+<script type="text/javascript">
+$(document).ready(function(){
+    console.log($("#btnPrint").html());
+    $("#btnPrint").on('click',function(){
+//            var divContents = $("#datable-1").html();
+            $('#table-print').printThis();
+    })
+});
+
+
+
+</script>
 @endsection

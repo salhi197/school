@@ -36,9 +36,17 @@
 						</div>
 					</div>
 				</div>
+			<div class="row">
+			<div class="col-md-3">
+					<a type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un élève </a>
+				</div>
+				<div class="col-md-3">
+					<button type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary"  id="btnPrint"> Imprimer </button>
+				</div>
 
+
+			</div>
 			
-			<a type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary col-md-3" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un élève </a>
 
 			<div id="myModal" class="modal fade" role="dialog">
 
@@ -372,4 +380,19 @@
 
 	
 	{{--  --}}
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+$(document).ready(function(){
+    console.log($("#btnPrint").html());
+    $("#btnPrint").on('click',function(){
+//            var divContents = $("#datable-1").html();
+            $('#datable-1').printThis();
+    })
+});
+
+
+
+</script>
 @endsection

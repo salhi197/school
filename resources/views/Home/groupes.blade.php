@@ -21,6 +21,7 @@
 
 
 <a type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un groupe </a>
+<button type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary"  id="btnPrint"> Imprimer </button>
 
 <div id="myModal" class="modal fade" role="dialog">
 
@@ -251,7 +252,6 @@
 
 
 
-
 <!-- ROW-1 OPEN -->
 <div class="row">
 	<div class="col-md-12 col-lg-12">
@@ -259,7 +259,7 @@
 			
 			<div class="card-header">
 				
-				<div class="card-title">Groupes 
+				<div class="card-title " >Groupes 
 					
 					<span id="alert" class="alert alert-sccess"> </span> 
 
@@ -418,5 +418,21 @@
 	</div>
 </div>
 
-	
+@endsection
+
+
+@section('scripts')
+<script type="text/javascript">
+
+$(document).ready(function(){
+    console.log($("#btnPrint").html());
+    $("#btnPrint").on('click',function(){
+//            var divContents = $("#datable-1").html();
+            $('#datable-1').printThis();
+    })
+});
+
+
+
+</script>
 @endsection

@@ -264,14 +264,15 @@
         <!-- CUSTOM JS-->
         <script src="{{ asset('../../assets/js/custom.js') }}"></script>
 
+        <script src="{{ asset('../../js/printThis.js') }}"></script>
+
         <!-- SWEET-ALERT PLUGIN -->
         <script src="{{ asset('../../assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
         <script src="{{ asset('../../assets/js/sweet-alert.js') }}"></script>        
 
         <script src="{{ asset('../../assets/plugins/multipleselect/multiple-select.js') }}"></script>
         <script src="{{ asset('../../assets/plugins/multipleselect/multi-select.js') }}"></script>
-
-
+        @yield('scripts')
     </body>
 </html>
 
