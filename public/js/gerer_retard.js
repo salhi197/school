@@ -75,35 +75,61 @@ function suur(objet)
 function completer_payement(objet) 
 {
 
-
 	var num_mois = (objet.id.substr(7));
 
+	var max = ($("#mois"+num_mois).attr("max"));
+	
 	var payement = ($("#mois"+num_mois).val());
 
-	var current_seance = $(objet).attr("current_seance");
+	if (payement>max)
+	{	
+		$("#mois"+num_mois).addClass("is-invalid state-invalid");
 
-	var id_eleve = $(objet).attr("id_eleve");
+		return false;
+	}
+	
+	else
+	{	
 
-	var id_groupe = $(objet).attr("id_groupe");
+		$("#mois"+num_mois).removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
 
-    $.ajax({
-        headers: 
-        {
-           'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        },                    
-        type:"POST",
-        url:"/home/single_eleve/completer_payement/ajax",
-        data:{id_eleve:id_eleve,id_groupe:id_groupe,num_mois:num_mois,current_seance:current_seance,payement:payement},
+		var current_seance = $(objet).attr("current_seance");
 
-        success:function(data) 
-        {
+		var id_eleve = $(objet).attr("id_eleve");
 
-        	location.reload();
+		var id_groupe = $(objet).attr("id_groupe");
 
-        	//
-		}
-	});	
+	    $.ajax({
+	        headers: 
+	        {
+	           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+	        },                    
+	        type:"POST",
+	        url:"/home/single_eleve/completer_payement/ajax",
+	        data:{id_eleve:id_eleve,id_groupe:id_groupe,num_mois:num_mois,current_seance:current_seance,payement:payement},
 
+	        success:function(data) 
+	        {
+
+	        	location.reload();
+
+	        	//
+			}
+		});
+	
+		//
+	}
+
+
+	//
+}
+
+function come_back(objet) 
+{
+
+	var id_groupe = (objet.id.substr(6));
+
+	window.location.href='/home/groupes/'+id_groupe;
 
 	//
 }

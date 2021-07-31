@@ -20,7 +20,7 @@
 
 
 
-<a type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un groupe </a>
+<a type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un groupe </a>
 
 <div id="myModal" class="modal fade" role="dialog">
 
@@ -286,7 +286,7 @@
                                 <th style="cursor: pointer;" class="wd-15p">%_école</th>
                                 <th style="cursor: pointer;" class="wd-15p">NB</th>
 								<th style="cursor: pointer;" class="wd-15p">Création</th>
-                                <th style="cursor: pointer;" class="wd-15p">Actions</th>
+                                {{-- <th style="cursor: pointer;" class="wd-15p">Actions</th> --}}
 							</tr>
 						</thead>
                         
@@ -346,7 +346,19 @@
                                         </td>
 
                                         <td> 
-                                            <span>10</span>                              
+
+                                            @foreach ($eleves_groupe as $groupee)
+                                                
+                                                @if($groupee->id_groupe==$groupes[$i]->id)
+                                                   
+                                                    <span>{!! $groupee->nb_eleves !!}</span>                              
+
+                                                    {{-- expr --}}
+                                                @endif
+
+                                                {{-- expr --}}
+                                            @endforeach
+
                                         </td>
 
                                         <td> 
@@ -354,7 +366,7 @@
                                             <span>{!! substr(date('d/m/Y H:i:s',strtotime($groupes[$i]->created_at)),0,10) !!}</span>
                                         </td>
 
-                                        <td> 
+{{--                                         <td> 
 
                                             <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$groupes[$i]->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
 
@@ -376,7 +388,7 @@
                                                             <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$groupes[$i]->id}}">OUI,je supprime</a>
 
                                                             <a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas supprimer</a>
-                                                            {{--  --}}
+
                                                       </div>
 
                                                       <div class="modal-footer">
@@ -384,11 +396,11 @@
                                                             <a class="btn btn-warning" data-dismiss="modal" style="color: #ffffff;">Fermer</a>
                                                       </div>
                                                     </div>
-                                                    {{--  --}}
+
                                               </div>
                                             </div>                    
                                         </td>
-                                    </form>
+ --}}                                    </form>
                                     {{--  --}}
                                 </tr>
                                 

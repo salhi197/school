@@ -215,7 +215,7 @@
 
                                         <td> 
 
-                                            @if($niveaux[$i]->cycle=="Secondaire"||$niveaux[$i]->cycle=="Universitaire")
+                                            @if($niveaux[$i]->cycle=="AS"||$niveaux[$i]->cycle=="Univ")
 
                                                 <span>{!! $niveaux[$i]->filiere !!}</span> 
 

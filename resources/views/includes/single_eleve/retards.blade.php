@@ -33,7 +33,8 @@
 
 					<label for="mois{{$i+1}}"> Montant </label> 
 
-					<input  style="margin:2% 2%;" id="mois{{$i+1}}" autofocus class="form-control col-md-4" type="number" value="{{ $groupe->tarif - $retard->payment_du_mois }}">
+					<input  style="margin:2% 2%;" id="mois{{$i+1}}" autofocus class="form-control col-md-4" type="number" max="{{ $groupe->tarif - $retard->payment_du_mois }}" value="{{ $groupe->tarif - $retard->payment_du_mois }}">
+
 
 					<button style="margin:2% 2%;" onclick="completer_payement(this)" id="Valider{{$i+1}}" current_seance="{{$current}}" id_eleve="{{$eleve->id}}" id_groupe="{{$groupe->id}}" class="btn btn-primary col-md-5"> Valider </button>
 				

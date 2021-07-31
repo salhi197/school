@@ -30,7 +30,7 @@
 							<p class="h3">Informations Prof : </p>
 							<address>
 								Prof : {!! $groupe->prof !!}<br>
-								Num tel : <br>
+								Num tel : {!! $numtel->tel !!} <br>
 								Pourcentage prof : {!! $groupe->pourcentage_prof !!} %<br>
 							</address>
 						</div>
@@ -88,7 +88,9 @@
 
 			                        <label for="payment">Payment</label>
 
-			                        <input type="number" min="0" id="payment" name="payment" class="form-control col-md-12">
+			                        <input type="number" min="0" max="{{$groupe->tarif}}" value="0" id="payment" name="payment" class="form-control col-md-12">
+			                        
+
 
 			                        {{--  --}}
 			                    </div>
@@ -111,6 +113,9 @@
 			    </div>
 		    
 			</div>           
+
+
+
 
 
 
@@ -159,28 +164,28 @@
 
                                         {{ csrf_field() }}  
 
-                                        <td>
+                                        <td class="col-md-1">
 
                                             {!! $i+1 !!}                                                
                                         </td>
 
-                                        <td>
+                                        <td class="col-md-1" >
 
                                             {!! $eleves_groupe[$i]->nom  !!}
                                         </td>
 
-                                        <td> 
+                                        <td class="col-md-1" > 
                                         	
 											{!! $eleves_groupe[$i]->prenom !!}
                                         </td>
 
-                                        <td> 
+                                        <td class="col-md-1" > 
                                         	
 											{!! $eleves_groupe[$i]->num_tel !!}
                                         </td>
 
 
-                                        <td>
+                                        <td class="col-md-4" >
                                         		
                                         	@include('includes.seances',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves])
@@ -188,7 +193,7 @@
                                         	{{--  --}}																						
                                         </td>
 
-                                        <td>
+                                        <td class="col-md-4" >
 
                                         	@include('includes.payement',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'payments'=>$payments,'le_mois'=>$le_mois])
@@ -197,7 +202,7 @@
                                         </td>
 
 
-                                        <td style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleves_groupe[$i]->id}}" groupe="{{ $groupe->id }}">
+                                        <td class="col-md-4" style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleves_groupe[$i]->id}}" groupe="{{ $groupe->id }}">
 
 
                                         	@include('includes.retard',['eleves_groupe'=>$eleves_groupe,
@@ -219,18 +224,74 @@
 				</div>
 
 
+
 				<div class="card-footer text-right">
 					
-					<a id="valider_les_coches" style="color:#ffffff;" groupe="{{ json_encode($groupe) }}" 
+					<a id="valider_les_coches" style="color:#ffffff;"
+					class="btn btn-primary mb-1" onclick="valider_coches(this);">Valider les coches</a>
+
+					<button id="valider" style="display:none;" class="btn btn-outline-success" groupe="{{ json_encode($groupe) }}" 
 					value="{{ json_encode($eleves_groupe) }}"
 					seances_eleves="{{ json_encode($seances_eleves) }}"
-					numero_de_la_seance_dans_le_mois="{{ json_encode($numero_de_la_seance_dans_le_mois) }}"
-					class="btn btn-primary mb-1" onclick="valider_coches(this);">Valider les coches</a>
+					numero_de_la_seance_dans_le_mois="{{ json_encode($numero_de_la_seance_dans_le_mois) }}" onclick="valider_tous(this)" >OUI, Valider</button>
+
+					<button id="ne_pas_valider" onclick="retour(this)" style="display:none;" class="btn btn-outline-danger">NOn, Pas Encore</button>
 
 					{{--  --}}
 				</div>
+
+				<div class="card-footer text-left row" style="color:blue;">
+
+					@foreach ($nb_presences as $nb_presence)
+						
+						<label class="col-md-3" for="payement_prof_mois{{$nb_presence->num_mois}}">Payement Du prof mois {!! $nb_presence->num_mois !!} :  
+
+							{!! ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) !!} DA
+
+						</label>
+						{{-- expr --}}
+					@endforeach
+
+				</div>
 			</div>
 		</div><!-- COL-END -->
+
+
+
+	    <a class="btn btn-outline-danger text-center col-md-12" style="color:red;" data-toggle="modal" data-target="#myModalsup-{{$groupe->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
+
+	    <div id="myModalsup-{{$groupe->id}}" class="modal fade" role="dialog">
+
+	      	<div class="modal-dialog modal-lg">
+
+	            <!-- Modal content-->
+
+	            <div class="modal-content">
+
+	               <div class="modal-header">
+
+	                    <h4 class="modal-title">Voulez-vous vraiment Archiver ce Groupe ?</h4>
+	              </div>
+
+	              <div class="modal-body">
+
+	                    <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$groupe->id}}">OUI,Archiver</a>
+
+	                    <a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas archiver</a>
+
+	              </div>
+
+	              <div class="modal-footer">
+
+	                    <a class="btn btn-warning" data-dismiss="modal" style="color: #ffffff;">Fermer</a>
+	              </div>
+	            </div>
+
+	      	</div>
+	    </div>                    
+
+
+
 
 		<script src="{{ asset('js/gerer_groupe.js') }}"></script>
 	</div>

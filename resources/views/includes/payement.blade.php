@@ -20,17 +20,20 @@
 
 	    	<input style="display:none;" id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" type="number" min="0" max="{{ $groupe->tarif-$payment->payment_du_mois }}" class="form-control col-md-12">
 
+	    	
 
 			{{--  --}}
 		@endif
 
 		@if ($payment->id_eleve == $eleves_groupe[$i]->id && $payment->payment_du_mois < $groupe->tarif)
 
-			Payé : {!! $payment->payment_du_mois !!} DA
+			<p style="color:green;" class="text-center"> Payé : {!! $payment->payment_du_mois !!} DA </p> 
 
 	    	<input id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" type="number" min="0" max="{{ $groupe->tarif-$payment->payment_du_mois }}" class="form-control col-md-12">
+
+	    	
 	
-			Reste : {!! $groupe->tarif-$payment->payment_du_mois !!} DA	    	
+			<p style="color:red;" class="text-center"> Reste : {!! $groupe->tarif-$payment->payment_du_mois !!} DA </p> 	    	
 
 			{{--  --}}
 		@endif

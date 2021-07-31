@@ -1,7 +1,35 @@
 function valider_coches(objet) 
 {
 
-	$(objet).hide(100);
+	$(objet).hide('1000', function() 
+	{
+
+		$("#valider").show(1000);
+
+		$("#ne_pas_valider").show(1000);
+		
+	});
+
+	// body...
+}
+
+function retour(objet) 
+{
+	$("#valider").hide('500');
+
+	$(objet).hide('1000', function() 
+	{	
+		
+		$("#valider_les_coches").show(500)	
+		
+	});
+
+	//
+}
+
+
+function valider_tous(objet) 
+{
 
 	var eleves_groupe = JSON.parse($(objet).attr('value'));
 
@@ -14,6 +42,10 @@ function valider_coches(objet)
 	var les_coches = [];
 
 	var les_input_payement = [];	
+
+	var max = [];
+
+	var compteur_faux = 0;
 
 	for (var i = 0; i < eleves_groupe.length; i++) 
 	{
@@ -31,10 +63,49 @@ function valider_coches(objet)
 
 		les_input_payement[i] = $("#input_payement"+eleves_groupe[i].id).val();
 
+		max[i] = $("#input_payement"+eleves_groupe[i].id).attr('max');
+
+		if(les_input_payement[i] > max[i]) 
+		{
+
+			compteur_faux = compteur_faux+1;
+
+			$("#input_payement"+eleves_groupe[i].id).removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+			
+			/*$("#valid_"+eleves_groupe[i].id).hide('1000');
+			
+			$("#invalid_"+eleves_groupe[i].id).show(1000);*/
+				
+			
+
+			
+			//
+		}
+		else
+		{
+
+			$("#input_payement"+eleves_groupe[i].id).removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+		
+			/*$("#invalid_"+eleves_groupe[i].id).hide('1000');
+			$("#valid_"+eleves_groupe[i].id).show(1000);*/
+				
+
+			//			
+		}
+
+
 		//
 	}
 	console.log(seances_eleves);
 	console.log(les_coches);
+
+	if (compteur_faux>0) 
+	{
+
+		$("html, body").animate({ scrollTop: 400 }, "slow");
+
+		return false;
+	}
 
     $.ajax({
         headers: 
@@ -54,8 +125,12 @@ function valider_coches(objet)
 		}
 	});	
 
+
+
+
 	// body...
 }
+
 
 function goto_the_link(objet) 
 {
@@ -68,6 +143,43 @@ function goto_the_link(objet)
 	
 	// body...
 }
+
+function supprimergroupe (event,objet) 
+{
+
+	event.preventDefault();
+
+	$id=(objet.getAttribute('id'));
+
+	$id=($id.substr(3));
+
+	var id_hide="#groupe"+$id;
+
+	console.log(id_hide)
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/groupes/supprimer/ajax",
+        data:{id:$id},
+
+        success:function(data) 
+        {
+
+        	$("#nnotif").text("Groupe Archivé").attr('class','text-center alert alert-danger')
+
+			window.location.href = '/home/groupes';
+
+        	//
+		}
+	});	
+
+	// body... 
+}
+
 
 
 

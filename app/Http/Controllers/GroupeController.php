@@ -33,7 +33,9 @@ class GroupeController extends Controller
 
         $niveaux=DB::select("select * from niveaux where visible = 1");
 
-        return view('Home.groupes',compact('groupes','last_id','salles','matieres','profs','niveaux','annee_scolaire'));
+        $eleves_groupe = DB::select("select s.id_groupe,count(DISTINCT s.id_groupe,e.id,e.nom,e.prenom,e.num_tel) as nb_eleves from eleves e, seances_eleves se , seances s where (s.id = se.id_seance and se.id_eleve=e.id ) group by s.id_groupe ");
+
+        return view('Home.groupes',compact('groupes','last_id','salles','matieres','profs','niveaux','annee_scolaire','eleves_groupe'));
 
 
         # code...
@@ -169,7 +171,18 @@ class GroupeController extends Controller
 
         //dd($ancien_payments);
 
-        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois'));
+        $nb_presences = (DB::select("select FLOOR((s.num-1)/4)+1 as num_mois,count(se.presence) as nb_presence from seances_eleves se, seances s where(se.id_seance=s.id) and (s.id_groupe=\"$id\") and (se.presence = 1) group by FLOOR((s.num-1)/4)+1 "));
+
+        $nom_prenom = (explode('-',$groupe->prof));
+        
+        $nom = $nom_prenom[0];
+        $prenom = $nom_prenom[1];
+        
+        $numtel = DB::select("select nom,prenom,tel from profs where (nom = \"$nom\" and prenom = \"$prenom\") or (nom = \"$prenom\" and prenom = \"$nom\") ");
+        
+        $numtel = $numtel[0];
+        
+        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel'));
 
         // code...
     }

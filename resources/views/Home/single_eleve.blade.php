@@ -13,7 +13,7 @@
 				<div class="card-body">
 					<div class="clearfix">
 						<div class="float-left">
-							<h3 class="card-title mb-0">Groupe : {!! $groupe->niveau !!} | {!! $groupe->matiere !!} | {!! $groupe->jour !!} | {!! substr($groupe->heure_debut,0,5) !!}-{!! substr($groupe->heure_fin,0,5) !!}</h3>
+							<h3 onclick="come_back(this)" id="groupe{{$groupe->id}}" class="card-title mb-0" style="cursor:pointer;" >Groupe : {!! $groupe->niveau !!} | {!! $groupe->matiere !!} | {!! $groupe->jour !!} | {!! substr($groupe->heure_debut,0,5) !!}-{!! substr($groupe->heure_fin,0,5) !!}</h3>
 						</div>
 					</div>
 
@@ -104,6 +104,7 @@
 			</div>
 		</div><!-- COL-END -->
 	</div>
+
 	<!-- ROW-1 CLOSED -->
 
 	<script src="{{ asset('js/gerer_retard.js') }}"></script>
