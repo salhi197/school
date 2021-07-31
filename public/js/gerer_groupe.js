@@ -1,12 +1,12 @@
 function valider_coches(objet) 
 {
 
-	$(objet).hide('1000', function() 
+	$(objet).hide(500, function() 
 	{
 
-		$("#valider").show(1000);
+		$("#valider").show(500);
 
-		$("#ne_pas_valider").show(1000);
+		$("#ne_pas_valider").show(500);
 		
 	});
 
@@ -61,9 +61,9 @@ function valider_tous(objet)
 			//
 		}
 
-		les_input_payement[i] = $("#input_payement"+eleves_groupe[i].id).val();
+		les_input_payement[i] = parseFloat($("#input_payement"+eleves_groupe[i].id).val());
 
-		max[i] = $("#input_payement"+eleves_groupe[i].id).attr('max');
+		max[i] = parseFloat($("#input_payement"+eleves_groupe[i].id).attr('max'));
 
 		if(les_input_payement[i] > max[i]) 
 		{
