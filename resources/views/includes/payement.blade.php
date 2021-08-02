@@ -5,9 +5,39 @@
 	{{-- expr --}}
 @endif
 
+<?php $complet = false;?>
+<?php $avance = 0;?>
+
 @if ($numero_de_la_seance_dans_le_mois%4==1 && $le_mois != 1)
 	
-	<input id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" max="{{ $groupe->tarif }}" type="number" min="0" class="form-control col-md-12">
+	@foreach ($payments as $payment)
+		
+		@if ($payment->id_eleve == $eleves_groupe[$i]->id && $payment->payment_du_mois >=0)		
+
+			<p style="color:green;" class="text-center"> Payé : {!! $payment->payment_du_mois !!} DA </p> 
+
+			<?php $avance = $payment->payment_du_mois;?>
+
+			@if ($payment->payment_du_mois==$groupe->tarif)
+				
+				<?php $complet = true;?>
+				
+				{{-- expr --}}
+			@endif
+
+			{{--  --}}
+		@endif	
+
+		{{-- expr --}}
+	@endforeach
+
+	@if (!$complet)
+		
+		<input id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" max="{{ $groupe->tarif-$avance }}" type="number" min="0" class="form-control col-md-12">
+	
+		{{-- expr --}}
+	@endif
+
 	
  @else
 

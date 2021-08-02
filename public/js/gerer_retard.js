@@ -36,7 +36,11 @@ function suur(objet)
 
 		$("#Payement_Complet"+mois).hide(1000);
 
-		$("#le_retard"+mois).addClass('text-center').css('color','green').text('Payement Complet').show(1000);
+		var montant_a_paye = $("#mois"+mois).val();
+
+		var montant_payee = tarif-montant_a_paye;
+
+		$("#le_retard"+mois).addClass('text-center').css('color','green').text('Payement Complet '+montant_payee+' DA').show(1000);
 
 		var id_groupe = $(objet).attr("groupe");
 
@@ -81,7 +85,7 @@ function completer_payement(objet)
 	
 	var payement = ($("#mois"+num_mois).val());
 
-	if (payement>max)
+	if (parseFloat(payement)>parseFloat(max))
 	{	
 		$("#mois"+num_mois).addClass("is-invalid state-invalid");
 

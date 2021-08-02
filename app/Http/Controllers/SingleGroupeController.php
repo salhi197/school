@@ -26,6 +26,7 @@ class SingleGroupeController extends Controller
         $numero_de_la_seance_dans_le_mois = $data["numero_de_la_seance_dans_le_mois"];
         $les_coches = $data["les_coches"];
         $id_groupe = $groupe["id"];
+        $le_mois = Groupe::get_the_month($id_groupe);
 
         if(!empty($data["les_input_payement"]))
         {
@@ -52,8 +53,6 @@ class SingleGroupeController extends Controller
         $last = DB::select("select max(id) as last_id from seances where id_groupe = \"$id_groupe\" ");
         
         $last_id_seance = $last[0]->last_id;
-    
-        $le_mois = Groupe::get_the_month($id_groupe);
 
         for ($i=0; $i<count($les_coches); $i++) 
         {
@@ -99,7 +98,7 @@ class SingleGroupeController extends Controller
         
         $le_mois = Groupe::get_the_month($id_groupe);
 
-        $payement_eleve = DB::select("select * from payment_groupes_eleves where id_eleve = \"$id_eleve\" and payement <> 0 order by num_mois ");
+        $payement_eleve = DB::select("select * from payment_groupes_eleves where id_eleve = \"$id_eleve\" and payement <> 0 order by num_mois,created_at ");
 
         $seances_eleves = DB::select("select se.id_eleve,se.presence,s.num,se.created_at from seances_eleves se, seances s where (se.id_seance=s.id) and (s.id_groupe = \"$id_groupe\") and (id_eleve = \"$id_eleve\") order by s.num ");
         
@@ -113,7 +112,7 @@ class SingleGroupeController extends Controller
         $retards = DB::select("select pg.id_eleve,pg.id_groupe,pg.num_mois,sum(payement) as payment_du_mois,sum(exoneree) as exoneree from payment_groupes_eleves pg where id_groupe =\"$id_groupe\"  and pg.id_eleve=\"$id_eleve\" group by pg.id_eleve,pg.id_groupe,pg.num_mois order by id_eleve,num_mois"); 
 
         $current = (Groupe::current_seance($groupe->id));
-
+        //dd($retards);
         return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current'));
 
         // code...

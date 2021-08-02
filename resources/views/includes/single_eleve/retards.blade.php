@@ -6,13 +6,13 @@
 
 @foreach ($retards as $retard)
 	
-	@if(++$pp != $numItems)
+	{{-- @if(++$pp != $numItems) --}}
 
 		<?php $vv = 0; ?>
 		
 		@if ($retard->num_mois == ($i+1))
 			
-			@if ( ($groupe->tarif - $retard->payment_du_mois)==0 || ($retard->exoneree>0) )
+			@if ( (($groupe->tarif - $retard->payment_du_mois)==0) || (($retard->exoneree>0)) )
 				
 				<p style="color:green;" class="text-center"> Payement Complet {!! $retard->payment_du_mois !!} DA </p>	
 			 		
@@ -56,7 +56,7 @@
 
 			{{-- expr --}}
 		@endif		
-	@endif
+	{{-- @endif --}}
 
 	{{-- expr --}}
 @endforeach

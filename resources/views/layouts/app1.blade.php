@@ -133,7 +133,7 @@
                                     
                                     <li aria-haspopup="true"><a href="/home/groupes" class=""><i class="mdi mdi-account-multiple"></i> Groupes</a></li>
                                     
-                                    <li aria-haspopup="true"><a href="/home/calendrier" class=""><i class="fe fe-calendar"></i> Calendrier</a></li>
+                                    <li aria-haspopup="true"><a href="/home/dawarat" class=""><i class="fe fe-calendar"></i> Dawarat</a></li>
                                     
                                     <li aria-haspopup="true"><a href="/home/caisse" class=""><i class="ion-cash"></i> Caisse</a></li>
 

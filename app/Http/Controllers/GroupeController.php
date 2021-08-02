@@ -190,6 +190,8 @@ class GroupeController extends Controller
     public function ajouter_eleve($id,Request $request)
     {
 
+        $le_mois = (Groupe::get_the_month($id));
+
         $dernier_seance_du_groupe = (DB::select("select max(num) as derniere_seance from seances where id_groupe = \"$id\" "));
 
         if(count($dernier_seance_du_groupe)>0)
@@ -201,8 +203,6 @@ class GroupeController extends Controller
         {
             $dernier_seance_du_groupe = 0;
         }
-
-        
 
         $id_dernier_seance_du_groupe = (DB::select("select max(id) as id_derniere_seance from seances where id_groupe = \"$id\" "));
         
@@ -222,9 +222,9 @@ class GroupeController extends Controller
 
         $id_eleve = $last[0]->id;
 
-        DB::insert("insert into payment_groupes_eleves (id_groupe,id_eleve,num_seance,payement) values (\"$id\",\"$id_eleve\",\"$dernier_seance_du_groupe\",\"$request->payment\")");
+        DB::insert("insert into payment_groupes_eleves (id_groupe,id_eleve,num_seance,payement,num_mois) values (\"$id\",\"$id_eleve\",\"$dernier_seance_du_groupe\",\"$request->payment\",\"$le_mois\")");
 
-        DB::insert("insert into seances_eleves (num_seance,paye,payement,presence,id_seance,id_eleve) values (0,1,\"$request->payment\",0,\"$id_dernier_seance_du_groupe\",\"$id_eleve\") ");
+        DB::insert("insert into seances_eleves (num_seance,paye,payement,presence,id_seance,id_eleve) values (\"$dernier_seance_du_groupe\",1,\"$request->payment\",0,\"$id_dernier_seance_du_groupe\",\"$id_eleve\") ");
 
         
         session()->flash('notification.message' , 'Elève : '.$last[0]->nom.' , '.$last[0]->prenom.' ajoutée avec succés');
