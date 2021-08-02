@@ -70,7 +70,11 @@ class SingleGroupeController extends Controller
                 $payement = $les_input_payement[$i];   
             }
             
-            (DB::update("update seances_eleves set presence = \"$presence\" ,num_seance =num_seance+1 where id_eleve = \"$id_eleve\" and id_seance = \"$id_dernier_seance_du_groupe\" "));
+            $now=(DB::select("select now() as datetime"));
+
+            $now = $now[0]->datetime;
+
+            (DB::update("update seances_eleves set presence = \"$presence\" ,num_seance =num_seance+1,created_at = \"$now\"  where id_eleve = \"$id_eleve\" and id_seance = \"$id_dernier_seance_du_groupe\" "));
 
             (DB::insert("insert into seances_eleves(num_seance,paye,payement,id_seance,id_eleve) values(\"$num_seance_groupe\",1,2000,\"$last_id_seance\",\"$id_eleve\") "));
     

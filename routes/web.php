@@ -68,6 +68,8 @@ Route::post('/home/single_eleve/completer_payement/ajax','SingleGroupeController
 Route::get('/home/dawarat','DawraController@dawrat');
 
 
+Route::get('/home/groupes_special','SpecialGroupeController@index');
+
 
 
 

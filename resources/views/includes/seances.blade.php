@@ -10,7 +10,8 @@
 
 				@if ($numero_de_la_seance_dans_le_mois == ($m+1))
 
-				  	<input class="form-check-input is-valid state-valid" type="checkbox" name="mois1" id="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}">
+				  	<input class="form-check-input is-valid state-valid" type="checkbox" name="mois1" id="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}" style="position:relative;">
+
 					
 				 @else 	
 
@@ -24,6 +25,10 @@
 							<?php $dkhel++; ?>
 
 						  	<input class="form-check-input" type="checkbox" checked disabled name="mois1" id="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}">
+							
+						  	
+						  	
+
 
 							{{-- expr --}}
 						@endif
@@ -46,6 +51,9 @@
 					@if ($dkhel == 0)
 		
 					  	<input class="form-check-input" type="checkbox" disabled name="mois1" id="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}">
+
+					  	
+					  	
 
 						{{-- expr --}}
 					@endif

@@ -42,8 +42,21 @@
     <body class="default-header">
 
         <!-- GLOBAL-LOADER -->
+
+        {{-- <div class="card-body">
+            <div class="dimmer active">
+                <div class="lds-hourglass"></div>
+            </div>
+        </div> --}}        
         <div id="global-loader">
-            <img src="{{ asset('../../assets/images/svgs/loader.svg') }}" class="loader-img" alt="Loader">
+            
+
+            <div style="margin-top: 22%;"class="dimmer active">
+                <div class="lds-hourglass"></div>
+            </div>
+
+
+            {{-- <img src="{{ asset('../../assets/images/svgs/loader.svg') }}" class="loader-img" alt="Loader"> --}}
         </div>
 
         <div class="page">
@@ -131,7 +144,32 @@
 
                                     <li aria-haspopup="true"><a href="/home/Enseignants" class=""><i class="fa fa-mortar-board"></i> Enseignants</a></li>
                                     
-                                    <li aria-haspopup="true"><a href="/home/groupes" class=""><i class="mdi mdi-account-multiple"></i> Groupes</a></li>
+{{--                                     <li aria-haspopup="true">
+                                        
+                                        <a href="/home/groupes" class="">
+                                            <i class="mdi mdi-account-multiple"></i> Groupes
+                                        </a>
+                                    </li>
+ --}}
+
+                                    <li aria-haspopup="true">
+                                        
+                                        <a href="/home/groupes" class="sub-icon">
+                                            <i class="mdi mdi-account-multiple"></i>Groupes 
+                                            <i class="fa fa-angle-down horizontal-icon"></i>
+                                        </a>
+                                        
+                                        <ul class="sub-menu">
+                                            
+                                            <li aria-haspopup="true">
+                                                <a href="/home/groupes">Groupe</a>
+                                            </li>
+                                            
+                                            <li aria-haspopup="true">
+                                                <a href="/home/groupes_special">Groupe Spécial</a>
+                                            </li>
+                                        </ul>
+                                    </li>                                    
                                     
                                     <li aria-haspopup="true"><a href="/home/dawarat" class=""><i class="fe fe-calendar"></i> Dawarat</a></li>
                                     
