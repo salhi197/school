@@ -53,6 +53,7 @@
 
             <div style="margin-top: 22%;"class="dimmer active">
                 <div class="lds-hourglass"></div>
+                <p class="blink" id="to_blink" style="font-weight: bold; animation: blinker 1s linear infinite; color: blueviolet; margin-left:35%; margin-top:-6%;">Veuiller Patientez ça peut prendre quelques secondes...</p>
             </div>
 
 

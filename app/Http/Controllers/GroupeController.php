@@ -142,7 +142,7 @@ class GroupeController extends Controller
         
         $seances_eleves = DB::select("select e.id as id_eleve,s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.num_seance as num_seance_eleve,se.paye,se.presence,se.created_at,se.created_at,e.nom,e.prenom from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) order by e.id,s.num");
         
-        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) ");
+        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) order by e.id ");
 
         $nbr_seance_mois = (DB::select("select max(num) as numero_de_la_seance_dans_le_mois from seances where id_groupe = \"$id\" "));
 
@@ -181,7 +181,7 @@ class GroupeController extends Controller
         $numtel = DB::select("select nom,prenom,tel from profs where (nom = \"$nom\" and prenom = \"$prenom\") or (nom = \"$prenom\" and prenom = \"$nom\") ");
         
         $numtel = $numtel[0];
-                
+        
         return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel'));
 
         // code...
