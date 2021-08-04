@@ -45,6 +45,9 @@
 				</div>
 
 
+				<div class="col-md-3">
+					<input id="myInput1" placeholder="Recherche ..." type="text" class="form-control">
+				</div>
 			</div>
 			
 
@@ -56,7 +59,7 @@
 
 			           	<div class="modal-header">
 
-			                <h4 class="modal-title">Nouveau Groupe</h4>
+			                <h4 class="modal-title">Nouvel Elève</h4>
 			          	</div>
 
 			            <div class="modal-body">
@@ -69,7 +72,7 @@
 
 			                        <label for="nom">nom</label>
 
-			                        <input type="text" id="nom" required name="nom" class="form-control col-md-12" autofocus>
+			                        <input type="text" onchange="verif_existance();" id="nom" required name="nom" groupe="{{$groupe->id}}" class="form-control col-md-12" autofocus>
 
 			                        {{--  --}}
 			                    </div>
@@ -78,7 +81,7 @@
 
 			                        <label for="prenom">Prenom</label>
 
-			                        <input type="text" id="prenom" required name="prenom" class="form-control col-md-12">
+			                        <input type="text" onchange="verif_existance();" id="prenom" required name="prenom" class="form-control col-md-12">
 
 			                        {{--  --}}
 			                    </div>
@@ -92,20 +95,29 @@
 			                        {{--  --}}
 			                    </div>
 
-			                    <div class="form-group col-md-3 col-sm-12">
+			                    <div  id="payement" class="form-group col-md-3 col-sm-12">
 
 			                        <label for="payment">Payment</label>
 
-			                        <input type="number" min="0" max="{{$groupe->tarif}}" value="0" id="payment" name="payment" class="form-control col-md-12">
+			                        <input type="number" min="0" max="{{$groupe->tarif}}" value="0" name="payment" class="form-control col-md-12">
 			                        
 
 
 			                        {{--  --}}
 			                    </div>
 
+								<div style="margin-top: 2%" class="form-group col-md-12">
+									
+									<label class="custom-switch">
+										<input type="checkbox" onchange="hide_payement(this);" id="ilpaye" name="cotisations" class="custom-switch-input col-md-12" value="1" checked>
+										<span class="custom-switch-indicator"></span>
+										<span class="custom-switch-description">L'élève paye ses cotisations</span>
+									</label>
+								</div>
 
+								<input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter" id="btn_ajouter">
 
-								<input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter">
+								<p id="il_existe_deja" style="display:none; font-size: 1.2em;" class="invalid-feedback text-center">L'Elève existe déja</p>
 			                </form>
 			            </div> 
 
@@ -149,7 +161,7 @@
 				
 				<div class="table-responsive">
 					
-					<table data-page-length='50' id="datable-1" class="table table-striped table-bordered text-nowrap w-100">
+					<table data-page-length='50' {{-- id="datable-1" --}} class="table table-striped table-bordered text-nowrap w-100">
 						<thead>
 							<tr>
 								<th style="cursor: pointer;" class="wd-15p">N°</th>
@@ -196,7 +208,7 @@
                                         <td class="col-md-4" >
                                         		
                                         	@include('includes.seances',['eleves_groupe'=>$eleves_groupe,
-                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves])
+                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves,'eleves_gratuits'=>$eleves_gratuits])
 
                                         	{{--  --}}																						
                                         </td>
@@ -204,7 +216,7 @@
                                         <td class="col-md-4" >
 
                                         	@include('includes.payement',['eleves_groupe'=>$eleves_groupe,
-                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'payments'=>$payments,'le_mois'=>$le_mois])
+                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'payments'=>$payments,'le_mois'=>$le_mois,'eleves_gratuits'=>$eleves_gratuits])
 
                                         	{{--  --}}
                                         </td>
@@ -214,7 +226,7 @@
 
 
                                         	@include('includes.retard',['eleves_groupe'=>$eleves_groupe,
-                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'ancien_payments'=>$ancien_payments,'le_mois'=>$le_mois])
+                                        		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'ancien_payments'=>$ancien_payments,'le_mois'=>$le_mois,'eleves_gratuits'=>$eleves_gratuits])
 
                                         	
                                         </td>
@@ -238,10 +250,17 @@
 					<a id="valider_les_coches" style="color:#ffffff;"
 					class="btn btn-primary mb-1" onclick="valider_coches(this);">Valider les coches</a>
 
-					<button id="valider" style="display:none;" class="btn btn-outline-success" groupe="{{ json_encode($groupe) }}" 
+					<button id="valider" style="display:none;" 
+					class="btn btn-outline-success" 
+					groupe="{{ json_encode($groupe->id) }}" 
 					value="{{ json_encode($eleves_groupe) }}"
 					seances_eleves="{{ json_encode($seances_eleves) }}"
-					numero_de_la_seance_dans_le_mois="{{ json_encode($numero_de_la_seance_dans_le_mois) }}" onclick="valider_tous(this)" >OUI, Valider</button>
+					numero_de_la_seance_dans_le_mois="{{ json_encode($numero_de_la_seance_dans_le_mois) }}"
+					eleves_gratuits="{{ json_encode($eleves_gratuits) }}" 
+					onclick="valider_tous(this)" >
+					
+						OUI, Valider
+					</button>
 
 					<button id="ne_pas_valider" onclick="retour(this)" style="display:none;" class="btn btn-outline-danger">NOn, Pas Encore</button>
 
@@ -264,9 +283,9 @@
 			</div>
 		</div><!-- COL-END -->
 
+		<a class="btn btn-outline-info text-center col-md-6" style="color: blue;" href="/home/groupes/{{$groupe->id}}/tout"> Voir toutes les séances de groupe</a>
 
-
-	    <a class="btn btn-outline-danger text-center col-md-12" style="color:red;" data-toggle="modal" data-target="#myModalsup-{{$groupe->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
+	    <a class="btn btn-outline-danger text-center col-md-6" style="color:red;" data-toggle="modal" data-target="#myModalsup-{{$groupe->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
 
 	    <div id="myModalsup-{{$groupe->id}}" class="modal fade" role="dialog">
 
@@ -319,7 +338,7 @@
 		for (var i = 0; i <nb_eleves; i++) 
 		{
 			
-			for (var j = 1; j <= 12; j++) 
+			for (var j = 1; j <= 20; j++) 
 			{
 				
 				var le_mois = "etudiant"+i+"-le_mois"+j;
@@ -384,13 +403,28 @@
 
 @section('scripts')
 <script type="text/javascript">
-$(document).ready(function(){
-    console.log($("#btnPrint").html());
-    $("#btnPrint").on('click',function(){
-//            var divContents = $("#datable-1").html();
-            $('#datable-1').printThis();
-    })
-});
+	
+	$(document).ready(function(){
+	    console.log($("#btnPrint").html());
+	    $("#btnPrint").on('click',function(){
+		// 		var divContents = $("#datable-1").html();
+	            $('#datable-1').printThis();
+	    })
+
+		$("#myInput1").on("keyup", function() 
+		{
+			var value = $(this).val().toLowerCase();
+			$("#all_the_eleves tr").filter(function() 
+			{
+		  		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	
+	});
+
+	
+	
+
 
 
 

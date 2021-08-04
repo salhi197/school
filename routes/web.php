@@ -50,12 +50,15 @@ Route::get('/home/groupes','GroupeController@groupes');
 Route::get('/home/groupes/{id}','GroupeController@afficher_groupe');
 Route::post('/home/groupes/{id}/ajouter','GroupeController@ajouter_eleve');
 Route::post('/home/single_groupe/valider_coches/ajax','SingleGroupeController@valider_coches');
+Route::get('/home/groupes/{id}/tout','SingleGroupeController@toutes_seances');
 
 Route::post('/home/groupes/modifier/ajax','GroupeController@modifier');
 Route::post('/home/groupes/supprimer/ajax','GroupeController@supprimer');
 Route::post('/home/groupes/ajouter/ajax','GroupeController@ajouter');
 Route::post('/home/groupes/get_profs/ajax','GroupeController@get_profs');
 Route::post('/home/groupes/fit_salle/ajax','GroupeController@fit_salles');
+Route::post('/home/single_groupe/verif_existance/ajax','GroupeController@verif_existance');
+
 
 //payement : 
 

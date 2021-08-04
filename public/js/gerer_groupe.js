@@ -1,3 +1,66 @@
+function verif_existance() 
+{
+ 	
+ 	var nom = $("#nom").val();
+
+ 	var prenom = $("#prenom").val();
+
+ 	var id_groupe = $("#nom").attr('groupe');
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/single_groupe/verif_existance/ajax",
+        data:{nom:nom,prenom:prenom,id_groupe:id_groupe},
+
+        success:function(data) 
+        {
+
+        	//alert(data);
+
+        	if (data!==false) 
+        	{
+
+        		$("#nom").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+        		$("#prenom").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+        		
+        		$("#il_existe_deja").hide('1000', function() 
+        		{
+        			$("#btn_ajouter").show(1000);
+        		});
+
+        		$("#num_tel").val(data);
+
+        		//
+        	}
+        	else
+        	{
+
+        		$("#nom").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+        		$("#prenom").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+        		
+        		$("#btn_ajouter").hide('1000', function() 
+        		{
+        			$("#il_existe_deja").show('1000');
+        		});
+
+        		$("#num_tel").val('');
+
+        		//
+        	}
+
+        	//
+		}
+	});	
+
+
+
+ 	//
+} 
+
 function valider_coches(objet) 
 {
 
@@ -39,6 +102,8 @@ function valider_tous(objet)
 
 	var numero_de_la_seance_dans_le_mois = JSON.parse($(objet).attr('numero_de_la_seance_dans_le_mois'));	
 
+	var eleves_gratuits = JSON.parse($(objet).attr('eleves_gratuits'));
+	
 	var les_coches = [];
 
 	var les_input_payement = [];	
@@ -114,11 +179,11 @@ function valider_tous(objet)
         },                    
         type:"POST",
         url:"/home/single_groupe/valider_coches/ajax",
-        data:{eleves_groupe:eleves_groupe,groupe:groupe,seances_eleves:seances_eleves,numero_de_la_seance_dans_le_mois:numero_de_la_seance_dans_le_mois,les_coches:les_coches,les_input_payement:les_input_payement},
+        data:{eleves_groupe:eleves_groupe,groupe:groupe,numero_de_la_seance_dans_le_mois:numero_de_la_seance_dans_le_mois,les_coches:les_coches,les_input_payement:les_input_payement,eleves_gratuits:eleves_gratuits},
 
         success:function(data) 
         {
-
+        	$("html, body").animate({ scrollTop: 140 }, "slow");
         	location.reload();
 
         	//
@@ -180,6 +245,41 @@ function supprimergroupe (event,objet)
 	// body... 
 }
 
+function hide_payement(objet) 
+{	
+
+	if($(objet).is(":checked"))
+	{
+
+		$("#payement .form-control").val(0);
+
+		$("#payement").show('1000', function() 
+		{
+			
+			$(".custom-switch-description").text("L'élève paye ses cotisations");
+
+			//	
+		});
+
+		//
+	}
+	else
+	{
+
+		$("#payement").hide('1000', function() 
+		{
+			
+			$(".custom-switch-description").text("L'élève ne paye pas");
+
+			//	
+		});
+
+
+		//
+	}
+
+	//
+}
 
 
 
