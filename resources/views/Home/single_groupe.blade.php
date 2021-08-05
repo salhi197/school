@@ -72,7 +72,7 @@
 
 			                        <label for="nom">nom</label>
 
-			                        <input type="text" onchange="verif_existance();" id="nom" required name="nom" groupe="{{$groupe->id}}" class="form-control col-md-12" autofocus>
+			                        <input type="text" onkeyup="verif_existance();" id="nom" required name="nom" groupe="{{$groupe->id}}" class="form-control col-md-12" autofocus>
 
 			                        {{--  --}}
 			                    </div>
@@ -81,7 +81,7 @@
 
 			                        <label for="prenom">Prenom</label>
 
-			                        <input type="text" onchange="verif_existance();" id="prenom" required name="prenom" class="form-control col-md-12">
+			                        <input type="text" onkeyup="verif_existance();" id="prenom" required name="prenom" class="form-control col-md-12">
 
 			                        {{--  --}}
 			                    </div>
@@ -178,7 +178,7 @@
 
                             @for($i=0 ; $i < count($eleves_groupe) ; $i++)
 
-                                <tr>
+                                <tr id="l_eleve{{$eleves_groupe[$i]->id}}">
 
                                     <form>
 
@@ -267,19 +267,65 @@
 					{{--  --}}
 				</div>
 
-				<div class="card-footer text-left row" style="color:blue;">
+
+					
+
+
+				<span class="card-footer row text-left" style="color:blue; display: inline-block;">
 
 					@foreach ($nb_presences as $nb_presence)
 						
-						<label class="col-md-3" for="payement_prof_mois{{$nb_presence->num_mois}}">Payement Du prof mois {!! $nb_presence->num_mois !!} :  
+						@if($nb_presence->num_mois<=count($payements_prof))
+							
+							<label style="margin-right: 8%; cursor: pointer;" onclick="afficher_payement_prof_1(this,{{ $nb_presence->num_mois }})" class="col-md-5 alert alert-success" id="payement_prof_mois{{$nb_presence->num_mois}}">
 
+							
+
+							{!! date_format(date_create($payements_prof[$nb_presence->num_mois-1]->created_at),"d/m/Y H:i:s") !!} | 
+
+						@else
+							
+
+							<label style="margin-right: 8%; cursor: pointer;" onclick="afficher_payement_prof_1(this,{{ $nb_presence->num_mois }})" class="col-md-5 alert alert-warning" id="payement_prof_mois{{$nb_presence->num_mois}}">
+
+
+							{{-- expr --}}
+						@endif
+
+
+							Payement Du prof mois {!! $nb_presence->num_mois !!} :  
+
+							
 							{!! ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) !!} DA
 
+
+							
+
+							<input style="display:none;" id="le_payement_du_mois{{$nb_presence->num_mois}}" type="number" value="{{ ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) }}">
+	
+							
+
+							<label style="display:none;" class="custom-switch">
+								
+								<input seance="{{$numero_de_la_seance_dans_le_mois }}" 	 		groupe="{{ $groupe->id }}" 
+										prof="{{ $groupe->prof }}" 
+										onchange="afficher_payement_prof_2(this,{{$nb_presence->num_mois }});" 
+										id="payement_prof_effectuee{{$nb_presence->num_mois}}" 
+										type="checkbox" 
+										name="custom-switch-checkbox" 
+										class="custom-switch-input">
+
+								<span class="custom-switch-indicator"></span>
+								<span class="custom-switch-description">Payement éffectué</span>
+							</label>
+
+							{{--  --}}
 						</label>
+
 						{{-- expr --}}
 					@endforeach
+				</span>
 
-				</div>
 			</div>
 		</div><!-- COL-END -->
 
@@ -404,6 +450,8 @@
 @section('scripts')
 <script type="text/javascript">
 	
+	var nb_eleves = {{ count($eleves_groupe) }};
+
 	$(document).ready(function(){
 	    console.log($("#btnPrint").html());
 	    $("#btnPrint").on('click',function(){
@@ -411,14 +459,35 @@
 	            $('#datable-1').printThis();
 	    })
 
-		$("#myInput1").on("keyup", function() 
-		{
-			var value = $(this).val().toLowerCase();
-			$("#all_the_eleves tr").filter(function() 
-			{
-		  		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    if (nb_eleves>25) 
+	    {
+
+			$("#myInput1").on("change", function() 
+			{	
+				var value = $(this).val().toLowerCase();
+				$("#all_the_eleves tr").filter(function() 
+				{
+			  		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
 			});
-		});
+	    	
+	    	//
+	    }
+	    else
+	    {
+
+			$("#myInput1").on("keyup", function() 
+			{	
+				var value = $(this).val().toLowerCase();
+				$("#all_the_eleves tr").filter(function() 
+				{
+			  		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+	    	
+	    	//
+	    }
+
 	
 	});
 

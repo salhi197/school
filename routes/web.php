@@ -66,11 +66,10 @@ Route::get('/home/groupes/{id_groupe}/eleve/{id_eleve}','SingleGroupeController@
 Route::post('/home/single_eleve/exoneree/ajax','SingleGroupeController@exonerer');
 Route::post('/home/single_eleve/completer_payement/ajax','SingleGroupeController@completer_payement');
 
+Route::post('/home/single_groupe/payer_prof/ajax','SingleGroupeController@payer_prof');
+
 // dawarat :
-
 Route::get('/home/dawarat','DawraController@dawrat');
-
-
 Route::get('/home/groupes_special','SpecialGroupeController@index');
 
 

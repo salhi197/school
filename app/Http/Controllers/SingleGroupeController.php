@@ -166,7 +166,7 @@ class SingleGroupeController extends Controller
         //dd($les_presences);
 
         $retards = DB::select("select pg.id_eleve,pg.id_groupe,pg.num_mois,sum(payement) as payment_du_mois,sum(exoneree) as exoneree from payment_groupes_eleves pg where id_groupe =\"$id_groupe\"  and pg.id_eleve=\"$id_eleve\" group by pg.id_eleve,pg.id_groupe,pg.num_mois order by id_eleve,num_mois"); 
-        
+
         $current = (Groupe::current_seance($groupe->id));
         //dd($retards);
         return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current'));
@@ -276,6 +276,35 @@ class SingleGroupeController extends Controller
 
         // code...
     }
+
+    public function payer_prof(Request $request)
+    {
+
+        $data = ($request->all());
+
+        $num_mois = $data['num_mois'];
+        $num_seance = $data['num_seance'];
+        $id_groupe = $data['id_groupe'];
+        $nom_prenom_prof = $data['nom_prenom_prof'];
+        $payement = $data['payement'];
+
+        $nom_prenom = (explode('-',$nom_prenom_prof));
+        
+        $nom = $nom_prenom[0];
+        $prenom = $nom_prenom[1];
+        
+        $id_prof = DB::select("select id from profs where (nom = \"$nom\" and prenom = \"$prenom\") or (nom = \"$prenom\" and prenom = \"$nom\") ");
+        
+        $id_prof = $id_prof[0]->id;
+
+        DB::insert("insert into payement_profs(id_prof,id_groupe,num_mois,num_seance,payement) values(\"$id_prof\",\"$id_groupe\",\"$num_mois\",\"$num_seance\",\"$payement\")");
+
+
+        return response()->json();
+
+        // code...
+    }
+
 
     //
 }

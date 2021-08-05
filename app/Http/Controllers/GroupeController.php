@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Groupe;
+use App\Eleve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -213,20 +214,28 @@ class GroupeController extends Controller
 
         //dd($ancien_payments);
 
-        $nb_presences = (DB::select("select FLOOR((s.num-1)/4)+1 as num_mois,count(se.presence) as nb_presence from seances_eleves se, seances s where(se.id_seance=s.id) and (s.id_groupe=\"$id\") and (se.presence = 1) group by FLOOR((s.num-1)/4)+1 "));
+        $nb_presences = (DB::select("select FLOOR((s.num-1)/4)+1 as num_mois,count(se.presence) as nb_presence from seances_eleves se, seances s where(se.id_seance=s.id) and (s.id_groupe=\"$id\") and (se.presence = 1) group by FLOOR((s.num-1)/4)+1  order by num_mois"));
 
+        //dump($nb_presences);
+        
         $nom_prenom = (explode('-',$groupe->prof));
         
         $nom = $nom_prenom[0];
         $prenom = $nom_prenom[1];
         
-        $numtel = DB::select("select nom,prenom,tel from profs where (nom = \"$nom\" and prenom = \"$prenom\") or (nom = \"$prenom\" and prenom = \"$nom\") ");
+        $numtel = DB::select("select id,nom,prenom,tel from profs where (nom = \"$nom\" and prenom = \"$prenom\") or (nom = \"$prenom\" and prenom = \"$nom\") ");
         
         $numtel = $numtel[0];
 
+        $id_prof = $numtel->id;
+
         $eleves_gratuits = (DB::select("select id_groupe,id_eleve,floor(avg(paye)) as il_paye from payment_groupes_eleves where id_groupe=\"$id\" group by id_groupe,id_eleve having floor(avg(paye))=0 "));
         
-        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel','eleves_gratuits'));
+        $payements_prof = DB::select("select * from payement_profs where id_groupe = \"$id\" and id_prof=\"$id_prof\" order by num_mois");
+        
+        //dd($payements_prof);
+
+        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel','eleves_gratuits','payements_prof'));
 
         // code...
     }
@@ -239,75 +248,8 @@ class GroupeController extends Controller
         ini_set('memory_limit', '-1');
 
         ini_set('max_input_vars', '500000000');
-
-        $il_paye = ($request->cotisations);
-
-        $le_mois = (Groupe::get_the_month($id));
-
-        $dernier_seance_du_groupe = (DB::select("select num as derniere_seance from seances where id_groupe = \"$id\" order by num desc "));
         
-        if(count($dernier_seance_du_groupe)>0)
-        {
-            $dernier_seance_du_groupe = $dernier_seance_du_groupe[0]->derniere_seance;
-            //
-        }
-        else
-        {
-            $dernier_seance_du_groupe = 0;
-        }
-
-        $id_dernier_seance_du_groupe = (DB::select("select id as id_derniere_seance from seances where id_groupe = \"$id\" order by id desc "));
-        
-        if(count($id_dernier_seance_du_groupe)>0)
-        {
-            $id_dernier_seance_du_groupe = $id_dernier_seance_du_groupe[0]->id_derniere_seance;
-            //
-        }
-        else
-        {
-            dd("makach seance");
-        }
-
-        $last = (DB::select("select * from eleves where (nom=\"$request->nom\" and prenom=\"$request->prenom\")or(nom=\"$request->prenom\" and nom=\"$request->prenom\") "));
-
-        if (count($last)>0) 
-        {
-            
-            $id_eleve = $last[0]->id;         
-
-            // code...
-        }
-        else
-        {
-    
-            DB::insert("insert into eleves(nom,prenom,num_tel) values(\"$request->nom\",\"$request->prenom\",\"$request->num_tel\") ");
-
-            $last = DB::select("select * from eleves order by id desc");
-
-            $id_eleve = $last[0]->id;
-
-        }
-        
-        if ($il_paye == 1) 
-        {
-
-            DB::insert("insert into payment_groupes_eleves (id_groupe,id_eleve,num_seance,payement,num_mois) values (\"$id\",\"$id_eleve\",\"$dernier_seance_du_groupe\",\"$request->payment\",\"$le_mois\")");
-        
-            //
-        }
-        else
-        {
-
-            DB::insert("insert into payment_groupes_eleves (id_groupe,id_eleve,num_seance,payement,num_mois,paye) values (\"$id\",\"$id_eleve\",\"$dernier_seance_du_groupe\",\"$request->payment\",\"$le_mois\",0)");
-            //
-        }
-
-        DB::insert("insert into seances_eleves (num_seance,paye,payement,presence,id_seance,id_eleve) values (\"$dernier_seance_du_groupe\",1,\"$request->payment\",0,\"$id_dernier_seance_du_groupe\",\"$id_eleve\") ");
-
-        
-        session()->flash('notification.message' , 'Elève : '.$last[0]->nom.' , '.$last[0]->prenom.' ajoutée avec succés');
-
-        session()->flash('notification.type' , 'success'); 
+        Eleve::add_eleve($id,$request->nom,$request->prenom,$request->num_tel,$request->payment,$request->cotisations);
 
         return back();
 

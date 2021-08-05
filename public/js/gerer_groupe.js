@@ -137,6 +137,8 @@ function valider_tous(objet)
 
 			$("#input_payement"+eleves_groupe[i].id).removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
 			
+			var scroll_to = $("#l_eleve"+eleves_groupe[i].id).position();
+
 			/*$("#valid_"+eleves_groupe[i].id).hide('1000');
 			
 			$("#invalid_"+eleves_groupe[i].id).show(1000);*/
@@ -164,10 +166,24 @@ function valider_tous(objet)
 	console.log(seances_eleves);
 	console.log(les_coches);
 
+	var nb_coches = les_coches.reduce((a, b) => a + b, 0)
+
+	if (nb_coches<(eleves_groupe.length)/5) 
+	{
+
+		//alert("Verifiez Que vous avez bien coché les élèves Vou avez coché "+nb_coches+" élèves seulement!!");
+
+		swal("Cochez les présences", "Vous avez coché que "+nb_coches+" élèves parmis : "+eleves_groupe.length, "error");
+
+		return false;
+
+		//
+	}
+
 	if (compteur_faux>0) 
 	{
 
-		$("html, body").animate({ scrollTop: 400 }, "slow");
+		$("html, body").animate({ scrollTop: scroll_to.top }, "slow");
 
 		return false;
 	}
@@ -281,6 +297,87 @@ function hide_payement(objet)
 	//
 }
 
+function verif_prix_tarif(objet,tarif) 
+{
 
+	if ($(objet).val()>tarif) 
+	{
+
+		$(objet).removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+
+		//
+	}
+	else
+	{
+
+		$(objet).removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+		//
+	}
+	
+
+	// body...
+}
+
+
+function afficher_payement_prof_1(objet,le_mois) 
+{
+	
+	if($(objet).attr('class')!=="col-md-5 alert alert-success")
+	{
+
+		$("#payement_prof_effectuee"+le_mois).parent().show(1000);
+
+		//
+	}
+
+
+	//
+}
+
+function afficher_payement_prof_2(objet,le_mois) 
+{
+
+	var num_mois = le_mois;
+	
+	var num_seance = $(objet).attr('seance');
+
+	var id_groupe = $(objet).attr('groupe');
+
+	var nom_prenom_prof = $(objet).attr('prof');
+
+	var payement = $("#le_payement_du_mois"+le_mois).val();
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/single_groupe/payer_prof/ajax",
+        data:{num_mois:num_mois,num_seance:num_seance,id_groupe:id_groupe,nom_prenom_prof:nom_prenom_prof,payement:payement},
+
+        success:function(data) 
+        {
+
+        	$("#payement_prof_effectuee"+le_mois).parent().hide('slow', function() 
+        	{
+        		$("#payement_prof_mois"+le_mois).removeClass("alert alert-warning").hide('slow/400/fast', function() 
+        		{
+        			
+        			$("#payement_prof_mois"+le_mois).addClass("alert alert-success").show('slow');
+
+        			//
+        		});
+        	});
+
+        	//
+		}
+	});	
+
+
+	
+
+	// body...
+}
 
   	

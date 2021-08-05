@@ -59,7 +59,7 @@
 
 		@if (!$complet)
 			
-			<input id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" max="{{ $groupe->tarif-$avance }}" type="number" min="0" class="form-control col-md-12">
+			<input onkeyup="verif_prix_tarif(this,{{ $groupe->tarif }})" id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" max="{{ $groupe->tarif-$avance }}" type="number" min="0" class="form-control col-md-12">
 		
 			{{-- expr --}}
 		@endif
@@ -74,7 +74,7 @@
 
 				<p style="color:green;">Complet {!! $payment->payment_du_mois !!} DA </p>
 
-		    	<input style="display:none;" id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" type="number" min="0" max="{{ $groupe->tarif-$payment->payment_du_mois }}" class="form-control col-md-12">
+		    	<input style="display:none;" onkeyup="verif_prix_tarif(this,{{ $groupe->tarif }})" id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" type="number" min="0" max="{{ $groupe->tarif-$payment->payment_du_mois }}" class="form-control col-md-12">
 
 		    	
 
@@ -85,7 +85,7 @@
 
 				<p style="color:green;" class="text-center"> Payé : {!! $payment->payment_du_mois !!} DA </p> 
 
-		    	<input id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" type="number" min="0" max="{{ $groupe->tarif-$payment->payment_du_mois }}" class="form-control col-md-12">
+		    	<input onkeyup="verif_prix_tarif(this,{{ $groupe->tarif }})" id="input_payement{{ $eleves_groupe[$i]->id }}" value="0" type="number" min="0" max="{{ $groupe->tarif-$payment->payment_du_mois }}" class="form-control col-md-12">
 
 		    	
 		
