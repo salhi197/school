@@ -66,6 +66,10 @@ Route::post('/home/single_eleve/completer_payement/ajax','SingleGroupeController
 // dawarat :
 
 Route::get('/home/dawarat','DawraController@dawrat');
+Route::post('/home/dawra/ajouter','DawraController@ajouter');
+Route::get('/home/dawra/{id}','DawraController@afficher_dawra');
+Route::post('/home/dawra/{id}/ajouter','DawraController@ajouter_eleve');
+
 
 
 
