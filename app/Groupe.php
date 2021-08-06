@@ -27,10 +27,46 @@ class Groupe extends Model
         # code...
     }
 
+    public static function all_groupes_speciaux()
+    {
+
+        $annee_scolaire=(Groupe::get_annee_scolaire());
+
+        $all_groupes = (DB::select("select * from special_groupes where visible =1 and annee_scolaire=\"$annee_scolaire\" order by id"));
+
+        return $all_groupes;
+        # code...
+    }
+
+
     public static function last_ids()
     {
 
         $all_groupes = (DB::select("select * from groupes /*where visible =1*/ order by id desc"));
+
+        if (count($all_groupes)==0) 
+        {
+        
+            return 0;
+            
+            # code...
+        }
+        else
+        {
+
+            return $all_groupes[0]->id;         
+
+            # code...   
+        }
+
+        # code...
+    }
+
+
+    public static function last_special_groupe_ids()
+    {
+
+        $all_groupes = (DB::select("select * from special_groupes /*where visible =1*/ order by id desc"));
 
         if (count($all_groupes)==0) 
         {

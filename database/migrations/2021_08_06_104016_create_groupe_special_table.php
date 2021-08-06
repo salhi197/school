@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupesTable extends Migration
+class CreateGroupeSpecialTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,30 +13,25 @@ class CreateGroupesTable extends Migration
      */
     public function up()
     {
-        Schema::create('special_groupe', function (Blueprint $table) 
+        Schema::create('special_groupes', function (Blueprint $table) 
         {
             $table->bigIncrements('id');
             
             $table->time('heure_debut', $precision = 0);
             $table->time('heure_fin', $precision = 0);
-            $table->string('pourcentage_prof', $precision = 0);
+            $table->double('pourcentage_prof',8,1);
             $table->string('pourcentage_ecole', $precision = 0);
             $table->string('annee_scolaire');
+            $table->double('tarif',8,1);
 
-
-            $table->string('classe');
-            $table->string('prof');
+            $table->string('salle');            
             $table->string('niveau');
-            $table->string('matiere');
-            
+            $table->integer('visible')->default(1);
+                        
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
-/*            $table->foreign('id_classe')->references('id')->on('classes');
-            $table->foreign('id_prof')->references('id')->on('profs');
-            $table->foreign('id_niveau')->references('id')->on('niveaux');
-            $table->foreign('id_matiere')->references('id')->on('id_matiere');
-*/        });
+        });
     }
 
     /**

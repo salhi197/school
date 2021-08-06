@@ -24,8 +24,6 @@ class GroupeController extends Controller
 
         ini_set('memory_limit', '-1');
 
-
-
         $annee_scolaire=(Groupe::get_annee_scolaire());
         
         $groupes=Groupe::all_groupes();
