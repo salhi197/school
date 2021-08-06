@@ -26,6 +26,10 @@
 
 					<span class="badge bg-danger"></span>
 
+				 @elseif($seance_eleve->presence == 2)	
+
+				 	<span class="badge bg-success"></span>
+
 					{{-- expr --}}
 				@endif
 

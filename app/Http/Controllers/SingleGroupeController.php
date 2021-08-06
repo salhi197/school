@@ -18,14 +18,22 @@ class SingleGroupeController extends Controller
     public function valider_coches(Request $request)
     {
 
-        $data=($request->all());
+        set_time_limit(0);
 
+        ini_set('memory_limit', '-1');
+
+        ini_set('max_input_vars','5500');
+
+        $data = $request->all();
+        
         $eleves_groupe = $data["eleves_groupe"];
         $groupe = $data["groupe"];
-        $seances_eleves = $data["seances_eleves"];
         $numero_de_la_seance_dans_le_mois = $data["numero_de_la_seance_dans_le_mois"];
         $les_coches = $data["les_coches"];
-        $id_groupe = $groupe["id"];
+        $eleves_gratuits = $data["eleves_gratuits"];
+        
+        $id_groupe = $groupe;
+
         $le_mois = Groupe::get_the_month($id_groupe);
 
         if(!empty($data["les_input_payement"]))
@@ -70,7 +78,50 @@ class SingleGroupeController extends Controller
                 $payement = $les_input_payement[$i];   
             }
             
-            (DB::update("update seances_eleves set presence = \"$presence\" ,num_seance =num_seance+1 where id_eleve = \"$id_eleve\" and id_seance = \"$id_dernier_seance_du_groupe\" "));
+            $now=(DB::select("select now() as datetime"));
+
+            $now = $now[0]->datetime;
+
+            $esq_gratuit = 0;
+
+            foreach ($eleves_gratuits as $eleve_gratuit) 
+            {
+                
+                if ($eleve_gratuit['id_eleve'] == $id_eleve ) 
+                {
+
+                    if ($presence == 1) 
+                    {
+                        
+                        (DB::update("update seances_eleves set presence = 2 ,num_seance =num_seance+1,created_at = \"$now\"  where id_eleve = \"$id_eleve\" and id_seance = \"$id_dernier_seance_du_groupe\" "));
+
+                        //
+                    }
+                    elseif($presence == 0)
+                    {
+
+                        (DB::update("update seances_eleves set presence = 0 ,num_seance =num_seance+1,created_at = \"$now\"  where id_eleve = \"$id_eleve\" and id_seance = \"$id_dernier_seance_du_groupe\" "));
+
+                        //
+                    }
+
+
+                    $esq_gratuit++;
+
+                    // code...
+                }
+
+                //
+            }
+
+            if ($esq_gratuit==0) 
+            {
+                
+                (DB::update("update seances_eleves set presence = \"$presence\" ,num_seance =num_seance+1,created_at = \"$now\"  where id_eleve = \"$id_eleve\" and id_seance = \"$id_dernier_seance_du_groupe\" "));
+                
+                // code...
+            }
+
 
             (DB::insert("insert into seances_eleves(num_seance,paye,payement,id_seance,id_eleve) values(\"$num_seance_groupe\",1,2000,\"$last_id_seance\",\"$id_eleve\") "));
     
@@ -89,6 +140,11 @@ class SingleGroupeController extends Controller
 
     public function historique_payement($id_groupe,$id_eleve)
     {
+
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
 
         $groupe = DB::select("select * from groupes where id = \"$id_groupe\" ");
         $groupe = $groupe[0];
@@ -121,6 +177,11 @@ class SingleGroupeController extends Controller
     public function exonerer(Request $request)
     {
 
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
+
         $data = ($request->all());
             
         $id_groupe = $data["id_groupe"];
@@ -135,6 +196,11 @@ class SingleGroupeController extends Controller
     public function completer_payement(Request $request)
     {
 
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
+
         $data = ($request->all());
 
         $id_groupe = $data["id_groupe"];
@@ -147,6 +213,98 @@ class SingleGroupeController extends Controller
         
         //
     }
+
+    public function toutes_seances($id_groupe)
+    {
+
+        $id=($id_groupe);
+
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
+        $groupe = (DB::select("select * from groupes where id = \"$id\" "));
+
+        $groupe = $groupe[0];
+
+        $this_mois = (Groupe::get_the_month($groupe->id));
+        
+        $seances_eleves = DB::select("select e.id as id_eleve,s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.presence,se.created_at from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) /*and ((FLOOR((s.num-1)/4)+1)=\"$this_mois\" or (FLOOR((s.num-1)/4)+1)=\"$this_mois-1\" or (FLOOR((s.num-1)/4)+1)=\"$this_mois+1\" )*/ order by e.nom,e.prenom,s.num");
+        
+        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) order by e.nom,e.prenom ");
+
+        $nbr_seance_mois = (DB::select("select num as numero_de_la_seance_dans_le_mois from seances where id_groupe = \"$id\" order by num desc "));
+
+        if (count($nbr_seance_mois)>0) 
+        {
+
+            $numero_de_la_seance_dans_le_mois=$nbr_seance_mois[0]->numero_de_la_seance_dans_le_mois;
+
+            // code...
+        }
+        else
+        {
+
+            $numero_de_la_seance_dans_le_mois=0;
+
+            //
+        }
+        
+        $le_mois = (Groupe::get_the_month($id));
+
+        $payments = DB::select("select id_eleve,id_groupe,num_mois,sum(payement) as payment_du_mois from payment_groupes_eleves where id_groupe =\"$id\" and num_mois = \"$le_mois\" group by id_eleve,id_groupe,num_mois order by id_eleve,num_mois"); 
+
+        /*dd($payments);*/
+
+        $ancien_payments = DB::select("select pg.id_eleve,pg.id_groupe,pg.num_mois,sum(payement) as payment_du_mois,sum(exoneree) as exoneree from payment_groupes_eleves pg where id_groupe =\"$id\" and num_mois <> \"$le_mois\" group by pg.id_eleve,pg.id_groupe,pg.num_mois having (sum(payement) <> (select tarif from groupes where id = \"$id\") ) order by id_eleve,num_mois"); 
+
+        //dd($ancien_payments);
+
+        $nb_presences = (DB::select("select FLOOR((s.num-1)/4)+1 as num_mois,count(se.presence) as nb_presence from seances_eleves se, seances s where(se.id_seance=s.id) and (s.id_groupe=\"$id\") and (se.presence = 1) group by FLOOR((s.num-1)/4)+1 "));
+
+        $nom_prenom = (explode('-',$groupe->prof));
+        
+        $nom = $nom_prenom[0];
+        $prenom = $nom_prenom[1];
+        
+        $numtel = DB::select("select nom,prenom,tel from profs where (nom = \"$nom\" and prenom = \"$prenom\") or (nom = \"$prenom\" and prenom = \"$nom\") ");
+        
+        $numtel = $numtel[0];
+
+        return view('Home.single_groupe_complet',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel'));
+
+
+        // code...
+    }
+
+    public function payer_prof(Request $request)
+    {
+
+        $data = ($request->all());
+
+        $num_mois = $data['num_mois'];
+        $num_seance = $data['num_seance'];
+        $id_groupe = $data['id_groupe'];
+        $nom_prenom_prof = $data['nom_prenom_prof'];
+        $payement = $data['payement'];
+
+        $nom_prenom = (explode('-',$nom_prenom_prof));
+        
+        $nom = $nom_prenom[0];
+        $prenom = $nom_prenom[1];
+        
+        $id_prof = DB::select("select id from profs where (nom = \"$nom\" and prenom = \"$prenom\") or (nom = \"$prenom\" and prenom = \"$nom\") ");
+        
+        $id_prof = $id_prof[0]->id;
+
+        DB::insert("insert into payement_profs(id_prof,id_groupe,num_mois,num_seance,payement) values(\"$id_prof\",\"$id_groupe\",\"$num_mois\",\"$num_seance\",\"$payement\")");
+
+
+        return response()->json();
+
+        // code...
+    }
+
 
     //
 }

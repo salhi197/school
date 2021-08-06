@@ -33,7 +33,7 @@
 
                 <a type="button" class="close" data-dismiss="modal">&times;</a>
 
-                <h4 class="modal-title">Nouvel Groupe</h4>
+                <h4 class="modal-title">Nouveau Groupe</h4>
           	</div>
 
             <div class="modal-body">

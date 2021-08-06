@@ -37,13 +37,29 @@
         <link href="{{ asset('../../assets/skins/skins-modes/color1.css') }}"  id="theme" rel="stylesheet" type="text/css" media="all" />
         <link rel="stylesheet" href="{{ asset('../../assets/plugins/multipleselect/multiple-select.css') }}">
 
+        <link href="{{ asset('../../assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet" />
+
     </head>
 
     <body class="default-header">
 
         <!-- GLOBAL-LOADER -->
+
+        {{-- <div class="card-body">
+            <div class="dimmer active">
+                <div class="lds-hourglass"></div>
+            </div>
+        </div> --}}        
         <div id="global-loader">
-            <img src="{{ asset('../../assets/images/svgs/loader.svg') }}" class="loader-img" alt="Loader">
+            
+
+            <div style="margin-top: 22%;"class="dimmer active">
+                <div class="lds-hourglass"></div>
+                <p class="blink" id="to_blink" style="font-weight: bold; animation: blinker 1s linear infinite; color: blueviolet; margin-left:35%; margin-top:-6%;">Veuiller Patientez ça peut prendre quelques secondes...</p>
+            </div>
+
+
+            {{-- <img src="{{ asset('../../assets/images/svgs/loader.svg') }}" class="loader-img" alt="Loader"> --}}
         </div>
 
         <div class="page">
@@ -131,7 +147,32 @@
 
                                     <li aria-haspopup="true"><a href="/home/Enseignants" class=""><i class="fa fa-mortar-board"></i> Enseignants</a></li>
                                     
-                                    <li aria-haspopup="true"><a href="/home/groupes" class=""><i class="mdi mdi-account-multiple"></i> Groupes</a></li>
+{{--                                     <li aria-haspopup="true">
+                                        
+                                        <a href="/home/groupes" class="">
+                                            <i class="mdi mdi-account-multiple"></i> Groupes
+                                        </a>
+                                    </li>
+ --}}
+
+                                    <li aria-haspopup="true">
+                                        
+                                        <a href="/home/groupes" class="sub-icon">
+                                            <i class="mdi mdi-account-multiple"></i>Groupes 
+                                            <i class="fa fa-angle-down horizontal-icon"></i>
+                                        </a>
+                                        
+                                        <ul class="sub-menu">
+                                            
+                                            <li aria-haspopup="true">
+                                                <a href="/home/groupes">Groupe</a>
+                                            </li>
+                                            
+                                            <li aria-haspopup="true">
+                                                <a href="/home/groupes_special">Groupe Spécial</a>
+                                            </li>
+                                        </ul>
+                                    </li>                                    
                                     
                                     <li aria-haspopup="true"><a href="/home/dawarat" class=""><i class="fe fe-calendar"></i> Dawarat</a></li>
                                     

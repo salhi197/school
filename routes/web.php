@@ -45,27 +45,32 @@ Route::post('/home/profs/supprimer/ajax','ProfController@supprimer');
 Route::post('/home/profs/ajouter/ajax','ProfController@ajouter');
 
 
-//Groupes : 
+//Groupes :
 Route::get('/home/groupes','GroupeController@groupes');
 Route::get('/home/groupes/{id}','GroupeController@afficher_groupe');
 Route::post('/home/groupes/{id}/ajouter','GroupeController@ajouter_eleve');
 Route::post('/home/single_groupe/valider_coches/ajax','SingleGroupeController@valider_coches');
+Route::get('/home/groupes/{id}/tout','SingleGroupeController@toutes_seances');
 
 Route::post('/home/groupes/modifier/ajax','GroupeController@modifier');
 Route::post('/home/groupes/supprimer/ajax','GroupeController@supprimer');
 Route::post('/home/groupes/ajouter/ajax','GroupeController@ajouter');
 Route::post('/home/groupes/get_profs/ajax','GroupeController@get_profs');
 Route::post('/home/groupes/fit_salle/ajax','GroupeController@fit_salles');
+Route::post('/home/single_groupe/verif_existance/ajax','GroupeController@verif_existance');
 
-//payement : 
+
+//payement :
 
 Route::get('/home/groupes/{id_groupe}/eleve/{id_eleve}','SingleGroupeController@historique_payement');
 Route::post('/home/single_eleve/exoneree/ajax','SingleGroupeController@exonerer');
 Route::post('/home/single_eleve/completer_payement/ajax','SingleGroupeController@completer_payement');
 
-// dawarat :
+Route::post('/home/single_groupe/payer_prof/ajax','SingleGroupeController@payer_prof');
 
+// dawarat :
 Route::get('/home/dawarat','DawraController@dawrat');
+Route::get('/home/groupes_special','SpecialGroupeController@index');
 Route::post('/home/dawra/ajouter','DawraController@ajouter');
 Route::get('/home/dawra/{id}','DawraController@afficher_dawra');
 Route::post('/home/dawra/{id}/ajouter','DawraController@ajouter_eleve');

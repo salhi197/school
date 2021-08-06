@@ -56,6 +56,7 @@
 								<tr class=" ">
 									<th class="text-center">Mois</th>
 									<th class="text-center">Cochages</th>
+									<th class="text-center">Dates Séances</th>
 									<th class="text-center">Payé</th>
 									<th class="text-center">Retard</th>
 								</tr>
@@ -63,27 +64,23 @@
 								@for ($i = 0; $i <$le_mois-1; $i++)
 									<tr>
 										<td class="text-center col-md-1 ">{!! $i+1 !!}</td>
-										<td class="text-left col-md-3 ">
+										<td class="text-left col-md-3">
                                         	@include('includes.single_eleve.cochages',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
 										</td>
-										{{-- 
- 										<td class="text-center col-md-3 ">
 
-											@include('includes.single_eleve.presences',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
+
+										<td class="text-left col-md-2">
+                                        	@include('includes.single_eleve.dates',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
 										</td>
-										<td class="text-center col-md-3 ">
 
-											@include('includes.single_eleve.absences',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
-										</td>--}}										
-
- 										<td class="text-center col-md-4 ">
+ 										<td class="text-left col-md-3 ">
 											
 											@include('includes.single_eleve.payement',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
 
 											{{--  --}}
 										</td>
 										
-										<td class="text-left col-md-4">			
+										<td class="text-left col-md-5">			
 
 											@include('includes.single_eleve.retards',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
 
