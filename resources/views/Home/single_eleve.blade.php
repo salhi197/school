@@ -34,26 +34,15 @@
 							<button type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary"  id="btnPrint"> Imprimer </button>
 						</div>
 
-
-
- 						{{--<div class="col-lg-6 text-right">
-							<p class="h3">Invoice To:</p>
-							<address>
-								Street Address<br>
-								State, City<br>
-								Region, Postal Code<br>
-								ypurdomain@example.com
-							</address>
-						</div> --}}
-
+						{{--  --}}
 					</div>
 					
 					<div class="table-responsive push">
 						
-						<table class="table table-bordered table-hover mb-0" id="table-print">
+						<table class="table table-bordered table-hover" id="table-print">
 							
 							<tbody>
-								<tr class=" ">
+								<tr class="">
 									<th class="text-center">Mois</th>
 									<th class="text-center">Cochages</th>
 									<th class="text-center">Dates Séances</th>
@@ -63,24 +52,25 @@
 
 								@for ($i = 0; $i <$le_mois-1; $i++)
 									<tr>
-										<td class="text-center col-md-1 ">{!! $i+1 !!}</td>
-										<td class="text-left col-md-3">
+										<td class="text-center" style="width: 2%;">{!! $i+1 !!}</td>
+										
+										<td class="text-left" style="width: 25%;">
                                         	@include('includes.single_eleve.cochages',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
 										</td>
 
 
-										<td class="text-left col-md-2">
+										<td class="text-left">
                                         	@include('includes.single_eleve.dates',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
 										</td>
 
- 										<td class="text-left col-md-3 ">
+ 										<td class="text-center" style="width: 25%;">
 											
 											@include('includes.single_eleve.payement',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
 
 											{{--  --}}
 										</td>
 										
-										<td class="text-left col-md-5">			
+										<td class="text-left" style="width: 25%;">			
 
 											@include('includes.single_eleve.retards',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
 

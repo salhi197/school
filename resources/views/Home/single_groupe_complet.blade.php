@@ -76,7 +76,7 @@
 				
 				<div class="table-responsive">
 					
-					<table {{-- id="datable-1" --}} class="table table-striped table-bordered text-nowrap">
+					<table id="table-1" class="table table-striped table-bordered text-nowrap">
 						<thead>
 							<tr>
 								<th style="cursor: pointer; font-size: 10px;" >N°</th>
@@ -96,23 +96,23 @@
 
                                         {{ csrf_field() }}  
 
-                                        <td class="col-md-1">
+                                        <td {{-- class="col-md-1" --}}>
 
                                             {!! $i+1 !!}                                                
                                         </td>
 
-                                        <td class="col-md-1" >
+                                        <td {{-- class="col-md-1" --}} >
 
                                             {!! $eleves_groupe[$i]->nom  !!}
                                         </td>
 
-                                        <td class="col-md-1" > 
+                                        <td {{-- class="col-md-1" --}} > 
                                         	
 											{!! $eleves_groupe[$i]->prenom !!}
                                         </td>
 
 
-                                        <td style="font-size:13px;" class="col-md-9" >
+                                        <td style="font-size:13px;" {{-- class="col-md-9" --}} >
                                         		
                                         	@include('includes.seances_tous',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves])
@@ -202,7 +202,7 @@
 	    console.log($("#btnPrint").html());
 	    $("#btnPrint").on('click',function(){
 		// 		var divContents = $("#datable-1").html();
-	            $('#datable-1').printThis();
+	            $('#table-1').printThis();
 	    })
 
 		$("#myInput1").on("keyup", function() 

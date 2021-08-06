@@ -85,3 +85,30 @@ Route::post('/home/dawra/{id}/ajouter','DawraController@ajouter_eleve');
 
 
 Route::get('/lang/{lang}', 'LangController@setLang');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Goupes Spéciaux : 
+
+Route::post('/home/groupes_special/ajouter/ajax','SpecialGroupeController@ajouter');
+
+
+

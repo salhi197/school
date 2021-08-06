@@ -11,7 +11,7 @@
 		
 		@if ( ((floor(($seance_eleve->num-1)/4)+1)==$i+1) )
 
-			<div style="margin-right : 10%;" class="form-check form-check-inline">
+			<span style="margin-right : 10%;" class="form-check form-check-inline">
 	  	
 			  	<label style="margin-right: 20%;" class="form-check-label" for="mois{{$i}}_seance{{$seance_eleve->num}}">	  		
 			  		{!! $seance_eleve->num%4 ? $seance_eleve->num%4 : 4 !!}
@@ -33,7 +33,7 @@
 					{{-- expr --}}
 				@endif
 
-			</div>												
+			</span>												
 			{{-- expr --}}
 		@endif
 

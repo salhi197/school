@@ -1,12 +1,12 @@
 @for ($p = 0; $p < floor($numero_de_la_seance_dans_le_mois/4)+1 ; $p++)
 	
-	@if ($p%3==0 && $p!=0)
+	@if ($p%4==0 && $p!=0)
 	 	
 		<br>
 	 	
 	@endif 
 
-	<span id="etudiant{{ $i }}-le_mois{{ $p+1 }}" style="margin-right:1%; border-right: black solid 1px;">Mois : {{ $p+1 }} |  
+	<span id="etudiant{{ $i }}-le_mois{{ $p+1 }}">Mois : {{ $p+1 }} |  
 
 		@for ($m = $p*4; $m < $p*4+4; $m++)
 
@@ -43,8 +43,6 @@
 
 							<?php $dkhel++; ?>
 
-						  	{{-- <input class="form-check-input" type="checkbox" checked disabled name="mois1" id="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}"> --}}
-
 						  	<span style="position:relative; margin-right: 10%;" class="badge bg-danger"></span>
 
 							{{-- expr --}}
@@ -54,8 +52,6 @@
 						@if ($seances_eleve->id_eleve == $eleves_groupe[$i]->id && $seances_eleve->numero_de_la_seance_dans_le_mois == ($m+1) && $seances_eleve->presence == 2)
 
 							<?php $dkhel++; ?>
-
-						  	{{-- <input class="form-check-input" type="checkbox" checked disabled name="mois1" id="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}"> --}}
 
 						  	<span style="position:relative; margin-right: 10%;" class="badge bg-success"></span>
 

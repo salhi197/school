@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddJourToGroupesTable extends Migration
+class AddJourToSpecialGroupesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddJourToGroupesTable extends Migration
      */
     public function up()
     {
-        Schema::table('groupes', function (Blueprint $table) 
+        Schema::table('special_groupes', function (Blueprint $table) 
         {   
             $table->string('jour');
             //
@@ -27,7 +27,7 @@ class AddJourToGroupesTable extends Migration
      */
     public function down()
     {
-        Schema::table('groupes', function (Blueprint $table) 
+        Schema::table('special_groupes', function (Blueprint $table) 
         {
             $table->dropColumn('jour');
             //

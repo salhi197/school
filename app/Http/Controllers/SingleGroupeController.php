@@ -154,7 +154,7 @@ class SingleGroupeController extends Controller
         
         $le_mois = Groupe::get_the_month($id_groupe);
 
-        $payement_eleve = DB::select("select * from payment_groupes_eleves where id_eleve = \"$id_eleve\" and payement <> 0 order by num_mois,created_at ");
+        $payement_eleve = DB::select("select * from payment_groupes_eleves where id_eleve = \"$id_eleve\" and id_groupe=\"$id_groupe\" and payement <> 0 order by num_mois,created_at ");
 
         $seances_eleves = DB::select("select se.id_eleve,se.presence,s.num,se.created_at from seances_eleves se, seances s where (se.id_seance=s.id) and (s.id_groupe = \"$id_groupe\") and (id_eleve = \"$id_eleve\") order by s.num ");
         

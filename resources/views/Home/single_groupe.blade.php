@@ -161,7 +161,7 @@
 				
 				<div class="table-responsive">
 					
-					<table data-page-length='50' {{-- id="datable-1" --}} class="table table-striped table-bordered text-nowrap w-100">
+					<table data-page-length='50' id="table-1" class="table table-striped table-bordered text-nowrap w-100">
 						<thead>
 							<tr>
 								<th style="cursor: pointer;" class="wd-15p">N°</th>
@@ -184,28 +184,28 @@
 
                                         {{ csrf_field() }}  
 
-                                        <td class="col-md-1">
+                                        <td>
 
                                             {!! $i+1 !!}                                                
                                         </td>
 
-                                        <td class="col-md-1" >
+                                        <td>
 
                                             {!! $eleves_groupe[$i]->nom  !!}
                                         </td>
 
-                                        <td class="col-md-1" > 
+                                        <td> 
                                         	
 											{!! $eleves_groupe[$i]->prenom !!}
                                         </td>
 
-                                        <td class="col-md-1" > 
+                                        <td> 
                                         	
 											{!! $eleves_groupe[$i]->num_tel !!}
                                         </td>
 
 
-                                        <td class="col-md-4" >
+                                        <td>
                                         		
                                         	@include('includes.seances',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves,'eleves_gratuits'=>$eleves_gratuits])
@@ -213,7 +213,7 @@
                                         	{{--  --}}																						
                                         </td>
 
-                                        <td class="col-md-4" >
+                                        <td>
 
                                         	@include('includes.payement',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'payments'=>$payments,'le_mois'=>$le_mois,'eleves_gratuits'=>$eleves_gratuits])
@@ -222,7 +222,7 @@
                                         </td>
 
 
-                                        <td class="col-md-4" style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleves_groupe[$i]->id}}" groupe="{{ $groupe->id }}">
+                                        <td style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleves_groupe[$i]->id}}" groupe="{{ $groupe->id }}">
 
 
                                         	@include('includes.retard',['eleves_groupe'=>$eleves_groupe,
@@ -456,7 +456,7 @@
 	    console.log($("#btnPrint").html());
 	    $("#btnPrint").on('click',function(){
 		// 		var divContents = $("#datable-1").html();
-	            $('#datable-1').printThis();
+	            $('#table-1').printThis();
 	    })
 
 	    if (nb_eleves>25) 
