@@ -5,6 +5,10 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
+				<!-- HIDDEN DATA -->
+				<input type="hidden" value="{{$dawra->id ?? ''}}" id="dawra_id" />
+				<!-- HIDDEN DATA -->
+
 				
 				<div class="card-body">
 					<div class="clearfix">
@@ -18,7 +22,7 @@
 					<hr>
 					<div class="row">
 						<div class="col-lg-6 ">
-							<p class="h3">Informations du Groupe : </p>
+							<p class="h3">Informations du Dawra : </p>
 							<address>
 								Année scolaire : {{ $dawra->annee_scolaire ?? "" }}<br>
 								Niveau : {{ $dawra->niveau ?? "" }} <br>
@@ -166,48 +170,50 @@
 							@foreach($eleves as $key=>$eleve)
                                 <tr>
 
-                                        <td class="col-md-1">
+									<td class="col-md-1">
 
-                                            {{ $key }}                                                
-                                        </td>
+										{{ $key }}                                                
+									</td>
 
-                                        <td class="col-md-1" >
+									<td class="col-md-1" >
 
-                                            {{ $eleve->nom  }}
-                                        </td>
+										{{ $eleve->nom  }}
+									</td>
 
-                                        <td class="col-md-1" > 
-                                        	
-											{{ $eleve->prenom }}
-                                        </td>
+									<td class="col-md-1" > 
+										
+										{{ $eleve->prenom }}
+									</td>
 
-                                        <td class="col-md-1" > 
-                                        	
-											{{ $eleve->num_tel }}
-                                        </td>
-
-
-                                        <td class="col-md-4" >
-												Séances : 
-
-												@foreach($eleve->getDawraSeances($dawra->id) as $seance)
-													<div class="form-check form-check-inline">
-														<input name="mois1" id="" class="form-check-input" type="checkbox" 
-															@if($seance->presence ==1)
-																checked																
-															@endif>
-													</div>												
-												@endforeach
-                                        </td>
-
-                                        <td class="col-md-4" >
-											{{ $eleve->getEleveDawraPayment($dawra->id) ?? ' ' }}
-                                        </td>
+									<td class="col-md-1" > 
+										
+										{{ $eleve->num_tel }}
+									</td>
 
 
-                                        <td class="col-md-4" style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleve->id}}" groupe="{{ $dawra->id }}">
-											{{ $eleve->getEleveDawraReste($dawra->id) ?? ' ' }}
-                                        </td>
+									<td class="col-md-4" >
+											Séances : 
+
+											@foreach($eleve->getDawraSeances($dawra->id) as $seance)
+												<div class="form-check form-check-inline">
+													<input  eleve="{{$eleve->id}}"
+													<?php if($seance->num_seance !=	 $dawra->current_seance) echo "disabled"; ?>
+													seance="{{$seance->num_seance}}" id=""  class="form-check-input checkboxes"  type="checkbox" 
+														@if($seance->presence ==1)
+															checked																
+														@endif>
+												</div>												
+											@endforeach
+									</td>
+
+									<td class="col-md-4" >
+										{{ $eleve->getEleveDawraPayment($dawra->id) ?? ' ' }}
+									</td>
+
+
+									<td class="col-md-4" style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleve->id}}" groupe="{{ $dawra->id }}">
+										{{ $eleve->getEleveDawraReste($dawra->id) ?? ' ' }}
+									</td>
                                 </tr>
 							@endforeach
                         </tbody>
@@ -276,7 +282,7 @@
 
 
 
-		<script src="{{ asset('js/gerer_groupe.js') }}"></script>
+		<script src="{{ asset('js/gerer_dawra.js') }}"></script>
 	</div>
 	<!-- ROW-1 CLOSED -->
 

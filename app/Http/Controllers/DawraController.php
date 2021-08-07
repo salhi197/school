@@ -210,6 +210,25 @@ class DawraController extends Controller
         
     }
 
+    public function valider_coches(Request $request)
+    {
+        $data = json_decode($request['data']);
+        $dawra = $request['dawra'];
+        foreach($data as $d){
+            $eleve = Eleve::find($d->eleve);
+            DB::table('seancesdawras')
+                        ->where(['id_eleve'=>$d->eleve,'num_seance'=>$d->num_seance,'id_dawra'=>$dawra])
+                        ->update(['presence' => 1]);
+            /**
+             * updae current seance
+             */
+            DB::table('dawras')
+                        ->where(['id'=>$dawra])
+                        ->increment('current_seance',1);
+
+        }
+    }
+
 
     //
 
