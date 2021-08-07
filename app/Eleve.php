@@ -124,4 +124,88 @@ class Eleve extends Model
         $seances = Seancesdawra::where(['id_dawra'=>$dawra,'id_eleve'=>$this->id])->get();
         return $seances;
     }
+
+
+    
+
+
+    public static function add_eleve_special($id_groupe,$nom,$prenom,$num_tel,$payement,$cotisations)
+    {
+
+
+        $il_paye = ($cotisations);
+
+        $le_mois = (Groupe::get_the_month_special($id_groupe));
+
+        $dernier_seance_du_groupe = (DB::select("select num as derniere_seance from seances_speciales where id_groupe_special = \"$id_groupe\" order by num desc "));
+        
+        if(count($dernier_seance_du_groupe)>0)
+        {
+            $dernier_seance_du_groupe = $dernier_seance_du_groupe[0]->derniere_seance;
+            //
+        }
+        else
+        {
+            $dernier_seance_du_groupe = 0;
+        }
+
+        $id_dernier_seance_du_groupe = (DB::select("select id as id_derniere_seance from seances_speciales where id_groupe_special = \"$id_groupe\" order by id desc "));
+        
+        if(count($id_dernier_seance_du_groupe)>0)
+        {
+            $id_dernier_seance_du_groupe = $id_dernier_seance_du_groupe[0]->id_derniere_seance;
+            //
+        }
+        else
+        {
+            dd("makach seance");
+        }
+
+        $last = (DB::select("select * from eleves where (nom=\"$nom\" and prenom=\"$prenom\")or(nom=\"$prenom\" and nom=\"$prenom\") "));
+
+        
+        if (count($last)>0) 
+        {
+            
+            $id_eleve = $last[0]->id;         
+
+            // code...
+        }
+        else
+        {
+    
+            DB::insert("insert into eleves(nom,prenom,num_tel) values(\"$nom\",\"$prenom\",\"$num_tel\") ");
+
+            $last = DB::select("select * from eleves order by id desc");
+
+            $id_eleve = $last[0]->id;
+
+        }
+        
+        if ($il_paye == 1) 
+        {
+
+            DB::insert("insert into payement_groupe_special_eleve (id_groupe_special,id_eleve,num_seance,payement,num_mois) values (\"$id_groupe\",\"$id_eleve\",\"$dernier_seance_du_groupe\",\"$payement\",\"$le_mois\")");
+        
+            //
+        }
+        else
+        {
+
+            DB::insert("insert into payement_groupe_special_eleve (id_groupe_special,id_eleve,num_seance,payement,num_mois,paye) values (\"$id_groupe\",\"$id_eleve\",\"$dernier_seance_du_groupe\",\"$payement\",\"$le_mois\",0)");
+            //
+        }
+
+        DB::insert("insert into seances_speciales_eleves (presence,id_seance_speciale,id_eleve) values (0,\"$id_dernier_seance_du_groupe\",\"$id_eleve\") ");
+
+        
+
+        session()->flash('notification.message' , 'Elève : '.$last[0]->nom.' , '.$last[0]->prenom.' ajoutée avec succés');
+
+        session()->flash('notification.type' , 'success');
+
+        //
+    }
+
+
 }

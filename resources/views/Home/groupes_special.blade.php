@@ -149,7 +149,6 @@
 
                     <input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter">
 
-                  	{{-- <a style="color: #2070F5; margin-top: 5%;" id="ajout{{ $last_id }}" data-dismiss="modal" onclick="ajoutergroupe(event,this)" class="btn btn-outline-primary col-md-12">Ajouter</a> --}}
                 </form>
 
                 {{--  --}}
@@ -297,7 +296,7 @@
 
                                             @foreach ($eleves_groupe as $groupee)
                                                 
-                                                @if($groupee->id_groupe==$groupes[$i]->id)
+                                                @if($groupee->id_groupe_special==$groupes[$i]->id)
                                                    
                                                     <span>{!! $groupee->nb_eleves !!}</span>                              
 

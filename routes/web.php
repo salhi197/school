@@ -110,6 +110,15 @@ Route::get('/lang/{lang}', 'LangController@setLang');
 //Goupes Spéciaux : 
 
 Route::post('/home/groupes_special/ajouter/ajax','SpecialGroupeController@ajouter');
+Route::get('/home/groupes_special/{id}','SpecialGroupeController@afficher_groupe');
+Route::post('/home/groupes_special/{id}/ajouter','SpecialGroupeController@ajouter_eleve');
+Route::post('/home/single_groupe_special/valider_coches/ajax','SpecialGroupeController@valider_coches');
+Route::post('/home/single_groupe_speciale/fit_prof/ajax','SpecialGroupeController@get_profs');
+Route::post('/home/single_groupe_speciale/fit_matiere/ajax','SpecialGroupeController@get_matiere');
+
+Route::get('/home/groupes_special/{id_groupe}/eleve/{id_eleve}','SpecialGroupeController@historique_payement');
+
+Route::post('/home/single_groupe_special/verif_existance/ajax','SpecialGroupeController@verif_existance');
 
 
 

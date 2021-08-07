@@ -133,7 +133,7 @@ function come_back(objet)
 
 	var id_groupe = (objet.id.substr(6));
 
-	window.location.href='/home/groupes/'+id_groupe;
+	window.location.href='/home/groupes_special/'+id_groupe;
 
 	//
 }

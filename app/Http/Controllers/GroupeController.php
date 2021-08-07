@@ -59,6 +59,10 @@ class GroupeController extends Controller
 
         $dispo=(DB::select("select * from groupes where jour = \"$request->jour\" and classe=\"$request->salle\" and visible = 1 and annee_scolaire = \"$annee_scolaire\""));
 
+        $dispo1=(DB::select("select * from special_groupes where jour = \"$request->jour\" and salle=\"$request->salle\" and visible = 1 and annee_scolaire = \"$annee_scolaire\""));
+
+        $dispo = array_merge($dispo, $dispo1);
+
         $debut = strtotime($request->debut);
         $fin = strtotime($request->fin);
 
@@ -295,9 +299,6 @@ class GroupeController extends Controller
 
         // code...
     }
-
-    //
-
 
 
     //
