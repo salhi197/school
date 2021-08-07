@@ -4,13 +4,11 @@
 			
 		<p> {!! $payement->payement !!} DA | Date : {!! substr($payement->created_at,0,16) !!} </p>
 		
-		@if ($payement->paye)
+{{-- 		@if ($payement->paye)
 			
 			<p>L'élève ne paye pas</p>
-
-			{{-- expr --}}
 		@endif
-
+ --}}
 		{{-- expr --}}
 	@endif
 

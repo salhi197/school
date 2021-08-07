@@ -86,3 +86,30 @@ Route::post('/home/single_dawra/valider_coches','DawraController@valider_coches'
 
 
 Route::get('/lang/{lang}', 'LangController@setLang');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Goupes Spéciaux : 
+
+Route::post('/home/groupes_special/ajouter/ajax','SpecialGroupeController@ajouter');
+
+
+
