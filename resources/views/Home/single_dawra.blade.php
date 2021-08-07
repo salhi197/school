@@ -73,7 +73,7 @@
 
 			                        <label for="nom">nom</label>
 
-			                        <input type="text" id="nom" required name="nom" class="form-control col-md-12" autofocus>
+			                        <input type="text" onkeyup="verif_existance();" id="nom" required name="nom" dawra="{{$dawra->id}}" class="form-control col-md-12" autofocus>
 
 			                        {{--  --}}
 			                    </div>
@@ -82,7 +82,7 @@
 
 			                        <label for="prenom">Prenom</label>
 
-			                        <input type="text" id="prenom" required name="prenom" class="form-control col-md-12">
+			                        <input type="text" onkeyup="verif_existance();" id="prenom" required name="prenom" class="form-control col-md-12">
 
 			                        {{--  --}}
 			                    </div>

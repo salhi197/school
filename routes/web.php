@@ -75,6 +75,7 @@ Route::post('/home/dawra/ajouter','DawraController@ajouter');
 Route::get('/home/dawra/{id}','DawraController@afficher_dawra');
 Route::post('/home/dawra/{id}/ajouter','DawraController@ajouter_eleve');
 Route::post('/home/single_dawra/valider_coches','DawraController@valider_coches')->name('dawra_valider_coches');
+Route::post('/home/single_dawra/verif_existance/ajax','DawraController@verif_existance');
 
 
 

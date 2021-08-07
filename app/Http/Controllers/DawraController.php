@@ -105,6 +105,7 @@ class DawraController extends Controller
         $dawra->pourcentage_prof = $request['pourcentage_prof'];
         $dawra->pourcentage_ecole = $request['pourcentage_ecole'];
         $dawra->tarif = $request['tarif'];
+        $dawra->current_seance = 1;
         $dawra->save();
        
        session()->flash('notification.message' , 'Dawra : '.$request->matiere.' , '.$request->niveau.' Prof : '.$request->prof.' ajoutée avec succés');
@@ -169,7 +170,7 @@ class DawraController extends Controller
                     $seanceDawra = new Seancesdawra();
                     $seanceDawra->id_eleve = $eleve->id;
                     $seanceDawra->id_dawra = $dawra->id;
-                    $seanceDawra->num_seance = $i;
+                    $seanceDawra->num_seance = $i+1;
                     $seanceDawra->presence = 0;
                     $seanceDawra->save();
                 }
@@ -197,7 +198,7 @@ class DawraController extends Controller
                 $seanceDawra = new Seancesdawra();
                 $seanceDawra->id_eleve = $id_eleve;
                 $seanceDawra->id_dawra = $dawra->id;
-                $seanceDawra->num_seance = $i;
+                $seanceDawra->num_seance = $i+1;
                 $seanceDawra->presence = 0;
                 $seanceDawra->save();
             }
@@ -222,6 +223,8 @@ class DawraController extends Controller
             /**
              * updae current seance
              */
+        }
+        if(count($data)>0){
             DB::table('dawras')
                         ->where(['id'=>$dawra])
                         ->increment('current_seance',1);
@@ -229,6 +232,48 @@ class DawraController extends Controller
         }
     }
 
+
+    public function verif_existance(Request $request)
+    {
+        $data = ($request->all());
+
+        $nom = $data['nom'];
+
+        $prenom = $data['prenom'];
+
+        $id_dawra = $data['id_dawra'];
+
+        $leleve = DB::select("select id,num_tel from eleves where (nom=\"$nom\" and prenom=\"$prenom\") or (prenom=\"$nom\" and nom=\"$prenom\")");
+
+        if(count($leleve)>0)
+        {
+
+            $id_eleve = $leleve[0]->id;
+
+            $existe = DB::select("select * from dawraeleves where id_dawra = \"$id_dawra\" and id_eleve=\"$id_eleve\" ");
+
+            if(count($existe)>0)
+            {
+
+                return response()->json(false);
+
+                //
+            }
+
+            return response()->json($leleve[0]->num_tel);
+
+            //
+        }
+        else
+        {
+
+            return response()->json(0);
+
+            //
+        }
+
+        // code...
+    }
 
     //
 

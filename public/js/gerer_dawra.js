@@ -5,17 +5,15 @@ function verif_existance()
 
  	var prenom = $("#prenom").val();
 
- 	var id_groupe = $("#nom").attr('groupe');
+ 	var id_dawra = $("#nom").attr('dawra');
 
     $.ajax({
-        headers: 
-        {
+        headers: {
            'X-CSRF-TOKEN': $('input[name="_token"]').val()
         },                    
         type:"POST",
-        url:"/home/single_groupe/verif_existance/ajax",
-        data:{nom:nom,prenom:prenom,id_groupe:id_groupe},
-
+        url:"/home/single_dawra/verif_existance/ajax",
+        data:{nom:nom,prenom:prenom,id_dawra:id_dawra},
         success:function(data) 
         {
 
@@ -111,6 +109,9 @@ function valider_tous(objet)
             success: function(data){
                 console.log('sasa');
                 $("#results").html(data);                       
+				location.reload();
+
+
             },
             error:function(){
                 console.log('error');
