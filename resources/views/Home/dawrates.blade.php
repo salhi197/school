@@ -214,61 +214,60 @@
                         
                         <tbody id="all_the_groupes">
 
-                            @for($i=0 ; $i < count($dawrates) ; $i++)
+                            @foreach($dawrates as $key=>$dawra)
 
-                                <tr onclick="goto_the_link(this);" style="cursor:pointer;" id="groupe{{$dawrates[$i]->id}}">
+                                <tr onclick="goto_the_link(this);" style="cursor:pointer;" id="groupe{{$dawra->id}}">
 
                                     <form>
 
                                         {{ csrf_field() }}  
 
                                         <td>
-
-                                            {!! $i+1 !!}                                                
+                                            {{$key}}
                                         </td>
 
                                         <td>
-                                            <span>{!! $dawrates[$i]->nbrseances  !!}</span>
+                                            <span>{!! $dawra->nbrseances  !!}</span>
                                         </td>
 
 
 
+
                                         <td> 
-                                            <span>{!! substr($dawrates[$i]->heure_fin,0,5) !!}</span>                              
+                                            
+                                            <span>{!! $dawra->matiere ?? "vide" !!}</span>
+                                        </td>
+
+                                        <td> 
+                                            <span>{!! $dawra->niveau  !!}</span>                              
+                                        </td>
+
+                                        <td> 
+                                            <span>{!! $dawra->prof  !!}</span>                              
+                                        </td>
+
+
+                                        <td> 
+                                            <span>{!! $dawra->pourcentage_prof  !!}%</span>                              
+                                        </td>
+
+                                        <td> 
+                                            <span>{!! $dawra->pourcentage_ecole  !!}%</span>                              
+                                        </td>
+                                        <td> 
+                                            <span>{{$dawra->getNbreleve() ?? 0}}</span>                              
                                         </td>
 
                                         <td> 
                                             
-                                            <span>{!! $dawrates[$i]->matiere !!}</span>
-                                        </td>
-
-                                        <td> 
-                                            <span>{!! $dawrates[$i]->niveau  !!}</span>                              
-                                        </td>
-
-                                        <td> 
-                                            <span>{!! $dawrates[$i]->prof  !!}</span>                              
-                                        </td>
-
-
-                                        <td> 
-                                            <span>{!! $dawrates[$i]->pourcentage_prof  !!}%</span>                              
-                                        </td>
-
-                                        <td> 
-                                            <span>{!! $dawrates[$i]->pourcentage_ecole  !!}%</span>                              
-                                        </td>
-
-                                        <td> 
-                                            
-                                            <span>{!! substr(date('d/m/Y H:i:s',strtotime($dawrates[$i]->created_at)),0,10) !!}</span>
+                                            <span>{!! substr(date('d/m/Y H:i:s',strtotime($dawra->created_at)),0,10) !!}</span>
                                         </td>
 
 {{--                                         <td> 
 
-                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$dawrates[$i]->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
+                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$dawra->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
 
-                                            <div id="myModalsup-{{$dawrates[$i]->id}}" class="modal fade" role="dialog">
+                                            <div id="myModalsup-{{$dawra->id}}" class="modal fade" role="dialog">
 
                                               <div class="modal-dialog modal-lg">
 
@@ -283,7 +282,7 @@
 
                                                       <div class="modal-body">
 
-                                                            <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$dawrates[$i]->id}}">OUI,je supprime</a>
+                                                            <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$dawra->id}}">OUI,je supprime</a>
 
                                                             <a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas supprimer</a>
 
@@ -303,7 +302,7 @@
                                 </tr>
                                 
                                 {{-- expr --}}
-                            @endfor
+                            @endforeach
                             {{--  --}}
                         </tbody>
  					</table>
