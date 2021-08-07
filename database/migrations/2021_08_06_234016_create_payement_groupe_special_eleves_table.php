@@ -22,8 +22,8 @@ class CreatePayementGroupeSpecialElevesTable extends Migration
             $table->double('payement',8,2);
             $table->double('num_mois',2,0);
             $table->double('num_seance',8,0);
-            $table->double('exoneree',1,0);
-            $table->double('paye',1,0);
+            $table->double('exoneree',1,0)->default(0);
+            $table->double('paye',1,0)->default(1);
             
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

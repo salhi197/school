@@ -123,6 +123,16 @@ class Groupe extends Model
         // code...
     }
 
+    public static function get_the_month_special($id_groupe_special)
+    {
+
+        $last_seance = DB::select("select max(num) as num_derniere_seance from seances_speciales where id_groupe_special = \"$id_groupe_special\" ");
+        
+        return (floor(($last_seance[0]->num_derniere_seance-1)/4)+1);
+
+        // code...
+    }
+
     public static function current_seance($id_groupe)
     {
         
@@ -136,6 +146,21 @@ class Groupe extends Model
 
        // code...
     }
+
+    public static function current_seance_special($id_groupe)
+    {
+        
+        $last =  DB::select("select max(num) as last from seances_speciales where id_groupe_special = \"$id_groupe\" ");
+
+        $last = $last[0]->last;
+
+        $next = $last/*+1*/;
+
+        return $next;
+
+       // code...
+    }
+
 
     //use HasFactory;
 }
