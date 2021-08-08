@@ -18,7 +18,7 @@ class CreateNiveauxTable extends Migration
             $table->bigIncrements('id');
             $table->string('nom');
             $table->string('desc');
-            $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

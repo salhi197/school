@@ -26,7 +26,6 @@ class CreateSeancesEleveTable extends Migration
             $table->unsignedBigInteger('id_seance');
             $table->unsignedBigInteger('id_eleve');
             $table->timestamp('created_at')->useCurrent();
-
             $table->foreign('id_seance')->references('id')->on('seances');
             $table->foreign('id_eleve')->references('id')->on('eleves');
 

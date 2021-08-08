@@ -18,7 +18,7 @@ class CreateElevesTable extends Migration
             $table->bigIncrements('id');
             $table->string('nom');
             $table->string('prenom');
-            $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

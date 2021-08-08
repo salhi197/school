@@ -17,7 +17,6 @@ class AddNumTelToElevesTable extends Migration
         {   
 
             $table->string('num_tel');
-            $table->timestamp('created_at')->useCurrent();
 
             //
         });
@@ -34,7 +33,6 @@ class AddNumTelToElevesTable extends Migration
         {
 
             $table->dropColumn('num_tel');
-            $table->dropColumn('created_at');
             //
         });
     }

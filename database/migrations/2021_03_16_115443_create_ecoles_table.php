@@ -22,7 +22,7 @@ class CreateEcolesTable extends Migration
             $table->string('tel2');
             $table->string('email');
             $table->text('desc');
-            $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

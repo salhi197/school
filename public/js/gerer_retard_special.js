@@ -56,7 +56,7 @@ function suur(objet)
 	           'X-CSRF-TOKEN': $('input[name="_token"]').val()
 	        },                    
 	        type:"POST",
-	        url:"/home/single_eleve/exoneree/ajax",
+	        url:"/home/single_eleve_special/exoneree/ajax",
 	        data:{id_eleve:id_eleve,id_groupe:id_groupe,num_mois:mois},
 
 	        success:function(data) 
@@ -109,7 +109,7 @@ function completer_payement(objet)
 	           'X-CSRF-TOKEN': $('input[name="_token"]').val()
 	        },                    
 	        type:"POST",
-	        url:"/home/single_eleve/completer_payement/ajax",
+	        url:"/home/single_eleve_special/completer_payement/ajax",
 	        data:{id_eleve:id_eleve,id_groupe:id_groupe,num_mois:num_mois,current_seance:current_seance,payement:payement},
 
 	        success:function(data) 
@@ -133,7 +133,7 @@ function come_back(objet)
 
 	var id_groupe = (objet.id.substr(6));
 
-	window.location.href='/home/groupes/'+id_groupe;
+	window.location.href='/home/groupes_special/'+id_groupe;
 
 	//
 }

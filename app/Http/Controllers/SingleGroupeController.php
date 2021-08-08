@@ -30,7 +30,13 @@ class SingleGroupeController extends Controller
         $groupe = $data["groupe"];
         $numero_de_la_seance_dans_le_mois = $data["numero_de_la_seance_dans_le_mois"];
         $les_coches = $data["les_coches"];
-        $eleves_gratuits = $data["eleves_gratuits"];
+        if(count($data)>5)
+        {
+
+            $eleves_gratuits = $data["eleves_gratuits"];
+        }
+        else
+            $eleves_gratuits = [];
         
         $id_groupe = $groupe;
 

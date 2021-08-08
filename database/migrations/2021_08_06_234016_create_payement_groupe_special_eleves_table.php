@@ -19,7 +19,7 @@ class CreatePayementGroupeSpecialElevesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_groupe_special');
             $table->unsignedBigInteger('id_eleve');
-            $table->double('payement',8,2);
+            $table->string('payement');
             $table->double('num_mois',2,0);
             $table->double('num_seance',8,0);
             $table->double('exoneree',1,0)->default(0);

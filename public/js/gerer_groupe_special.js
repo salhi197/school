@@ -265,6 +265,7 @@ function valider_tous(objet)
 
 		//
 	}
+
 	console.log(seances_eleves);
 	console.log(les_coches);
 
@@ -281,7 +282,7 @@ function valider_tous(objet)
 
 		//
 	}
-
+	
 	if (compteur_faux>0) 
 	{
 
@@ -300,8 +301,10 @@ function valider_tous(objet)
         data:{la_matiere:la_matiere,le_prof:le_prof,eleves_groupe:eleves_groupe,groupe:groupe,numero_de_la_seance_dans_le_mois:numero_de_la_seance_dans_le_mois,les_coches:les_coches,les_input_payement:les_input_payement,eleves_gratuits:eleves_gratuits},
 
         success:function(data) 
-        {
+        {        	
+
         	$("html, body").animate({ scrollTop: 140 }, "slow");
+        	
         	location.reload();
 
         	//
@@ -346,7 +349,7 @@ function supprimergroupe (event,objet)
            'X-CSRF-TOKEN': $('input[name="_token"]').val()
         },                    
         type:"POST",
-        url:"/home/groupes/supprimer/ajax",
+        url:"/home/groupes_special/supprimer/ajax",
         data:{id:$id},
 
         success:function(data) 
@@ -354,7 +357,7 @@ function supprimergroupe (event,objet)
 
         	$("#nnotif").text("Groupe Archivé").attr('class','text-center alert alert-danger')
 
-			window.location.href = '/home/groupes';
+			window.location.href = '/home/groupes_special';
 
         	//
 		}
@@ -401,6 +404,12 @@ function hide_payement(objet)
 
 function verif_prix_tarif(objet,tarif) 
 {
+
+	var max = $(objet).attr('max');
+
+	tarif = max;
+
+	tarif = parseFloat(tarif);
 
 	if ($(objet).val()>tarif) 
 	{

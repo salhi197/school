@@ -41,7 +41,7 @@ class CreateGroupeSpecialTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('special_groupe');
+        Schema::dropIfExists('special_groupes');
     }
 }
 

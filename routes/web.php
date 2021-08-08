@@ -122,5 +122,13 @@ Route::get('/home/groupes_special/{id_groupe}/eleve/{id_eleve}','SpecialGroupeCo
 
 Route::post('/home/single_groupe_special/verif_existance/ajax','SpecialGroupeController@verif_existance');
 
+Route::post('/home/single_eleve_special/exoneree/ajax','SpecialGroupeController@exonerer');
+
+Route::post('/home/single_eleve_special/completer_payement/ajax','SpecialGroupeController@completer_payement');
+
+Route::post('/home/groupes_special/supprimer/ajax','SpecialGroupeController@supprimer');
+
+
+
 
 

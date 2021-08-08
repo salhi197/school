@@ -77,7 +77,7 @@
 										
 										<td class="text-left" style="width: 25%;">			
 
-											@include('includes.single_eleve.retards',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
+											@include('includes.single_eleve.retards_special',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,'les_presences'=>$les_presences,'les_absences'=>$les_absences])
 
 										</td>
 									</tr>
@@ -97,7 +97,7 @@
 
 	<!-- ROW-1 CLOSED -->
 
-	<script src="{{ asset('js/gerer_retard.js') }}"></script>
+	<script src="{{ asset('js/gerer_retard_special.js') }}"></script>
 
 @endsection
 @section('scripts')

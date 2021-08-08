@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
-				<div class="card-body">
+				<div class="card-body"  id="table-print">
 					<div class="clearfix">
 						<div class="float-left">
 							<h3 onclick="come_back(this)" id="groupe{{$groupe->id}}" class="card-title mb-0" style="cursor:pointer;" >Groupe : {!! $groupe->niveau !!} | {!! $groupe->matiere !!} | {!! $groupe->jour !!} | {!! substr($groupe->heure_debut,0,5) !!}-{!! substr($groupe->heure_fin,0,5) !!}</h3>
@@ -39,11 +39,11 @@
 					
 					<div class="table-responsive push">
 						
-						<table class="table table-bordered table-hover" id="table-print">
+						<table class="table table-bordered table-hover">
 							
 							<tbody>
 								<tr class="">
-									<th class="text-center">Mois</th>
+									<th class="text-center">Mois </th>
 									<th class="text-center">Cochages</th>
 									<th class="text-center">Dates Séances</th>
 									<th class="text-center">Payé</th>

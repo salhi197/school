@@ -18,7 +18,7 @@
 					<hr>
 					<div class="row">
 						<div class="col-lg-6 ">
-							<p class="h3">Informations du Groupe : </p>
+							<p class="h3 alert alert-info">Informations du Groupe Spécial : </p>
 							<address>
 								Année scolaire : {!! $groupe->annee_scolaire !!}<br>
 								Niveau : {!! $groupe->niveau !!} <br>
@@ -153,15 +153,22 @@
 				<div class="table-responsive">
 					
 					<table data-page-length='50' id="table-1" class="table table-striped table-bordered text-nowrap w-100">
+
+						<caption>
+							Groupe Spécial #{!! $groupe->id !!} {!! $groupe->jour !!} | {!! substr($groupe->heure_debut,0,5) !!}-{!! substr($groupe->heure_fin,0,5) !!} | Niveau : {!! $groupe->niveau !!} |
+								Tarif : {!! $groupe->tarif !!} DA  
+						</caption>
+
+
 						<thead>
 							<tr>
-								<th style="cursor: pointer;" class="wd-15p">N°</th>
-								<th style="cursor: pointer;" class="wd-15p">Nom</th>
-								<th style="cursor: pointer;" class="wd-15p">Prénom</th>
-								<th style="cursor: pointer;" class="wd-15p">Num tel</th>
-								<th style="cursor: pointer;" class="wd-15p">Séances</th>
-								<th style="cursor: pointer; color: green;" class="wd-15p">Payé</th>
-								<th style="cursor: pointer; color: red;" class="wd-15p">Retard</th>
+								<th style="cursor: pointer;" class="alert alert-info wd-15p">N°</th>
+								<th style="cursor: pointer;" class="alert alert-info wd-15p">Nom</th>
+								<th style="cursor: pointer;" class="alert alert-info wd-15p">Prénom</th>
+								<th style="cursor: pointer;" class="alert alert-info wd-15p">Num tel</th>
+								<th style="cursor: pointer;" class="alert alert-info wd-15p">Séances</th>
+								<th style="cursor: pointer; color: green;" class="alert alert-info wd-15p">Payé</th>
+								<th style="cursor: pointer; color: red;" class="alert alert-info wd-15p">Retard</th>
 							</tr>
 						</thead>
                         
@@ -263,9 +270,9 @@
 						
 						<select id="prof" class="form-control" onclick="fit_matiere();">
 							
-							@foreach ($profs as $prof)
-								
-								<option value="--">  </option>
+							<option value="--">  </option>
+							
+							@foreach ($profs as $prof)	
 
 								<option value="{{ $prof->nom }}-{{ $prof->prenom }}">
 									{!! $prof->nom !!}-{!! $prof->prenom !!}

@@ -213,12 +213,12 @@
 
 <!-- ROW-1 OPEN -->
 <div class="row">
-	<div class="col-md-12 col-lg-12">
+	<div class="col-md-12 col-lg-12 ">
 		<div class="card">
 			
-			<div class="card-header">
+			<div class="card-header text-center">
 				
-				<div class="card-title " >Groupes 
+				<div class="card-title alert alert-info">Groupes Spéciaux
 					
 					<span id="alert" class="alert alert-sccess"> </span> 
 
@@ -233,16 +233,16 @@
 					<table data-page-length='50' id="datable-1" class="table table-striped table-bordered text-nowrap w-100">
 						<thead>
 							<tr>
-								<th style="cursor: pointer;" class="wd-15p">N°</th>
-								<th style="cursor: pointer;" class="wd-15p">Jour</th>
-								<th style="cursor: pointer;" class="wd-20p">Début</th>
-								<th style="cursor: pointer;" class="wd-15p">Fin</th>
-                                <th style="cursor: pointer;" class="wd-15p">Salle</th>
-                                <th style="cursor: pointer;" class="wd-15p">Niveau</th>
-                                <th style="cursor: pointer;" class="wd-15p">%_Prof</th>
-                                <th style="cursor: pointer;" class="wd-15p">%_école</th>
-                                <th style="cursor: pointer;" class="wd-15p">NB</th>
-								<th style="cursor: pointer;" class="wd-15p">Création</th>
+								<th style="cursor: pointer;" class="wd-15p text-center alert alert-info">N°</th>
+								<th style="cursor: pointer;" class="wd-15p text-center alert alert-info">Jour</th>
+								<th style="cursor: pointer;" class="wd-20p text-center alert alert-info">Début</th>
+								<th style="cursor: pointer;" class="wd-15p text-center alert alert-info">Fin</th>
+                                <th style="cursor: pointer;" class="wd-15p text-center alert alert-info">Salle</th>
+                                <th style="cursor: pointer;" class="wd-15p text-center alert alert-info">Niveau</th>
+                                <th style="cursor: pointer;" class="wd-15p text-center alert alert-info">%_Prof</th>
+                                <th style="cursor: pointer;" class="wd-15p text-center alert alert-info">%_école</th>
+                                <th style="cursor: pointer;" class="wd-15p text-center alert alert-info">NB</th>
+								<th style="cursor: pointer;" class="wd-15p text-center alert alert-info">Création</th>
                                 {{-- <th style="cursor: pointer;" class="wd-15p">Actions</th> --}}
 							</tr>
 						</thead>
@@ -257,7 +257,7 @@
 
                                         {{ csrf_field() }}  
 
-                                        <td>
+                                        <td class="text-center">
 
                                             {!! $i+1 !!}                                                
                                         </td>
@@ -280,7 +280,7 @@
                                             <span>{!! $groupes[$i]->salle  !!}</span>                              
                                         </td>
 
-                                        <td> 
+                                        <td class="text-center"> 
                                             <span>{!! $groupes[$i]->niveau  !!}</span>                              
                                         </td>
 
@@ -308,7 +308,7 @@
 
                                         </td>
 
-                                        <td> 
+                                        <td class="text-center"> 
                                             
                                             <span>{!! substr(date('d/m/Y H:i:s',strtotime($groupes[$i]->created_at)),0,10) !!}</span>
                                         </td>

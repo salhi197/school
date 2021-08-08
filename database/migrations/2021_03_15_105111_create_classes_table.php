@@ -23,7 +23,7 @@ class CreateClassesTable extends Migration
             $table->string('num');
             $table->string('nb_places_min');
             $table->string('nb_places_max');
-            $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
 
             //
         });        

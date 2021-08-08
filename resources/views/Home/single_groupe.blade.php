@@ -162,6 +162,11 @@
 				<div class="table-responsive">
 					
 					<table data-page-length='50' id="table-1" class="table table-striped table-bordered text-nowrap w-100">
+						<caption>
+							Groupe #{!! $groupe->id !!} {!! $groupe->jour !!} | {!! substr($groupe->heure_debut,0,5) !!}-{!! substr($groupe->heure_fin,0,5) !!} | Niveau : {!! $groupe->niveau !!} |
+								Matière : {!! $groupe->matiere !!} | 
+								Tarif : {!! $groupe->tarif !!} DA | Prof : {!! $groupe->prof !!} 
+						</caption>
 						<thead>
 							<tr>
 								<th style="cursor: pointer;" class="wd-15p">N°</th>

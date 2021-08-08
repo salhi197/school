@@ -156,7 +156,7 @@ class SpecialGroupeController extends Controller
         $profs = DB::select("select * from profs order by nom,cycle,matiere");
 
         $matieres = DB::select("select * from matieres order by nom");
-
+        
         return view('Home.single_groupe_special',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id_groupe_special','payments','ancien_payments','le_mois','nb_presences','eleves_gratuits','profs','matieres'));
 
 
@@ -357,8 +357,6 @@ class SpecialGroupeController extends Controller
         // code...
     }
 
-
-
     public function verif_existance(Request $request)
     {
 
@@ -402,6 +400,56 @@ class SpecialGroupeController extends Controller
         // code...
     }
 
+    public function exonerer(Request $request)
+    {
+
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
+        $data = ($request->all());
+            
+        $id_groupe = $data["id_groupe"];
+        $id_eleve = $data["id_eleve"];
+        $num_mois = $data["num_mois"];
+
+        dump(DB::update("update payement_groupe_special_eleve set exoneree = 1 where (id_groupe_special = \"$id_groupe\") and (id_eleve = \"$id_eleve\") and (num_mois=\"$num_mois\")"));
+
+        // code..
+    }   
+
+    public function completer_payement(Request $request)
+    {
+
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
+
+        $data = ($request->all());
+
+        $id_groupe = $data["id_groupe"];
+        $id_eleve = $data["id_eleve"];
+        $current_seance = $data["current_seance"];
+        $payement = $data["payement"];
+        $num_mois = $data["num_mois"];
+        
+        dump(DB::insert("insert into payement_groupe_special_eleve(id_groupe_special,id_eleve,num_seance,payement,num_mois) values(\"$id_groupe\",\"$id_eleve\",\"$current_seance\",\"$payement\",\"$num_mois\") "));
+        
+        //
+    }
+
+    public function supprimer(Request $request)
+    {
+        
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
+        DB::update("update special_groupes set visible = 0 where id = \"$request->id\" ");
+
+        # code...
+    }
 
 
     //

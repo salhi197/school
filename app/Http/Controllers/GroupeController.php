@@ -113,8 +113,6 @@ class GroupeController extends Controller
 
         ini_set('memory_limit', '-1');
 
-
-
     	DB::update("update groupes set visible = 0 where id = \"$request->id\" ");
 
     	# code...

@@ -19,7 +19,7 @@ class CreateProfsTable extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('cycle');
-            $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
