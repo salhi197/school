@@ -214,16 +214,34 @@ class DawraController extends Controller
     public function valider_coches(Request $request)
     {
         $data = json_decode($request['data']);
+
+        $payments = json_decode($request['payments']);
         $dawra = $request['dawra'];
+
+        foreach($payments as $payment){
+            $dawra_eleves =Dawraeleve::where(['id_eleve'=>$payment->eleve,'id_dawra'=>$dawra])->first();
+            $newReste = $dawra_eleves->reste - $payment->montant;
+            $newPayment = $dawra_eleves->payment + $payment->montant;
+            dump($newPayment,$newReste);             
+            DB::table('dawraeleves')
+                        ->where(['id_eleve'=>$payment->eleve,'id_dawra'=>$dawra])
+                        ->update([
+                            'payment' => $newPayment,
+                            'reste'=>$newReste
+                        ]);
+            
+        }
+        
         foreach($data as $d){
             $eleve = Eleve::find($d->eleve);
             DB::table('seancesdawras')
                         ->where(['id_eleve'=>$d->eleve,'num_seance'=>$d->num_seance,'id_dawra'=>$dawra])
-                        ->update(['presence' => 1]);
+                        ->update(['presence' => 1,'payment'=>$d->montant]);
             /**
              * updae current seance
              */
         }
+
         if(count($data)>0){
             DB::table('dawras')
                         ->where(['id'=>$dawra])

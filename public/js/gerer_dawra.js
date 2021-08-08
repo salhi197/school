@@ -91,35 +91,51 @@ function retour(objet)
 
 function valider_tous(objet) 
 {
-    var selected = [];
+    var checked = [];
+    var payments = [];
+
     var dawra = $('#dawra_id').val();
     $(".checkboxes:checkbox:checked").each(function() {
-        selected.push({
+        checked.push({
             "eleve":$(this).attr("eleve"),
-            "num_seance":$(this).attr("seance")
+            "num_seance":$(this).attr("seance"),
+//			"montant":parseFloat($("#payment_eleve_"+$(this).attr("eleve")).val()),
         }
         )
     });
-    console.log(selected);
-    if(selected.length>0){
-        $.ajax({   
-            type: "POST",
-            data : {dawra:dawra,data:JSON.stringify(selected)},//$(this).serialize(),
-            url: "/home/single_dawra/valider_coches",   
-            success: function(data){
-                console.log('sasa');
-                $("#results").html(data);                       
-				location.reload();
+	var liste_eleves = JSON.parse($('#liste_eleves').val());
+    console.log(liste_eleves);
 
+	var payment_inputs = []
+	for(var i=0;i<liste_eleves.length;i++){
+		payment_inputs.push({
+            "eleve":liste_eleves[i].id,
+			"montant":parseFloat($("#payment_eleve_"+liste_eleves[i].id).val())
+		}
+		)
+	}
+	console.log(payment_inputs)
+	
+	$.ajax({   
+		type: "POST",
+		data : {
+			dawra:dawra,
+			data:JSON.stringify(checked),
+			payments:JSON.stringify(payment_inputs),
+			
+		},//$(this).serialize(),
+		url: "/home/single_dawra/valider_coches",   
+		success: function(data){
+			console.log('sasa');
+			$("#results").html(data);                       
+			location.reload();
+		},
+		error:function(err){
+			console.log(err	);
+		}
+	});      
 
-            },
-            error:function(){
-                console.log('error');
-    //            $("#results").html(data);                       
-            }
-        });      
-    }
-
+	
 
 
 
@@ -140,7 +156,26 @@ function goto_the_link(objet)
 }
 
 
+function verif_prix_tarif(objet,tarif) 
+{
 
+	if ($(objet).val()>tarif) 
+	{
+
+		$(objet).removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+
+		//
+	}
+	else
+	{
+
+		$(objet).removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+		//
+	}
+	
+
+	// body...
+}
 
 
 

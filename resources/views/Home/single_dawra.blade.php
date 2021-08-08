@@ -7,6 +7,7 @@
 			<div class="card">
 				<!-- HIDDEN DATA -->
 				<input type="hidden" value="{{$dawra->id ?? ''}}" id="dawra_id" />
+				<input type="hidden" value="{{$dawra->getEleves() ?? ''}}" id="liste_eleves" />
 				<!-- HIDDEN DATA -->
 
 				
@@ -162,7 +163,7 @@
 								<th style="cursor: pointer;" class="wd-15p">Num tel</th>
 								<th style="cursor: pointer;" class="wd-15p">Séances</th>
 								<th style="cursor: pointer; color: green;" class="wd-15p">Payé</th>
-								<th style="cursor: pointer; color: red;" class="wd-15p">Retard</th>
+								<th style="cursor: pointer; color: red;" class="wd-15p">Reste</th>
 							</tr>
 						</thead>
                         
@@ -196,6 +197,7 @@
 
 											@foreach($eleve->getDawraSeances($dawra->id) as $seance)
 												<div class="form-check form-check-inline">
+												{{$seance->num_seance}} : 
 													<input  eleve="{{$eleve->id}}"
 													<?php if($seance->num_seance !=	 $dawra->current_seance) echo "disabled"; ?>
 													seance="{{$seance->num_seance}}" id=""  class="form-check-input checkboxes"  type="checkbox" 
@@ -207,7 +209,11 @@
 									</td>
 
 									<td class="col-md-4" >
-										{{ $eleve->getEleveDawraPayment($dawra->id) ?? ' ' }}
+										@if($eleve->getEleveDawraReste($dawra->id) == 0)
+										<p style="color:green;">Complet {!! $dawra->tarif !!} DA </p>
+										@else
+										<input onkeyup="verif_prix_tarif(this,{{ $dawra->tarif }})" id="payment_eleve_{{ $eleve->id }}" value="0" max="{{$eleve->getEleveDawraReste($dawra->id)}}" type="number" min="0" class="form-control payment_inputs">
+										@endif
 									</td>
 
 
