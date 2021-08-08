@@ -91,9 +91,9 @@ function retour(objet)
 
 function valider_tous(objet) 
 {
+	$("#valider").hide();	
     var checked = [];
     var payments = [];
-
     var dawra = $('#dawra_id').val();
     $(".checkboxes:checkbox:checked").each(function() {
         checked.push({
@@ -128,7 +128,8 @@ function valider_tous(objet)
 		success: function(data){
 			console.log('sasa');
 			$("#results").html(data);                       
-			location.reload();
+        	location.reload();
+
 		},
 		error:function(err){
 			console.log(err	);

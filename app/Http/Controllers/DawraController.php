@@ -6,6 +6,7 @@ use App\Groupe;
 use App\Eleve;
 use App\Dawra;
 use App\Dawraeleve;
+use App\Dawrapayment;
 use App\Seancesdawra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,12 +108,11 @@ class DawraController extends Controller
         $dawra->tarif = $request['tarif'];
         $dawra->current_seance = 1;
         $dawra->save();
-       
-       session()->flash('notification.message' , 'Dawra : '.$request->matiere.' , '.$request->niveau.' Prof : '.$request->prof.' ajoutée avec succés');
+        session()->flash('notification.message' , 'Dawra : '.$request->matiere.' , '.$request->niveau.' Prof : '.$request->prof.' ajoutée avec succés');
 
-       session()->flash('notification.type' , 'success'); 
+        session()->flash('notification.type' , 'success'); 
 
-       return back();
+           return back();
 
     	# code...
     }
@@ -134,7 +134,11 @@ class DawraController extends Controller
         $dawra = Dawra::find($id);
         $eleves = Dawraeleve::where('id_dawra',$id)->pluck("id_eleve")->toArray();
         $eleves = Eleve::whereIn('id',$eleves)->get();
-        return view('Home.single_dawra',compact('dawra','eleves'));
+        $seances = Seancesdawra::where(['id_dawra'=>$id,'presence'=>1])->get()->count();
+
+        $payment = $dawra->tarif * $dawra->pourcentage_prof/100;
+
+        return view('Home.single_dawra',compact('dawra','eleves','payment'));
         //,'eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel'));
         // code...
     }
@@ -218,42 +222,46 @@ class DawraController extends Controller
             session()->flash('notification.message' , 'Elève : '.$last[0]->nom.' , '.$last[0]->prenom.' ajoutée avec succés');
             session()->flash('notification.type' , 'success'); 
             return back();
-    
         }
-    
-        
     }
 
     public function valider_coches(Request $request)
     {
         $data = json_decode($request['data']);
-
         $payments = json_decode($request['payments']);
         $dawra = $request['dawra'];
-
         foreach($payments as $payment){
             $dawra_eleves =Dawraeleve::where(['id_eleve'=>$payment->eleve,'id_dawra'=>$dawra])->first();
             $newReste = $dawra_eleves->reste - $payment->montant;
             $newPayment = $dawra_eleves->payment + $payment->montant;
-            dump($newPayment,$newReste);             
+            if(is_null($payment->montant)==false AND $payment->montant>0){
+                $dawrapayment = new  Dawrapayment();
+                $dawrapayment->id_eleve = $payment->eleve;
+                $dawrapayment->id_dawra = $dawra;
+                $dawrapayment->montant = $payment->montant ?? 200;
+                $dawrapayment->save();    
+            }
             DB::table('dawraeleves')
                         ->where(['id_eleve'=>$payment->eleve,'id_dawra'=>$dawra])
                         ->update([
                             'payment' => $newPayment,
                             'reste'=>$newReste
                         ]);
-            
+    
+                        
         }
         
         foreach($data as $d){
             $eleve = Eleve::find($d->eleve);
+
             DB::table('seancesdawras')
                         ->where(['id_eleve'=>$d->eleve,'num_seance'=>$d->num_seance,'id_dawra'=>$dawra])
-                        ->update(['presence' => 1,'payment'=>$d->montant]);
+                        ->update(['presence' => 1]);
             /**
              * updae current seance
              */
         }
+
 
         if(count($data)>0){
             DB::table('dawras')
@@ -303,15 +311,14 @@ class DawraController extends Controller
 
     public function historique_payement($id_dawra,$id_eleve)
     {
+        $dawarapayments = Dawrapayment::where(['id_eleve'=>$id_eleve,'id_dawra'=>$id_dawra])->get();
         $eleve = Eleve::find($id_eleve);
         $dawra = Dawra::find($id_dawra);
 
-
-        $seances = Seancesdawra::where(['id_eleve'=>$id_eleve,'id_dawra'=>$id_dawra])->get();   
         return view('Home.payment_dawra',compact(
             'eleve',
             'dawra',
-            'seances'
+            'dawarapayments'
         ));
     }
 

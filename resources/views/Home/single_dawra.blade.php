@@ -209,12 +209,12 @@
 												</div>												
 											@endforeach
 									</td>
-
+ 
 									<td class="col-md-4" >
 										@if($eleve->getEleveDawraReste($dawra->id) == 0)
-										<p style="color:green;">Complet {!! $dawra->tarif !!} DA </p>
+											<p style="color:green;">Complet {!! $dawra->tarif !!} DA </p>
 										@else
-										<input onkeyup="verif_prix_tarif(this,{{ $dawra->tarif }})" id="payment_eleve_{{ $eleve->id }}" value="0" max="{{$eleve->getEleveDawraReste($dawra->id)}}" type="number" min="0" class="form-control payment_inputs">
+										    <input onkeyup="verif_prix_tarif(this,{{ $dawra->tarif }})" id="payment_eleve_{{ $eleve->id }}" value="0" max="{{$eleve->getEleveDawraReste($dawra->id)}}" type="number" min="0" class="form-control payment_inputs">
 										@endif
 									</td>
 
@@ -231,6 +231,15 @@
 
 
 
+				<div class="row">
+					<div class="col-md-4" >
+						<h3 class="text-white bg-success" style="padding:10px;">
+							Payement Du prof :	{{$payment ?? ''}} DA
+						</h3>
+					</div>
+				</div>
+				
+
 				<div class="card-footer text-right">
 				
 					<a id="valider_les_coches" style="color:#ffffff;"
@@ -243,53 +252,49 @@
 
 					<button id="ne_pas_valider" onclick="retour(this)" style="display:none;" class="btn btn-outline-danger">NOn, Pas Encore</button>
 
+					
 					{{--  --}}
 				</div>
 
+
+
+				
 				<div class="card-footer text-left row" style="color:blue;">
 
 
 				</div>
 			</div>
-		</div><!-- COL-END -->
+		</div>
 
 
 
 	    <a class="btn btn-outline-danger text-center col-md-12" style="color:red;" data-toggle="modal" data-target="#myModalsup-{{$dawra->id ?? ""}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
+			<div id="myModalsup-{{$dawra->id ?? ""}}" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<!-- Modal content-->
 
-	    <div id="myModalsup-{{$dawra->id ?? ""}}" class="modal fade" role="dialog">
+					<div class="modal-content">
 
-	      	<div class="modal-dialog modal-lg">
+						<div class="modal-header">
 
-	            <!-- Modal content-->
+								<h4 class="modal-title">Voulez-vous vraiment Archiver ce Groupe ?</h4>
+						</div>
 
-	            <div class="modal-content">
+						<div class="modal-body">
 
-	               <div class="modal-header">
+								<a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$dawra->id ?? ""}}">OUI,Archiver</a>
 
-	                    <h4 class="modal-title">Voulez-vous vraiment Archiver ce Groupe ?</h4>
-	              </div>
+								<a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas archiver</a>
 
-	              <div class="modal-body">
+						</div>
 
-	                    <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$dawra->id ?? ""}}">OUI,Archiver</a>
+						<div class="modal-footer">
+								<a class="btn btn-warning" data-dismiss="modal" style="color: #ffffff;">Fermer</a>
+						</div>
+					</div>
 
-	                    <a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas archiver</a>
-
-	              </div>
-
-	              <div class="modal-footer">
-
-	                    <a class="btn btn-warning" data-dismiss="modal" style="color: #ffffff;">Fermer</a>
-	              </div>
-	            </div>
-
-	      	</div>
-	    </div>                    
-
-
-
-
+				</div>
+			</div>                    
 		<script src="{{ asset('js/gerer_dawra.js') }}"></script>
 	</div>
 	<!-- ROW-1 CLOSED -->
