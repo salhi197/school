@@ -20,8 +20,5 @@ class AddPaymentToSeancesDawra extends Migration
 
     public function down()
     {
-        Schema::table('seances_dawra', function (Blueprint $table) {
-            //
-        });
     }
 }

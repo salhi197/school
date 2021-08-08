@@ -148,9 +148,9 @@ function goto_the_link(objet)
 
 	var id_eleve = (objet.id.substr(5));
 
-	var id_groupe = $(objet).attr("groupe")
+	var id_dawra = $(objet).attr("dawra")
 
-	window.location.href = '/home/groupes/'+id_groupe+'/eleve/'+id_eleve;
+	window.location.href = '/home/dawra/'+id_dawra+'/eleve/'+id_eleve;
 	
 	// body...
 }

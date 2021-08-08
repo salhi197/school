@@ -151,19 +151,18 @@ class DawraController extends Controller
         if($eleve){
             // eleve qui existe
             $eleveInDawra = $eleve->isInDawra($id);
-            if($eleveInDawra){
+            if($eleveInDawra == false){
                 // eleve deja assigné au dawra
                 session()->flash('notification.message' , 'Elève :  Déja Ajouté ');
                 session()->flash('notification.type' , 'success'); 
                 return back();
         
             }else{
-                dump('find');
                 //eleve qui existe mais il n'a pas été assigné , donc faudrai l'assigner
                 $dawra = Dawra::find($id);
                 $nbrseances = $dawra->nbrseances;
                 $dawraeleve = new Dawraeleve();
-                $dawraeleve->id_eleve = $id_eleve;
+                $dawraeleve->id_eleve = $eleve->id;
                 $dawraeleve->id_dawra = $dawra->id;
                 $dawraeleve->save();
                 for($i=0;$i<$nbrseances;$i++) {
@@ -174,6 +173,10 @@ class DawraController extends Controller
                     $seanceDawra->presence = 0;
                     $seanceDawra->save();
                 }
+                session()->flash('notification.message' , 'Elève :  ajoutée avec succés');
+                session()->flash('notification.type' , 'success'); 
+                return back();
+    
             }
         }else{
             //elve qui n'existe pas
@@ -284,17 +287,23 @@ class DawraController extends Controller
         }
         else
         {
-
             return response()->json(0);
-
-            //
         }
-
-        // code...
     }
 
-    //
+    public function historique_payement($id_dawra,$id_eleve)
+    {
+        $eleve = Eleve::find($id_eleve);
+        $dawra = Dawra::find($id_dawra);
 
+
+        $seances = Seancesdawra::where(['id_eleve'=>$id_eleve,'id_dawra'=>$id_dawra])->get();   
+        return view('Home.payment_dawra',compact(
+            'eleve',
+            'dawra',
+            'seances'
+        ));
+    }
 
 
     //
