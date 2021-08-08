@@ -160,11 +160,21 @@ class DawraController extends Controller
             }else{
                 //eleve qui existe mais il n'a pas été assigné , donc faudrai l'assigner
                 $dawra = Dawra::find($id);
+                $tarif= $dawra->tarif;
+
                 $nbrseances = $dawra->nbrseances;
                 $dawraeleve = new Dawraeleve();
                 $dawraeleve->id_eleve = $eleve->id;
                 $dawraeleve->id_dawra = $dawra->id;
+                $dawraeleve->payment = $request['payment'];
+                if($tarif==$request['payment']){
+                    $dawraeleve->paye = 1;
+                }else{
+                    $dawraeleve->paye = 0;
+                }
+                $dawraeleve->reste = $tarif-$request['payment'];            
                 $dawraeleve->save();
+    
                 for($i=0;$i<$nbrseances;$i++) {
                     $seanceDawra = new Seancesdawra();
                     $seanceDawra->id_eleve = $eleve->id;
