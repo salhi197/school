@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	
 	<div class="page-header">
-		
 		<h4 class="page-title">Détails sur le payement de l'élève : {!! $eleve->nom !!} {!! $eleve->prenom !!}</h4>
 	</div>
 
@@ -43,23 +41,19 @@
 							
 							<tbody>
 								<tr class="">
-									<th class="text-center">Mois</th>
-									<th class="text-center">Seance</th>
-									<th class="text-center">Dates Séances</th>
-									<th class="text-center">Payé</th>
+									<th class="text-center">Numéro</th>
+									<th class="text-center">Montant</th>
+									<th class="text-center">Date Payment</th>
 								</tr>
-								@foreach ($seances as $key=>$seance)
+								@foreach ($dawarapayments as $key=>$dawarapayment)
                                     <tr>
-										<td class="text-center" style="width: 2%;">{!! $key !!}</td>
-										<td class="text-left" style="width: 25%;">
-                                            Numéro Séance : {{$seance->num_seance}}
-										</td>
+										<td class="text-center" style="width: 2%;">{!! $key+1 !!}</td>
+										<td class="text-center" style="width: 25%;">
+                                            Montant Payé : {{$dawarapayment->montant}} DA
+                                        </td>
 
-										<td class="text-left">
-                                            
-										</td>
-										<td class="text-left" style="width: 25%;">
-                                            {{$seance->payment ?? ''}} DA
+										<td class="text-center" style="width: 25%;">
+                                            {{$dawarapayment->created_at ?? ''}} 
 										</td>
 									</tr>
                                 @endforeach
