@@ -19,8 +19,8 @@ class CreateDawrasTable extends Migration
             $table->string('niveau');
             $table->string('matiere');
             $table->integer('nbrseances');
-            $table->string('pourcentage_prof', $precision = 0);
-            $table->string('pourcentage_ecole', $precision = 0);
+            $table->string('pourcentage_prof', $precision = 0)->nullable();
+            $table->string('pourcentage_ecole', $precision = 0)->nullable();
             $table->double('tarif',8,1);            
             $table->timestamps();
         });

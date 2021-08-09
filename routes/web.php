@@ -16,6 +16,7 @@ Route::get('/', function () {
 })->middleware('lang');
 
 Auth::routes();
+Route::group(['middleware' => 'auth'], function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 //classes :
@@ -127,8 +128,6 @@ Route::post('/home/single_eleve_special/exoneree/ajax','SpecialGroupeController@
 Route::post('/home/single_eleve_special/completer_payement/ajax','SpecialGroupeController@completer_payement');
 
 Route::post('/home/groupes_special/supprimer/ajax','SpecialGroupeController@supprimer');
-
-
-
-
+     
+});
 

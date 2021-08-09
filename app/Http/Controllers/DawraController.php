@@ -135,9 +135,7 @@ class DawraController extends Controller
         $eleves = Dawraeleve::where('id_dawra',$id)->pluck("id_eleve")->toArray();
         $eleves = Eleve::whereIn('id',$eleves)->get();
         $seances = Seancesdawra::where(['id_dawra'=>$id,'presence'=>1])->get()->count();
-
-        $payment = $dawra->tarif * $dawra->pourcentage_prof/100;
-
+        $payment = $seances*$dawra->tarif * $dawra->pourcentage_prof/100;
         return view('Home.single_dawra',compact('dawra','eleves','payment'));
         //,'eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel'));
         // code...
@@ -209,6 +207,7 @@ class DawraController extends Controller
             }else{
                 $dawraeleve->paye = 0;
             }
+
             $dawraeleve->reste = $tarif-$request['payment'];            
             $dawraeleve->save();
             for($i=0;$i<$nbrseances;$i++) {
@@ -219,6 +218,14 @@ class DawraController extends Controller
                 $seanceDawra->presence = 0;
                 $seanceDawra->save();
             }
+
+            
+            $dawrapayment = new  Dawrapayment();
+            $dawrapayment->id_eleve = $id_eleve;
+            $dawrapayment->id_dawra = $dawra->id;
+            $dawrapayment->montant = $request['payment'];
+            $dawrapayment->save();    
+
             session()->flash('notification.message' , 'Elève : '.$last[0]->nom.' , '.$last[0]->prenom.' ajoutée avec succés');
             session()->flash('notification.type' , 'success'); 
             return back();
@@ -238,7 +245,7 @@ class DawraController extends Controller
                 $dawrapayment = new  Dawrapayment();
                 $dawrapayment->id_eleve = $payment->eleve;
                 $dawrapayment->id_dawra = $dawra;
-                $dawrapayment->montant = $payment->montant ?? 200;
+                $dawrapayment->montant = $payment->montant ;
                 $dawrapayment->save();    
             }
             DB::table('dawraeleves')
