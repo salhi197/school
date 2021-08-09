@@ -36,7 +36,6 @@
 					</div>
 					
 					<div class="table-responsive push">
-						
 						<table class="table table-bordered table-hover" id="table-print">
 							
 							<tbody>
