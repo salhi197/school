@@ -52,7 +52,7 @@ class NiveauController extends Controller
         $cycleduniveau = ($request->cycleduniveau);
         $filiereduniveau = ($request->filiereduniveau);
 
-        if($cycleduniveau=="Secondaire"||$cycleduniveau=="Universitaire") 
+        if($cycleduniveau=="AS"||$cycleduniveau=="Univ") 
         {
             DB::insert("insert into niveaux(niveau,cycle,filiere) values(\"$niveauduniveau\",\"$cycleduniveau\",\"$filiereduniveau\")");
         }

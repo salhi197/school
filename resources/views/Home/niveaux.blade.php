@@ -58,10 +58,11 @@
 
                         <select id="cycleduniveau" onchange="afficher_filiere(this);" required class="form-control col-md-12">
 
-                            <option value="Primaire"> Primaire </option>
-                            <option value="Moyen"> Moyen </option>
-                            <option value="Secondaire"> Secondaire </option>
-                            <option value="Universitaire"> Universitaire </option>                            
+                            <option value="PS"> Préscolaire </option>
+                            <option value="AP"> Primaire </option>
+                            <option value="AM"> Moyen </option>
+                            <option value="AS"> Secondaire </option>
+                            <option value="Univ"> Universitaire </option>                            
                         </select>
 
                         {{--  --}}

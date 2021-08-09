@@ -9,7 +9,7 @@ function afficher_filiere(objet)
 
 	var niv = ($('#niveauduniveau').val());
 
-	if((conceptName == "Secondaire" && niv<4 ) || conceptName == "Universitaire" && niv<4)
+	if((conceptName == "AS" && niv<4 ) || conceptName == "Univ" && niv<4)
 	{
 
 		$("#in_niveau").attr('class', 'form-group col-md-4 col-sm-12');
@@ -43,7 +43,7 @@ function afficher_filiere1(objet)
 
 	var cycle = $("#cycleduniveau").find(":selected").val();
 
-	if((conceptName<=3) && (cycle=="Secondaire" || cycle=="Universitaire") ) 
+	if((conceptName<=3) && (cycle=="AS" || cycle=="Univ") ) 
 	{
 
 
@@ -148,7 +148,7 @@ function ajouterniveau(event,ojbet)
 
 	to_append+='<td> <span> '+$cycleduniveau+' </span></td>'
 	
-	if($cycleduniveau=="Secondaire"||$cycleduniveau=="Universitaire") 
+	if($cycleduniveau=="AS"||$cycleduniveau=="Univ") 
 	{
 		to_append+='<td> <span> '+$filiereduniveau+' </span></td>'
 	}
@@ -157,12 +157,14 @@ function ajouterniveau(event,ojbet)
 		to_append+='<td> <span> ------ </span></td>'	
 	}
 
-	to_append+='<td> <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-'+new_id+'" style="color: #fff;"> supprimer</a><div id="myModalsup-'+new_id+'" class="modal fade" role="dialog">'
+	to_append+='<td> <li style="margin: auto; width: 50%; padding: 10px;" class="icons-list-item"><i class="ion-ios7-checkmark-empty" data-toggle="tooltip"></i></li></td></tr>';
+
+/*	to_append+='<td> <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-'+new_id+'" style="color: #fff;"> supprimer</a><div id="myModalsup-'+new_id+'" class="modal fade" role="dialog">'
 
 	to_append+='<div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Voulez-vous vraiment supprimer ce niveau</h4></div>'
 
 	to_append+='<div class="modal-body"><button style="color:#ffffff; margin-right:1%;" class="col-md-5 btn btn-primary" onclick="supprimerniveau(event,this)" data-dismiss="modal" id="mod'+new_id+'">OUI,je supprime</button><a style="color:#ffffff;" data-dismiss="modal" class="col-md-6 btn btn-danger">NON,je ne veux pas supprimer</a></div><div class="modal-footer"><button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button></div></div></div></div></td></form></tr>'
-
+*/
 	to_append=$(to_append)	
 
 	to_append=$(to_append)	
