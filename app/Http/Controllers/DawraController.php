@@ -164,6 +164,14 @@ class DawraController extends Controller
                 $dawra = Dawra::find($id);
                 $tarif= $dawra->tarif;
 
+
+                $dawrapayment = new  Dawrapayment();
+                $dawrapayment->id_eleve = $eleve->id;
+                $dawrapayment->id_dawra = $dawra->id;
+                $dawrapayment->montant = $request['payment'];
+                $dawrapayment->save();    
+    
+
                 $nbrseances = $dawra->nbrseances;
                 $dawraeleve = new Dawraeleve();
                 $dawraeleve->id_eleve = $eleve->id;
@@ -219,7 +227,6 @@ class DawraController extends Controller
                 $seanceDawra->save();
             }
 
-            
             $dawrapayment = new  Dawrapayment();
             $dawrapayment->id_eleve = $id_eleve;
             $dawrapayment->id_dawra = $dawra->id;
