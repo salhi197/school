@@ -19,7 +19,7 @@ class CreateSeancesSpecialesTable extends Migration
             $table->unsignedBigInteger('id_groupe_special');
             $table->double('num',8,1);
             $table->string('id_prof');
-            $table->string('matiere');
+            $table->string('matiere')->nullable();
                         
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
