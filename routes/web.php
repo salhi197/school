@@ -128,16 +128,13 @@ Route::post('/home/single_eleve_special/exoneree/ajax','SpecialGroupeController@
 Route::post('/home/single_eleve_special/completer_payement/ajax','SpecialGroupeController@completer_payement');
 
 Route::post('/home/groupes_special/supprimer/ajax','SpecialGroupeController@supprimer');
-<<<<<<< HEAD
+
 
 
 //matiéres :
 Route::get('/home/caisse', 'CaisseController@index');
 
-
-
-=======
      
 });
->>>>>>> f03102774a161e5f19b786655ec6dc544c351cd5
+
 
