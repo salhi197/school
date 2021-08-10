@@ -199,6 +199,8 @@ function valider_tous(objet)
 
         success:function(data) 
         {
+        	
+        	$(objet).hide(500);
         	$("html, body").animate({ scrollTop: 140 }, "slow");
         	location.reload();
 

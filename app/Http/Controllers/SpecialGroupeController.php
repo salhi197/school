@@ -342,7 +342,6 @@ class SpecialGroupeController extends Controller
         
         $seances_eleves = DB::select("select s.id_prof,s.matiere, se.id_eleve,se.presence,s.num,se.created_at from seances_speciales_eleves se, seances_speciales s where (se.id_seance_speciale=s.id) and (s.id_groupe_special = \"$id_groupe\") and (id_eleve = \"$id_eleve\") order by s.num ");
 
-
         $les_presences = DB::select("select se.id_eleve,FLOOR((s.num-1)/4)+1 as mois,count(presence) as presences from seances_speciales_eleves se,seances_speciales s where (se.id_seance_speciale = s.id) and (se.id_eleve = \"$id_eleve\") and (s.id_groupe_special = \"$id_groupe\") and (se.presence = 1) group by se.id_eleve,s.num");
 
         $les_absences = DB::select("select se.id_eleve,FLOOR((s.num-1)/4)+1 as mois,count(presence) as presences from seances_speciales_eleves se,seances_speciales s where (se.id_seance_speciale = s.id) and (se.id_eleve = \"$id_eleve\") and (s.id_groupe_special = \"$id_groupe\") and (se.presence = 0) group by se.id_eleve,s.num");
@@ -350,9 +349,12 @@ class SpecialGroupeController extends Controller
         $retards = DB::select("select pg.id_eleve,pg.id_groupe_special,pg.num_mois,sum(payement) as payment_du_mois,sum(exoneree) as exoneree from payement_groupe_special_eleve pg where id_groupe_special =\"$id_groupe\"  and pg.id_eleve=\"$id_eleve\" group by pg.id_eleve,pg.id_groupe_special,pg.num_mois order by id_eleve,num_mois"); 
 
         $current = (Groupe::current_seance_special($groupe->id));
-        
-        
-        return view('Home.single_eleve_special',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current'));
+
+        $num_seance_groupe = DB::select("select max(num) as numero_de_la_derniere_seance_du_groupe from seances where id_groupe = \"$id_groupe\" ");
+
+        $num_seance_groupe = $num_seance_groupe[0]->numero_de_la_derniere_seance_du_groupe;
+
+        return view('Home.single_eleve_special',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe'));
 
         // code...
     }

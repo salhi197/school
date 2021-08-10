@@ -96,23 +96,23 @@
 
                                         {{ csrf_field() }}  
 
-                                        <td {{-- class="col-md-1" --}}>
+                                        <td style="width:5%;">
 
                                             {!! $i+1 !!}                                                
                                         </td>
 
-                                        <td {{-- class="col-md-1" --}} >
+                                        <td style="width:5%;" >
 
                                             {!! $eleves_groupe[$i]->nom  !!}
                                         </td>
 
-                                        <td {{-- class="col-md-1" --}} > 
+                                        <td style="width:5%;" > 
                                         	
 											{!! $eleves_groupe[$i]->prenom !!}
                                         </td>
 
 
-                                        <td style="font-size:13px;" {{-- class="col-md-9" --}} >
+                                        <td style="/*font-size:13px;*/ width:85%;">
                                         		
                                         	@include('includes.seances_tous',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves])

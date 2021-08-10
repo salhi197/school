@@ -51,12 +51,12 @@
 									<th class="text-center">Retard</th>
 								</tr>
 
-								@for ($i = 0; $i <$le_mois-1; $i++)
+								@for ($i = 0; $i <$le_mois; $i++)
 									<tr>
 										<td class="text-center" style="width: 2%;">{!! $i+1 !!}</td>
 										
 										<td class="text-left" style="width: 20%;">
-                                        	@include('includes.single_eleve.cochages',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i])
+                                        	@include('includes.single_eleve.cochages',['groupe'=>$groupe,'eleve'=>$eleve,'payement_eleve'=>$payement_eleve,'seances_eleves'=>$seances_eleves,"i"=>$i,"num_seance_groupe"=>$num_seance_groupe])
 										</td>
 
 

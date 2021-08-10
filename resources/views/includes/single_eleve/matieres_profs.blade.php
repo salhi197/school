@@ -6,7 +6,7 @@
 
 @foreach ($seances_eleves as $seance_eleve)
 	
-	@if(++$pp != $numItems)
+	{{-- @if(++$pp != $numItems) --}}
 
 		
 		@if ( ((floor(($seance_eleve->num-1)/4)+1)==$i+1) )
@@ -22,13 +22,11 @@
 			</div>												
 			{{-- expr --}}
 		@endif
-
-	 @else
 	 	
 	 	
 
 		{{--  --}}
-	@endif
+	{{-- @endif --}}
 
 
 	

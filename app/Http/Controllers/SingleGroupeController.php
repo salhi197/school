@@ -174,8 +174,12 @@ class SingleGroupeController extends Controller
         $retards = DB::select("select pg.id_eleve,pg.id_groupe,pg.num_mois,sum(payement) as payment_du_mois,sum(exoneree) as exoneree from payment_groupes_eleves pg where id_groupe =\"$id_groupe\"  and pg.id_eleve=\"$id_eleve\" group by pg.id_eleve,pg.id_groupe,pg.num_mois order by id_eleve,num_mois"); 
 
         $current = (Groupe::current_seance($groupe->id));
-        //dd($retards);
-        return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current'));
+        
+        $num_seance_groupe = DB::select("select max(num) as numero_de_la_derniere_seance_du_groupe from seances where id_groupe = \"$id_groupe\" ");
+
+        $num_seance_groupe = $num_seance_groupe[0]->numero_de_la_derniere_seance_du_groupe;
+
+        return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe'));
 
         // code...
     }

@@ -189,28 +189,28 @@
 
                                         {{ csrf_field() }}  
 
-                                        <td>
+                                        <td style="width:5%;">
 
                                             {!! $i+1 !!}                                                
                                         </td>
 
-                                        <td>
+                                        <td style="width:5%;">
 
                                             {!! $eleves_groupe[$i]->nom  !!}
                                         </td>
 
-                                        <td> 
+                                        <td style="width:5%;"> 
                                         	
 											{!! $eleves_groupe[$i]->prenom !!}
                                         </td>
 
-                                        <td> 
+                                        <td style="width:5%;"> 
                                         	
 											{!! $eleves_groupe[$i]->num_tel !!}
                                         </td>
 
 
-                                        <td>
+                                        <td style="width:40%;">
                                         		
                                         	@include('includes.seances',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'seances_eleves'=>$seances_eleves,'eleves_gratuits'=>$eleves_gratuits])
@@ -218,7 +218,7 @@
                                         	{{--  --}}																						
                                         </td>
 
-                                        <td>
+                                        <td style="width:20%;">
 
                                         	@include('includes.payement',['eleves_groupe'=>$eleves_groupe,
                                         		'numero_de_la_seance_dans_le_mois'=>$numero_de_la_seance_dans_le_mois,'groupe'=>$groupe,'payments'=>$payments,'le_mois'=>$le_mois,'eleves_gratuits'=>$eleves_gratuits])
@@ -227,7 +227,7 @@
                                         </td>
 
 
-                                        <td style="cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleves_groupe[$i]->id}}" groupe="{{ $groupe->id }}">
+                                        <td style="width:20%; cursor:pointer;" onclick="goto_the_link(this)" id="eleve{{$eleves_groupe[$i]->id}}" groupe="{{ $groupe->id }}">
 
 
                                         	@include('includes.retard',['eleves_groupe'=>$eleves_groupe,

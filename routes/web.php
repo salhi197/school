@@ -129,6 +129,9 @@ Route::post('/home/single_eleve_special/completer_payement/ajax','SpecialGroupeC
 Route::post('/home/groupes_special/supprimer/ajax','SpecialGroupeController@supprimer');
 
 
+//matiéres :
+Route::get('/home/caisse', 'CaisseController@index');
+
 
 
 
