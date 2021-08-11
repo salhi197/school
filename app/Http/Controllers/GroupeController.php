@@ -246,8 +246,8 @@ class GroupeController extends Controller
         ini_set('memory_limit', '-1');
 
         ini_set('max_input_vars', '500000000');
-        
-        Eleve::add_eleve($id,$request->nom,$request->prenom,$request->num_tel,$request->payment,$request->cotisations);
+
+        Eleve::add_eleve($id,$request->nom,$request->prenom,$request->num_tel,$request->payment,$request->cotisations,$request->frais);
 
         return back();
 
@@ -266,7 +266,7 @@ class GroupeController extends Controller
 
         $id_groupe = $data['id_groupe'];
 
-        $leleve = DB::select("select id,num_tel from eleves where (nom=\"$nom\" and prenom=\"$prenom\") or (prenom=\"$nom\" and nom=\"$prenom\")");
+        $leleve = DB::select("select id,num_tel,frais from eleves where (nom=\"$nom\" and prenom=\"$prenom\") or (prenom=\"$nom\" and nom=\"$prenom\")");
 
         if(count($leleve)>0)
         {
@@ -283,7 +283,7 @@ class GroupeController extends Controller
                 //
             }
 
-            return response()->json($leleve[0]->num_tel);
+            return response()->json($leleve[0]);
 
             //
         }

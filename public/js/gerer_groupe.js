@@ -19,8 +19,6 @@ function verif_existance()
         success:function(data) 
         {
 
-        	//alert(data);
-
         	if (data!==false) 
         	{
 
@@ -32,7 +30,10 @@ function verif_existance()
         			$("#btn_ajouter").show(1000);
         		});
 
-        		$("#num_tel").val(data);
+        		$("#num_tel").val(data.num_tel);
+
+    			$("#frais").val(data.frais).show(1000);
+
 
         		//
         	}
@@ -49,7 +50,9 @@ function verif_existance()
 
         		$("#num_tel").val('');
 
-        		//
+        		$("#frais").hide(1000);
+
+        		//	
         	}
 
         	//
@@ -200,7 +203,8 @@ function valider_tous(objet)
         success:function(data) 
         {
         	
-        	$(objet).hide(500);
+        	$(objet).parent().hide(500);
+        	$("#patientez").show(1000);
         	$("html, body").animate({ scrollTop: 140 }, "slow");
         	location.reload();
 

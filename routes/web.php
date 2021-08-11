@@ -67,6 +67,9 @@ Route::get('/home/groupes/{id_groupe}/eleve/{id_eleve}','SingleGroupeController@
 Route::post('/home/single_eleve/exoneree/ajax','SingleGroupeController@exonerer');
 Route::post('/home/single_eleve/completer_payement/ajax','SingleGroupeController@completer_payement');
 
+Route::post('/home/groupes/{id_groupe}/eleve/{id_eleve}/completer_frais','SingleGroupeController@completer_frais');
+
+
 Route::post('/home/single_groupe/payer_prof/ajax','SingleGroupeController@payer_prof');
 
 // dawarat :
@@ -133,6 +136,8 @@ Route::post('/home/groupes_special/supprimer/ajax','SpecialGroupeController@supp
 
 //matiéres :
 Route::get('/home/caisse', 'CaisseController@index');
+
+Route::post('/home/saisir_frais', 'HomeController@saisir_frais');
 
      
 });

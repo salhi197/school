@@ -97,14 +97,23 @@
 
 			                    <div  id="payement" class="form-group col-md-3 col-sm-12">
 
-			                        <label for="payment">Payment</label>
+			                        <label for="payment">Payement</label>
 
 			                        <input type="number" min="0" max="{{$groupe->tarif}}" value="0" name="payment" class="form-control col-md-12">
-			                        
-
 
 			                        {{--  --}}
 			                    </div>
+
+
+			                    <div  id="frais" style="display:none;" class="form-group col-md-3 col-sm-12">
+
+			                        <label for="frais">Frais D'inscriptions</label>
+
+			                        <input type="number" min="0" max="{{$groupe->tarif}}" value="0" name="frais" class="form-control col-md-12">
+
+			                        {{--  --}}
+			                    </div>
+
 
 								<div style="margin-top: 2%" class="form-group col-md-12">
 									
@@ -268,6 +277,8 @@
 					</button>
 
 					<button id="ne_pas_valider" onclick="retour(this)" style="display:none;" class="btn btn-outline-danger">NOn, Pas Encore</button>
+
+					<p style="display:none;" id="patientez" class="alert alert-info"> Traitement en cours veuillez Patienter s'il vous plait </p>
 
 					{{--  --}}
 				</div>

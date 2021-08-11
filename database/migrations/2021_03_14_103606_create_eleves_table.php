@@ -19,6 +19,7 @@ class CreateElevesTable extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

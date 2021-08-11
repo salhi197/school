@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Input;
 class Eleve extends Model
 {
 
-    public static function add_eleve($id_groupe,$nom,$prenom,$num_tel,$payement,$cotisations)
+    public static function add_eleve($id_groupe,$nom,$prenom,$num_tel,$payement,$cotisations,$frais)
     {
 
         $il_paye = ($cotisations);
@@ -60,7 +60,7 @@ class Eleve extends Model
         else
         {
     
-            DB::insert("insert into eleves(nom,prenom,num_tel) values(\"$nom\",\"$prenom\",\"$num_tel\") ");
+            DB::insert("insert into eleves(nom,prenom,num_tel,frais) values(\"$nom\",\"$prenom\",\"$num_tel\",\"$frais\") ");
 
             $last = DB::select("select * from eleves order by id desc");
 
@@ -174,7 +174,7 @@ class Eleve extends Model
         else
         {
     
-            DB::insert("insert into eleves(nom,prenom,num_tel) values(\"$nom\",\"$prenom\",\"$num_tel\") ");
+            DB::insert("insert into eleves(nom,prenom,num_tel,frais) values(\"$nom\",\"$prenom\",\"$num_tel\",\"$frais\") ");
 
             $last = DB::select("select * from eleves order by id desc");
 

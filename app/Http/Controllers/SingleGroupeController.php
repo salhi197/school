@@ -179,7 +179,11 @@ class SingleGroupeController extends Controller
 
         $num_seance_groupe = $num_seance_groupe[0]->numero_de_la_derniere_seance_du_groupe;
 
-        return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe'));
+        $frais = DB::select("select frais from ecoles");
+
+        $frais = $frais[0]->frais;
+
+        return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe','frais'));
 
         // code...
     }
@@ -315,6 +319,17 @@ class SingleGroupeController extends Controller
         // code...
     }
 
+    public function completer_frais($id_groupe,$id_eleve,Request $request)
+    {
+
+        $frais = ($request->frais);
+
+        DB::update("update eleves e set e.frais = e.frais+$frais where id = '$id_eleve' ");
+
+        return back();
+
+        // code...
+    }
 
     //
 }

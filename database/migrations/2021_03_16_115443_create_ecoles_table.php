@@ -22,6 +22,7 @@ class CreateEcolesTable extends Migration
             $table->string('tel2');
             $table->string('email');
             $table->text('desc');
+            $table->float('frais',10,2)->default(0);
             $table->timestamp('created_at')->useCurrent();
         });
     }

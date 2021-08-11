@@ -30,6 +30,32 @@
 							</address>
 						</div>
 
+						<div class="col-lg-6 ">
+							<p class="h3">Frais D'inscription : </p>
+							<address>
+								
+								<form method="post" action="/home/groupes/{{$groupe->id}}/eleve/{{$eleve->id}}/completer_frais">
+								
+									<label for="frais">Frais : {!! $eleve->frais !!} DA</label>
+
+									@if ($eleve->frais == $frais)
+										
+										<p class="alert alert-sccess" style="color:green;">Frais d'inscriptions Complets</p>
+									 @else
+		
+										<input type="number" max="{{$frais}}" id="frais" name="frais" class="is-invalid state-invalid form-control col-md-6" value="{{ $frais-$eleve->frais }}">
+										<br>
+										
+										<button type="submit" class="col-md-6 btn btn-outline-warning">Valider</button>
+
+										{{-- expr --}}
+									@endif
+								</form>
+
+							</address>
+						</div>
+
+
 						<div class="col-md-3">
 							<button type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary"  id="btnPrint"> Imprimer </button>
 						</div>

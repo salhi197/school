@@ -38,5 +38,15 @@ class HomeController extends Controller
         return view('home',compact('ecole'));
     }
 
+    public function saisir_frais(Request $request)
+    {
+
+        DB::update("update ecoles set frais = '$request->frais' ");
+
+        return back();
+
+        // code...
+    }
+
     //
 }

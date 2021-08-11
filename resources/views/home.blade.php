@@ -102,25 +102,34 @@
                                         </table>
                                     </div>
                                     <div class="media-heading mt-3">
-                                        <h5 class="text-uppercase"><strong>Business Location Information</strong></h5>
+                                        <h5 class="text-uppercase"><strong>Définir les frais d'inscriptions</strong></h5>
                                     </div>
                                     <hr class="m-0">
                                     <div class="table-responsive ">
                                         <table class="table row table-borderless">
                                             <tbody class="col-lg-12 col-xl-6 p-0">
                                                 <tr>
-                                                    <td><strong>Streen Name:</strong> 45 welete Streen</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>City :</strong> USA</td>
+                                                    <td><strong>Définition des frais d'inscriptions</strong> Année scolaire : 21/22</td>
                                                 </tr>
                                             </tbody>
                                             <tbody class="col-lg-12 col-xl-6 p-0">
                                                 <tr>
-                                                    <td><strong>Country :</strong> USA</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Postal Code :</strong> 658965</td>
+                                                    <td>
+
+                                                        <form method="POST" action="/home/saisir_frais">
+
+                                                            <strong>
+                                                            
+                                                                <label for="frais"> 
+                                                                    
+                                                                    Frais 
+
+                                                                    <input type="number" name="frais" class="form-control" value="{{$ecole[0]->frais}}"> 
+                                                                </label>
+                                                            </strong>
+                                                            <button class="btn btn-outline-primary">Valider</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
