@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function index()
     {   
         $ecole = (DB::select("select * from ecoles"));
-
+        
         return view('home',compact('ecole'));
     }
 

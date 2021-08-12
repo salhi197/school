@@ -21,7 +21,7 @@
                                         <img class="" src="../../assets/images/users/male/32.jpg" alt="img">
                                     </div>
                                     <div class="user-wrap">
-                                        <h4>Malek School</h4>
+                                        <h4>Nom Ecole</h4>
                                         <h6 class="text-muted mb-3">Member Since: November 2017</h6>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                                     <td><strong>Nom :</strong> {!! $ecole[0]->nom !!}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Location :</strong> USA</td>
+                                                    <td><strong>Location :</strong> Alger</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Languages :</strong> English, German, Spanish.</td>

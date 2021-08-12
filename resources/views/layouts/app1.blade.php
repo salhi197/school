@@ -171,6 +171,11 @@
                                             <li aria-haspopup="true">
                                                 <a href="/home/groupes_special">Groupe Spécial</a>
                                             </li>
+
+                                            <li aria-haspopup="true">
+                                                <a href="/home/particulier">Particulier</a>
+                                            </li>
+
                                         </ul>
                                     </li>                                    
                                     

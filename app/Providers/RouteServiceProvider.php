@@ -39,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapLotfiRoutes();
+
         //
     }
 
@@ -55,6 +57,14 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
     }
+
+    protected function mapLotfiRoutes()
+    {
+        Route::middleware('web') // specify here your middlewares
+            ->namespace($this->namespace) /** the name of your route goes here: */
+            ->group(base_path('routes/lotfi.php'));
+    }    
+
 
     /**
      * Define the "api" routes for the application.
