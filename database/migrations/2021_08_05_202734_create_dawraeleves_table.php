@@ -14,14 +14,12 @@ class CreateDawraelevesTable extends Migration
     public function up()
     {
         Schema::create('dawraeleves', function (Blueprint $table) {
-            $table->bigIncrements('id')->nullable();
+            $table->bigIncrements('id');
             $table->integer('id_eleve')->nullable();
             $table->integer('id_dawra')->nullable();
-
             $table->integer('paye')->nullable();
             $table->integer('payment')->nullable();
             $table->integer('reste')->nullable();
-
             $table->timestamps();
         });
     }
