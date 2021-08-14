@@ -32,7 +32,20 @@ function verif_existance()
 
         		$("#num_tel").val(data.num_tel);
 
-    			$("#frais").val(data.frais).show(1000);
+        		if (data.frais==0 || data.frais===undefined) 
+        		{
+
+    				$("#frais").val(data.frais).show(1000);
+
+        			//
+        		}
+        		else
+        		{
+
+        			$("#frais").val(data.frais).hide(1000);
+        			//
+        		}
+
 
 
         		//
@@ -328,62 +341,12 @@ function verif_prix_tarif(objet,tarif)
 function afficher_payement_prof_1(objet,le_mois) 
 {
 	
-	if($(objet).attr('class')!=="col-md-5 alert alert-success")
-	{
+	var id_groupe = $(objet).attr('groupe');
 
-		$("#payement_prof_effectuee"+le_mois).parent().show(1000);
-
-		//
-	}
-
+	window.location.href = '/home/groupes/'+id_groupe+'/payer_prof';
 
 	//
 }
 
-function afficher_payement_prof_2(objet,le_mois) 
-{
-
-	var num_mois = le_mois;
-	
-	var num_seance = $(objet).attr('seance');
-
-	var id_groupe = $(objet).attr('groupe');
-
-	var nom_prenom_prof = $(objet).attr('prof');
-
-	var payement = $("#le_payement_du_mois"+le_mois).val();
-
-    $.ajax({
-        headers: 
-        {
-           'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        },                    
-        type:"POST",
-        url:"/home/single_groupe/payer_prof/ajax",
-        data:{num_mois:num_mois,num_seance:num_seance,id_groupe:id_groupe,nom_prenom_prof:nom_prenom_prof,payement:payement},
-
-        success:function(data) 
-        {
-
-        	$("#payement_prof_effectuee"+le_mois).parent().hide('slow', function() 
-        	{
-        		$("#payement_prof_mois"+le_mois).removeClass("alert alert-warning").hide('slow/400/fast', function() 
-        		{
-        			
-        			$("#payement_prof_mois"+le_mois).addClass("alert alert-success").show('slow');
-
-        			//
-        		});
-        	});
-
-        	//
-		}
-	});	
-
-
-	
-
-	// body...
-}
 
   	

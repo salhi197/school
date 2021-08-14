@@ -289,11 +289,12 @@
 
 				<span class="card-footer row text-left" style="color:blue; display: inline-block;">
 					@foreach ($nb_presences as $nb_presence)
+						
 						@if($nb_presence->num_mois<=count($payements_prof))
-							<label style="margin-right: 8%; cursor: pointer;" onclick="afficher_payement_prof_1(this,{{ $nb_presence->num_mois }})" class="col-md-5 alert alert-success" id="payement_prof_mois{{$nb_presence->num_mois}}">
+							<label style="margin-right: 8%;  cursor: pointer;" groupe="{{ $groupe->id }}" prof="{{ $groupe->prof }}" onclick="afficher_payement_prof_1(this,{{ $nb_presence->num_mois }})" class="col-md-5 alert alert-success" id="payement_prof_mois{{$nb_presence->num_mois}}">
 							{!! date_format(date_create($payements_prof[$nb_presence->num_mois-1]->created_at),"d/m/Y H:i:s") !!} | 
 						@else
-							<label style="margin-right: 8%; cursor: pointer;" onclick="afficher_payement_prof_1(this,{{ $nb_presence->num_mois }})" class="col-md-5 alert alert-warning" id="payement_prof_mois{{$nb_presence->num_mois}}">
+							<label style="margin-right: 8%;  cursor: pointer;" groupe="{{ $groupe->id }}" prof="{{ $groupe->prof }}" onclick="afficher_payement_prof_1(this,{{ $nb_presence->num_mois }})" class="col-md-5 alert alert-warning" id="payement_prof_mois{{$nb_presence->num_mois}}">
 						@endif
 
 
@@ -302,6 +303,7 @@
 							
 							{!! ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) !!} DA
 							<input style="display:none;" id="le_payement_du_mois{{$nb_presence->num_mois}}" type="number" value="{{ ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) }}">
+							
 							<label style="display:none;" class="custom-switch">
 								
 								<input seance="{{$numero_de_la_seance_dans_le_mois }}" 	 		groupe="{{ $groupe->id }}" 
@@ -341,20 +343,20 @@
 	               <div class="modal-header">
 
 	                    <h4 class="modal-title">Voulez-vous vraiment Archiver ce Groupe ?</h4>
-	              </div>
+	              	</div>
 
-	              <div class="modal-body">
+	              	<div class="modal-body">
 
 	                    <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$groupe->id}}">OUI,Archiver</a>
 
 	                    <a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas archiver</a>
 
-	              </div>
+	              	</div>
 
-	              <div class="modal-footer">
+	              	<div class="modal-footer">
 
 	                    <a class="btn btn-warning" data-dismiss="modal" style="color: #ffffff;">Fermer</a>
-	              </div>
+	              	</div>
 	            </div>
 
 	      	</div>

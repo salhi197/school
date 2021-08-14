@@ -137,3 +137,76 @@ function come_back(objet)
 
 	//
 }
+
+function afficher_suur(objet) 
+{
+
+	var le_mois = $(objet).attr('id');
+	
+	le_mois = le_mois.substr(13)
+
+	var id_to_show = "#payement_prof_effectuee"+le_mois;
+
+	if($(objet).is(':checked'))
+	{
+
+		$(id_to_show).show(1000);
+	}
+	else
+	{
+
+		$(id_to_show).hide(1000);
+
+		//
+	}
+
+	//
+}
+
+function afficher_payement_prof_2(objet,le_mois) 
+{
+
+	var num_mois = le_mois;
+	
+	var num_seance = $(objet).attr('seance');
+
+	var id_groupe = $(objet).attr('groupe');
+
+	var nom_prenom_prof = $(objet).attr('prof');
+
+	var payement = $("#le_payement_du_mois"+le_mois).val();
+	
+	console.log(payement);
+    
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/single_groupe/payer_prof/ajax",
+        data:{num_mois:num_mois,num_seance:num_seance,id_groupe:id_groupe,nom_prenom_prof:nom_prenom_prof,payement:payement},
+
+        success:function(data) 
+        {
+
+        	$("#payement_prof_effectuee"+le_mois).siblings().hide('slow', function() 
+        	{
+        			
+    			$("#payement_prof_effectuee"+le_mois).hide('slow', function() 
+    			{
+    				
+    				$("#payement_prof_effectuee"+le_mois).parent().text('Payement éffectué le : ' +data).css('color','green');
+
+    				//	
+    			});
+
+    			//
+        	});
+
+        	//
+		}
+	});	
+
+	// body...
+}
