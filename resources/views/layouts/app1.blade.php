@@ -6,6 +6,11 @@
         <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
         <meta content="Solic – Bootstrap Responsive Modern Simple Dashboard Clean HTML Premium Admin Template" name="description">
 
+        <!-- CALENDAR CSS -->
+        
+        {{-- <link href="{{ asset('../../assets/plugins/calendar/clndr.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('../../assets/plugins/calendar/stylesheet.css') }}" rel="stylesheet" /> --}}        
+        
         <!--favicon -->
         <link rel="icon" href="{{ asset('../../assets/images/brand/favicon.ico') }}" type="image/x-icon"/>
         <link rel="shortcut icon" href="{{ asset('../../assets/images/brand/favicon.ico') }}" type="image/x-icon"/>
@@ -173,7 +178,7 @@
                                             </li>
 
                                             <li aria-haspopup="true">
-                                                <a href="/home/particulier">Particulier</a>
+                                                <a href="/home/calendrier">Calendrier</a>
                                             </li>
 
                                         </ul>
@@ -318,6 +323,17 @@
 
         <script src="{{ asset('../../assets/plugins/multipleselect/multiple-select.js') }}"></script>
         <script src="{{ asset('../../assets/plugins/multipleselect/multi-select.js') }}"></script>
+
+        <!-- DEFAULT CALENDAR -->
+        {{-- <script src="{{ asset('../../assets/plugins/calendar/underscore-min.js') }}"></script>
+        <script src="{{ asset('../../assets/plugins/calendar/moment.js') }}"></script>
+        <script src="{{ asset('../../assets/plugins/calendar/clndr.js') }}"></script>
+        <script src="{{ asset('../../assets/plugins/calendar/demo.js') }}"></script>
+        <script src="{{ asset('../../assets/plugins/rating/jquery.rating-stars.js') }}"></script>
+        <script src="{{ asset('../../assets/plugins/calendar/calendar.min.js') }}"></script>
+        <script src="{{ asset('../../assets/plugins/calendar/defalutcal.js') }}"></script> --}}        
+
+
         @yield('scripts')
     </body>
 </html>

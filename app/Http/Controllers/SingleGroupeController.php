@@ -294,29 +294,33 @@ class SingleGroupeController extends Controller
     public function payer_prof1($id_groupe)
     {
 
+        $id_groupe = ((int)$id_groupe);
+
         $le_mois = Groupe::get_the_month($id_groupe);
 
-        $presences = DB::select("select FLOOR((s.num-1)/4)+1 as mois,s.num,count(se.presence) as presences from seances_eleves se , seances s where se.id_seance=s.id and s.id_groupe = '$id_groupe' and se.presence=1 group by FLOOR((s.num-1)/4)+1,s.num ");
+        $presences = DB::select("select FLOOR((s.num-1)/4)+1 as mois,s.num,count(se.presence) as presences from seances_eleves se , seances s where se.id_seance=s.id and s.id_groupe = $id_groupe and se.presence=1 group by FLOOR((s.num-1)/4)+1,s.num ");
 
-        $absences = DB::select("select FLOOR((s.num-1)/4)+1 as mois,s.num,count(se.presence) as absences from seances_eleves se , seances s where se.id_seance=s.id and s.id_groupe = '$id_groupe' and se.presence=0 group by FLOOR((s.num-1)/4)+1,s.num ");
-
-        $groupe = DB::select("select * from groupes where id = '$id_groupe' ");
+        $groupe = DB::select("select * from groupes where id = $id_groupe ");
 
         $groupe = $groupe[0];
 
-        $presences_mois = DB::select("select FLOOR((s.num-1)/4)+1 as mois,count(se.presence) as presences from seances_eleves se , seances s where se.id_seance=s.id and s.id_groupe = '$id_groupe' and se.presence=1 group by FLOOR((s.num-1)/4)+1");
+        $presences_mois = DB::select("select FLOOR((s.num-1)/4)+1 as mois,count(se.presence) as presences from seances_eleves se , seances s where se.id_seance=s.id and s.id_groupe = $id_groupe and se.presence=1 group by FLOOR((s.num-1)/4)+1");
 
         $numero_de_la_seance_dans_le_mois = (Groupe::current_seance($id_groupe));
 
-        $payementssss = DB::select("select * from payement_profs where id_groupe = '$id_groupe' order by num_mois");
-        
-        $nbr = count($payementssss);
-        
-        $les_payements = $payementssss;
+        $les_payements = DB::select("select * from payement_profs where id_groupe = $id_groupe order by num_mois");
 
-        $eleves_ne_payent_pas = (DB::select("select distinct e.nom,e.prenom from eleves e,seances_eleves se, seances s where (s.id=se.id_seance) and (s.id_groupe='$id_groupe') and (se.id_eleve=e.id) and (se.presence = 2) "));
+        $eleves_ne_payent_pas = (DB::select("select distinct e.nom,e.prenom from eleves e,seances_eleves se, seances s where (s.id=se.id_seance) and (s.id_groupe=$id_groupe) and (se.id_eleve=e.id) and (se.presence = 2) "));
 
-        return view('Home.payement_prof',compact('presences','groupe','le_mois','presences_mois','numero_de_la_seance_dans_le_mois','les_payements','eleves_ne_payent_pas')) ;
+        ini_set('display_errors', 1);
+            
+        $nbr = count($les_payements);
+
+    
+        return view('Home.payer_prof',compact('presences','groupe','le_mois','presences_mois','numero_de_la_seance_dans_le_mois','les_payements','eleves_ne_payent_pas','nbr')) ;
+        
+        //
+
 
         // code...
     }

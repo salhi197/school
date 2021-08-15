@@ -86,11 +86,10 @@
 												@endif
 
 											@endforeach
-
- 										</td>
+										</td>
 
 										<td class="text-center">
- 
+
 											@foreach ($presences as $presence)
 												
 												@if ($presence->mois == ($i+1) && ($presence->num%4 == 2))
@@ -101,11 +100,9 @@
 												@endif
 
 											@endforeach
-
- 										</td>
+										</td>
 
  										<td class="text-center">
-										
 
 											@foreach ($presences as $presence)
 												
@@ -166,6 +163,9 @@
 
 												{{-- expr --}}
 											@endforeach
+
+
+											{{--  --}}
 										</td>
 
 										<td class="text-center">	
@@ -184,16 +184,23 @@
 													<span class="custom-switch-description">Payement éffectué</span>
 												</label>
 
-												<label id="payement_prof_effectuee{{$i}}" style="display:none;" class="custom-switch">
 
-													<input type="checkbox" class="custom-switch-input" onchange="afficher_payement_prof_2(this,{{ $i }});" seance="{{$numero_de_la_seance_dans_le_mois }}" groupe="{{ $groupe->id }}" prof="{{ $groupe->prof }}" >
+												<label id="payement_prof_effectuee{{$i}}" style="display:none;" class="custom-switch">
+													
+													<input seance="{{$numero_de_la_seance_dans_le_mois }}" groupe="{{ $groupe->id }}" 
+															prof="{{ $groupe->prof }}" 
+															onchange="afficher_payement_prof_2(this,{{ $i }});" 
+															type="checkbox"  
+															class="custom-switch-input">
+
 													<span class="custom-switch-indicator"></span>
 													<span class="custom-switch-description">étes vous sur ?</span>
-
 												</label>
-												
+
 											 	{{-- expr --}}
 											@endif 
+
+											{{--  --}}
 										</td>
 
 										@if (!($i<count($les_payements)))
@@ -225,17 +232,19 @@
 	<script src="{{ asset('js/gerer_retard.js') }}"></script>
 
 @endsection
+
 @section('scripts')
-<script type="text/javascript">
-$(document).ready(function(){
-    console.log($("#btnPrint").html());
-    $("#btnPrint").on('click',function(){
-//            var divContents = $("#datable-1").html();
-            $('#table-print').printThis();
-    })
-});
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+	    console.log($("#btnPrint").html());
+	    $("#btnPrint").on('click',function(){
+	//            var divContents = $("#datable-1").html();
+	            $('#table-print').printThis();
+	    })
+	});
 
 
 
-</script>
+	</script>
 @endsection
