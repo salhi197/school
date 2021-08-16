@@ -24,7 +24,9 @@
 								
 								@foreach ($salles_profs_vendredis as $horaire)
 									
-									<th>{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
+									<th>
+										{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}
+									</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
@@ -36,7 +38,7 @@
 								
 								<tr>
 									<th scope="row">{!! $salles[$i]->num !!}</th>
-
+									
 									@foreach ($salles_profs_vendredi as $salle_prof)
 
 										@if ($salle_prof->classe == $salles[$i]->num)
