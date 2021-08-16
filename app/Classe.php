@@ -50,6 +50,66 @@ class Classe extends Model
 		# code...
 	}
 
+	public static function what_exists($salle,$horaires,$le_jour)
+	{
+
+		$salle = $salle->num;
+		
+		$jours = [];
+		$i=0;
+		
+		foreach ($le_jour as $l_jour) 
+		{
+		 	
+			if (strtoupper($l_jour->classe) == strtoupper($salle)) 
+			{
+				
+				$jours[$i] = (object)['heure_debut' => $l_jour->heure_debut,'heure_fin' => $l_jour->heure_fin];
+
+				$jourss[$i] = $l_jour;
+
+				$i++;
+				
+				//
+			}
+
+		 	// code...
+		} 
+
+		$le_jour = $jours;
+
+		$to_return = [];
+
+		$k=0;
+
+		for ($i=0; $i < count($horaires) ; $i++) 
+		{ 
+			
+			if (in_array($horaires[$i], $le_jour)) 
+			{
+				
+				$to_return[$i] = $jourss[$k];
+				
+				$k++;
+
+				//
+			}
+			else
+			{
+
+				$to_return[$i] = (object)['prof' => 'vide','matiere' => 'vide','niveau' => 'vide'];
+
+				//
+			}
+
+			//
+		}		
+
+		return $to_return;
+		
+		//
+	}
+
 
     //use HasFactory;
 }

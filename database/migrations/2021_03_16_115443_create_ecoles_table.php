@@ -24,6 +24,7 @@ class CreateEcolesTable extends Migration
             $table->text('desc');
             $table->float('frais',10,2)->default(0);
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

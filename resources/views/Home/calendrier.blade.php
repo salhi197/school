@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<?php use App\Classe; ?>
+
 @section('content')
 
 	<div class="page-header">
@@ -10,45 +12,53 @@
 
 
 	<!-- vendredi OPEN -->
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
+	<div {{-- class="row" --}}>
+		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">vendredi</h3>
+					<h3 class="card-title row col-md-12">
+						<span class="col-md-5">Vendredi</span> 
+					
+						<button type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-info col-md-6"  id="btnPrint_vendredi"> Imprimer </button>
+					</h3>
 				</div>
-				<div class="table-responsive">
-					<table class="table card-table table-vcenter text-nowrap table-secondary">
+				<div {{-- class="table-responsive" --}} id="Vendredi">
+					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th>Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires <br> Vendredi</th>
 								
-								@foreach ($salles_profs_vendredis as $horaire)
+								@foreach ($horaires_vendredi as $horaire)
 									
-									<th>
-										{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}
-									</th>
+									<th style="width:10%;">{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
 						</thead>
-						
 						<tbody>
 
 							@for ($i = 0; $i < count($salles) ; $i++)
 								
 								<tr>
-									<th scope="row">{!! $salles[$i]->num !!}</th>
-									
-									@foreach ($salles_profs_vendredi as $salle_prof)
+									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
-										@if ($salle_prof->classe == $salles[$i]->num)
-													
-											<td> 
-												<p style="font-weight: bold;" >{!! $salle_prof->prof !!}</p> {!! $salle_prof->matiere !!} 
+									@foreach(Classe::what_exists($salles[$i],$horaires_vendredi,$salles_profs_vendredi) as $element)
+										
+										@if ($element->prof != 'vide')
+											
+											<td class="text-left" style="width:10%;"> 
+												
+												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+												{!! $element->matiere !!} | {!! $element->niveau !!}
 											</td>
 
+										@else
+										
+											<td style="width:10%;"></td>	
+
 											{{-- expr --}}
-										@endif										
+										@endif
+
 
 										{{-- expr --}}
 									@endforeach
@@ -68,22 +78,24 @@
 
 
 
+
+
 	<!-- samedi OPEN -->
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
+	<div {{-- class="row" --}}>
+		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">samedi</h3>
+					<h3 class="card-title" id="Samedi">Samedi</h3>
 				</div>
-				<div class="table-responsive">
-					<table class="table card-table table-vcenter text-nowrap table-secondary">
+				<div {{-- class="table-responsive" --}}>
+					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th>Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires</th>
 								
-								@foreach ($salles_profs_samedis as $horaire)
+								@foreach ($horaires_samedi as $horaire)
 									
-									<th>{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
+									<th style="width:10%;">{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
@@ -93,28 +105,25 @@
 							@for ($i = 0; $i < count($salles) ; $i++)
 								
 								<tr>
-									<th scope="row">{!! $salles[$i]->num !!}</th>
+									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
-									@foreach ($salles_profs_samedi as $salle_prof)
-
-										@if ($salle_prof->classe == $salles[$i]->num)
-
-											@foreach ($salles_profs_samedis as $h_samedi)
+									@foreach(Classe::what_exists($salles[$i],$horaires_samedi,$salles_profs_samedi) as $element)
+										
+										@if ($element->prof != 'vide')
+											
+											<td class="text-left" style="width:10%;"> 
 												
-												@if ($h_samedi->heure_debut == $salle_prof->heure_debut)
-													
-													<td> <p style="font-weight: bold;" >{!! $salle_prof->prof !!}</p> {!! $salle_prof->matiere !!} </td>
-												@else
+												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+												{!! $element->matiere !!} | {!! $element->niveau !!}
+											</td>
 
-													
+										@else
+										
+											<td style="width:10%;"></td>	
 
-													{{-- expr --}}
-												@endif
+											{{-- expr --}}
+										@endif
 
-												{{-- expr --}}
-											@endforeach
-
-										@endif										
 
 										{{-- expr --}}
 									@endforeach
@@ -134,22 +143,23 @@
 
 
 
-	<!-- ROW-4 OPEN -->
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
+
+	<!-- Dimanche OPEN -->
+	<div {{-- class="row" --}}>
+		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">Dimanche</h3>
+					<h3 class="card-title" id="Dimanche">Dimanche</h3>
 				</div>
-				<div class="table-responsive">
-					<table class="table card-table table-vcenter text-nowrap table-secondary">
+				<div {{-- class="table-responsive" --}}>
+					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th>Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires</th>
 								
-								@foreach ($salles_profs_dimanches as $horaire)
+								@foreach ($horaires_dimanche as $horaire)
 									
-									<th>{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
+									<th style="width:10%;">{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
@@ -159,30 +169,25 @@
 							@for ($i = 0; $i < count($salles) ; $i++)
 								
 								<tr>
-									<th scope="row">{!! $salles[$i]->num !!}</th>
+									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
-									@foreach ($salles_profs_dimanche as $salle_prof)
-
-										@if ($salle_prof->classe == $salles[$i]->num)
+									@foreach(Classe::what_exists($salles[$i],$horaires_dimanche,$salles_profs_dimanche) as $element)
+										
+										@if ($element->prof != 'vide')
 											
-
-											@foreach ($salles_profs_dimanches as $h_dimanche)
+											<td class="text-left" style="width:10%;"> 
 												
-												@if ($h_dimanche->heure_debut == $salle_prof->heure_debut)
-													
-													<td> <p style="font-weight: bold;" >{!! $salle_prof->prof !!}</p> {!! $salle_prof->matiere !!} </td>
-												@else
+												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+												{!! $element->matiere !!} | {!! $element->niveau !!}
+											</td>
 
-													
+										@else
+										
+											<td style="width:10%;"></td>	
 
-													{{-- expr --}}
-												@endif
+											{{-- expr --}}
+										@endif
 
-												{{-- expr --}}
-											@endforeach
-
-											{{--  --}}
-										@endif										
 
 										{{-- expr --}}
 									@endforeach
@@ -198,27 +203,26 @@
 			</div>
 		</div>
 	</div>
-	<!-- ROW-4 CLOSED -->
+	<!-- Dimanche CLOSED -->
 
 
 
-
-	<!-- Lundi OPEN -->
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
+	<!-- lundi OPEN -->
+	<div {{-- class="row" --}}>
+		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">lundi</h3>
+					<h3 class="card-title" id="Lundi">Lundi</h3>
 				</div>
-				<div class="table-responsive">
-					<table class="table card-table table-vcenter text-nowrap table-secondary">
+				<div {{-- class="table-responsive" --}}>
+					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th>Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires</th>
 								
-								@foreach ($salles_profs_lundis as $horaire)
+								@foreach ($horaires_lundi as $horaire)
 									
-									<th>{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
+									<th style="width:10%;">{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
@@ -228,31 +232,25 @@
 							@for ($i = 0; $i < count($salles) ; $i++)
 								
 								<tr>
-									<th scope="row">{!! $salles[$i]->num !!}</th>
+									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
-									@foreach ($salles_profs_lundi as $salle_prof)
-
-										@if ($salle_prof->classe == $salles[$i]->num)
-
-
-											@foreach ($salles_profs_lundis as $h_lundi)
+									@foreach(Classe::what_exists($salles[$i],$horaires_lundi,$salles_profs_lundi) as $element)
+										
+										@if ($element->prof != 'vide')
+											
+											<td class="text-left" style="width:10%;"> 
 												
-												@if ($h_lundi->heure_debut == $salle_prof->heure_debut)
-													
-													<td> <p style="font-weight: bold;" >{!! $salle_prof->prof !!}</p> {!! $salle_prof->matiere !!} </td>
-												@else
+												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+												{!! $element->matiere !!} | {!! $element->niveau !!}
+											</td>
 
-													
+										@else
+										
+											<td style="width:10%;"></td>	
 
-													{{-- expr --}}
-												@endif
+											{{-- expr --}}
+										@endif
 
-												{{-- expr --}}
-											@endforeach
-
-
-											{{--  --}}
-										@endif										
 
 										{{-- expr --}}
 									@endforeach
@@ -268,26 +266,26 @@
 			</div>
 		</div>
 	</div>
-	<!-- Lundi CLOSED -->
+	<!-- lundi CLOSED -->
 
 
 
 	<!-- mardi OPEN -->
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
+	<div {{-- class="row" --}}>
+		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">mardi</h3>
+					<h3 class="card-title" id="Mardi">Mardi</h3>
 				</div>
-				<div class="table-responsive">
-					<table class="table card-table table-vcenter text-nowrap table-secondary">
+				<div {{-- class="table-responsive" --}}>
+					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th>Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires</th>
 								
-								@foreach ($salles_profs_mardis as $horaire)
+								@foreach ($horaires_mardi as $horaire)
 									
-									<th>{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
+									<th style="width:10%;">{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
@@ -297,31 +295,25 @@
 							@for ($i = 0; $i < count($salles) ; $i++)
 								
 								<tr>
-									<th scope="row">{!! $salles[$i]->num !!}</th>
+									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
-									@foreach ($salles_profs_mardi as $salle_prof)
-
-										@if ($salle_prof->classe == $salles[$i]->num)
-
-											@foreach ($salles_profs_mardis as $h_mardi)
+									@foreach(Classe::what_exists($salles[$i],$horaires_mardi,$salles_profs_mardi) as $element)
+										
+										@if ($element->prof != 'vide')
+											
+											<td class="text-left" style="width:10%;"> 
 												
-												@if ($h_mardi->heure_debut == $salle_prof->heure_debut)
-													
-													<td> <p style="font-weight: bold;" >{!! $salle_prof->prof !!}</p> {!! $salle_prof->matiere !!} </td>
-												@else
+												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+												{!! $element->matiere !!} | {!! $element->niveau !!}
+											</td>
 
-													
+										@else
+										
+											<td style="width:10%;"></td>	
 
-													{{-- expr --}}
-												@endif
+											{{-- expr --}}
+										@endif
 
-												{{-- expr --}}
-											@endforeach
-
-
-
-											{{--  --}}
-										@endif										
 
 										{{-- expr --}}
 									@endforeach
@@ -342,21 +334,21 @@
 
 
 	<!-- mercredi OPEN -->
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
+	<div {{-- class="row" --}}>
+		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">mercredi</h3>
+					<h3 class="card-title" id="Mercredi">Mercredi</h3>
 				</div>
-				<div class="table-responsive">
-					<table class="table card-table table-vcenter text-nowrap table-secondary">
+				<div {{-- class="table-responsive" --}}>
+					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th>Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires</th>
 								
-								@foreach ($salles_profs_mercredis as $horaire)
+								@foreach ($horaires_mercredi as $horaire)
 									
-									<th>{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
+									<th style="width:10%;">{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
@@ -366,31 +358,25 @@
 							@for ($i = 0; $i < count($salles) ; $i++)
 								
 								<tr>
-									<th scope="row">{!! $salles[$i]->num !!}</th>
+									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
-									@foreach ($salles_profs_mercredi as $salle_prof)
-
-										@if ($salle_prof->classe == $salles[$i]->num)
-
-
-											@foreach ($salles_profs_mercredis as $h_mercredi)
+									@foreach(Classe::what_exists($salles[$i],$horaires_mercredi,$salles_profs_mercredi) as $element)
+										
+										@if ($element->prof != 'vide')
+											
+											<td class="text-left" style="width:10%;"> 
 												
-												@if ($h_mercredi->heure_debut == $salle_prof->heure_debut)
-													
-													<td> <p style="font-weight: bold;" >{!! $salle_prof->prof !!}</p> {!! $salle_prof->matiere !!} </td>
-												@else
+												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+												{!! $element->matiere !!} | {!! $element->niveau !!}
+											</td>
 
-													
+										@else
+										
+											<td style="width:10%;"></td>	
 
-													{{-- expr --}}
-												@endif
+											{{-- expr --}}
+										@endif
 
-												{{-- expr --}}
-											@endforeach
-
-
-											{{--  --}}
-										@endif										
 
 										{{-- expr --}}
 									@endforeach
@@ -411,21 +397,21 @@
 
 
 	<!-- jeudi OPEN -->
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
+	<div {{-- class="row" --}}>
+		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">jeudi</h3>
+					<h3 class="card-title" id="Jeudi">Jeudi</h3>
 				</div>
-				<div class="table-responsive">
-					<table class="table card-table table-vcenter text-nowrap table-secondary">
+				<div {{-- class="table-responsive" --}}>
+					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th>Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires</th>
 								
-								@foreach ($salles_profs_jeudis as $horaire)
+								@foreach ($horaires_jeudi as $horaire)
 									
-									<th>{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
+									<th style="width:10%;">{!! substr($horaire->heure_debut,0,5) !!} - {!! substr($horaire->heure_fin,0,5) !!}</th>
 									{{-- expr --}}
 								@endforeach
 							</tr>
@@ -435,32 +421,25 @@
 							@for ($i = 0; $i < count($salles) ; $i++)
 								
 								<tr>
-									<th scope="row">{!! $salles[$i]->num !!}</th>
+									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
-									@foreach ($salles_profs_jeudi as $salle_prof)
-
-										@if ($salle_prof->classe == $salles[$i]->num)
+									@foreach(Classe::what_exists($salles[$i],$horaires_jeudi,$salles_profs_jeudi) as $element)
+										
+										@if ($element->prof != 'vide')
 											
-
-											@foreach ($salles_profs_jeudis as $h_jeudi)
+											<td class="text-left" style="width:10%;"> 
 												
-												@if ($h_jeudi->heure_debut == $salle_prof->heure_debut)
-													
-													<td> <p style="font-weight: bold;" >{!! $salle_prof->prof !!}</p> {!! $salle_prof->matiere !!} </td>
-												@else
+												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+												{!! $element->matiere !!} | {!! $element->niveau !!}
+											</td>
 
-													
+										@else
+										
+											<td style="width:10%;"></td>	
 
-													{{-- expr --}}
-												@endif
+											{{-- expr --}}
+										@endif
 
-												{{-- expr --}}
-											@endforeach
-
-
-
-											{{--  --}}
-										@endif										
 
 										{{-- expr --}}
 									@endforeach
@@ -478,6 +457,23 @@
 	</div>
 	<!-- jeudi CLOSED -->
 
-
 	{{--  --}}
+@endsection
+
+
+@section('scripts')
+	
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+		    console.log($("#btnPrint_vendredi").html());
+		    $("#btnPrint_vendredi").on('click',function(){
+		//            var divContents = $("#datable-1").html();
+		            $('#Vendredi').printThis();
+		    })
+		});
+
+
+		//
+	</script>
 @endsection

@@ -19,6 +19,7 @@ class CreateNiveauxTable extends Migration
             $table->string('nom');
             $table->string('desc');
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

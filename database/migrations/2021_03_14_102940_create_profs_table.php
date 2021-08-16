@@ -20,6 +20,7 @@ class CreateProfsTable extends Migration
             $table->string('prenom');
             $table->string('cycle');
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
