@@ -229,7 +229,7 @@
 
                                         <td> 
 
-                                            @if ($i>23)
+                                            @if ($i>100)
                                                 
                                                 <a  style="margin: auto; width: 50%; padding: 10px; color: #fff;" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$niveaux[$i]->id}}"> supprimer</a>
 

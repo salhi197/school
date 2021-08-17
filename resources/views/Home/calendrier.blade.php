@@ -44,21 +44,30 @@
 
 									@foreach(Classe::what_exists($salles[$i],$horaires_vendredi,$salles_profs_vendredi) as $element)
 										
-										@if ($element->prof != 'vide')
+										@if (property_exists($element,"prof"))
+
+											@if ($element->prof != 'vide')
+												
+												<td class="text-left" style="width:10%;"> 
+													
+													<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+													{!! $element->matiere !!} | {!! $element->niveau !!}
+												</td>
+
+											@else
 											
+												<td style="width:10%;"></td>	
+
+												{{-- expr --}}
+											@endif
+										@else
+
 											<td class="text-left" style="width:10%;"> 
 												
-												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
-												{!! $element->matiere !!} | {!! $element->niveau !!}
-											</td>
-
-										@else
-										
-											<td style="width:10%;"></td>	
-
-											{{-- expr --}}
+												<p style="font-weight:bold;">Spécial</p> 
+												{!! $element->niveau !!}
+											</td>										
 										@endif
-
 
 										{{-- expr --}}
 									@endforeach
@@ -108,23 +117,32 @@
 									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
 									@foreach(Classe::what_exists($salles[$i],$horaires_samedi,$salles_profs_samedi) as $element)
+
+										@if (property_exists($element,"prof"))
 										
-										@if ($element->prof != 'vide')
+											@if ($element->prof != 'vide')
+												
+												<td class="text-left" style="width:10%;"> 
+													
+													<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+													{!! $element->matiere !!} | {!! $element->niveau !!}
+												</td>
+
+											@else
 											
+												<td style="width:10%;"></td>	
+
+												{{-- expr --}}
+											@endif
+										@else	
+
 											<td class="text-left" style="width:10%;"> 
 												
-												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
-												{!! $element->matiere !!} | {!! $element->niveau !!}
+												<p style="font-weight:bold;">Spécial</p> 
+												{!! $element->niveau !!}
 											</td>
 
-										@else
-										
-											<td style="width:10%;"></td>	
-
-											{{-- expr --}}
 										@endif
-
-
 										{{-- expr --}}
 									@endforeach
 								</tr>
@@ -172,20 +190,32 @@
 									<th style="width:10%;">{!! $salles[$i]->num !!}</th>
 
 									@foreach(Classe::what_exists($salles[$i],$horaires_dimanche,$salles_profs_dimanche) as $element)
+
+										@if (property_exists($element,"prof"))
 										
-										@if ($element->prof != 'vide')
+											@if ($element->prof != 'vide')
+												
+												<td class="text-left" style="width:10%;"> 
+													
+													<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+													{!! $element->matiere !!} | {!! $element->niveau !!}
+												</td>
+
+											@else
 											
+												<td style="width:10%;"></td>	
+
+												{{-- expr --}}
+											@endif
+										@else	
+
 											<td class="text-left" style="width:10%;"> 
 												
-												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
-												{!! $element->matiere !!} | {!! $element->niveau !!}
+												<p style="font-weight:bold; color: seagreen;">Spécial</p> 
+												{!! $element->niveau !!}
 											</td>
 
-										@else
-										
-											<td style="width:10%;"></td>	
-
-											{{-- expr --}}
+											{{--  --}}
 										@endif
 
 
@@ -236,20 +266,35 @@
 
 									@foreach(Classe::what_exists($salles[$i],$horaires_lundi,$salles_profs_lundi) as $element)
 										
-										@if ($element->prof != 'vide')
+										@if (property_exists($element,"prof"))
 											
-											<td class="text-left" style="width:10%;"> 
-												
-												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
-												{!! $element->matiere !!} | {!! $element->niveau !!}
-											</td>
+											@if ($element->prof != 'vide')
+
+												<td class="text-left" style="width:10%;"> 
+													
+													<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+													{!! $element->matiere !!} | {!! $element->niveau !!}
+												</td>
+											
+												{{--  --}}
+											@else
+											
+												<td style="width:10%;"></td>	
+
+												{{-- expr --}}
+											@endif
 
 										@else
-										
-											<td style="width:10%;"></td>	
+
+											<td class="text-left" style="width:10%;"> 
+												
+												<p style="font-weight:bold;">Spécial</p> 
+												{!! $element->niveau !!}
+											</td>
 
 											{{-- expr --}}
 										@endif
+
 
 
 										{{-- expr --}}
@@ -299,23 +344,34 @@
 
 									@foreach(Classe::what_exists($salles[$i],$horaires_mardi,$salles_profs_mardi) as $element)
 										
-										@if ($element->prof != 'vide')
-											
-											<td class="text-left" style="width:10%;"> 
+										@if (property_exists($element,"prof"))
+
+											@if ($element->prof != 'vide')
 												
-												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
-												{!! $element->matiere !!} | {!! $element->niveau !!}
-											</td>
+												<td class="text-left" style="width:10%;"> 
+													
+													<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+													{!! $element->matiere !!} | {!! $element->niveau !!}
+												</td>
+
+											@else
+											
+												<td style="width:10%;"></td>	
+
+												{{-- expr --}}
+											@endif
 
 										@else
-										
-											<td style="width:10%;"></td>	
+
+											<td class="text-left" style="width:10%;"> 
+												
+												<p style="font-weight:bold; color:seagreen;">Spécial</p> 
+												{!! $element->niveau !!}
+											</td>
+
 
 											{{-- expr --}}
 										@endif
-
-
-										{{-- expr --}}
 									@endforeach
 								</tr>
 
@@ -362,22 +418,30 @@
 
 									@foreach(Classe::what_exists($salles[$i],$horaires_mercredi,$salles_profs_mercredi) as $element)
 										
-										@if ($element->prof != 'vide')
+										@if (property_exists($element,"prof"))
+
+											@if ($element->prof != 'vide')
+												
+												<td class="text-left" style="width:10%;"> 
+													
+													<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+													{!! $element->matiere !!} | {!! $element->niveau !!}
+												</td>
+
+											@else
 											
+												<td style="width:10%;"></td>	
+
+												{{-- expr --}}
+											@endif
+										@else
+
 											<td class="text-left" style="width:10%;"> 
 												
-												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
-												{!! $element->matiere !!} | {!! $element->niveau !!}
-											</td>
-
-										@else
-										
-											<td style="width:10%;"></td>	
-
-											{{-- expr --}}
+												<p style="font-weight:bold;">Spécial</p> 
+												{!! $element->niveau !!}
+											</td>										
 										@endif
-
-
 										{{-- expr --}}
 									@endforeach
 								</tr>
@@ -425,22 +489,32 @@
 
 									@foreach(Classe::what_exists($salles[$i],$horaires_jeudi,$salles_profs_jeudi) as $element)
 										
-										@if ($element->prof != 'vide')
+										@if (property_exists($element,"prof"))
+
+											@if ($element->prof != 'vide')
+												
+												<td class="text-left" style="width:10%;"> 
+													
+													<p style="font-weight:bold;">{!! $element->prof !!}</p> 
+													{!! $element->matiere !!} | {!! $element->niveau !!}
+												</td>
+
+											@else
 											
+												<td style="width:10%;"></td>	
+
+												{{-- expr --}}
+											@endif
+										@else
+
 											<td class="text-left" style="width:10%;"> 
 												
-												<p style="font-weight:bold;">{!! $element->prof !!}</p> 
-												{!! $element->matiere !!} | {!! $element->niveau !!}
+												<p style="font-weight:bold;">Spécial</p> 
+												{!! $element->niveau !!}
 											</td>
 
-										@else
-										
-											<td style="width:10%;"></td>	
-
-											{{-- expr --}}
+											{{--  --}}										
 										@endif
-
-
 										{{-- expr --}}
 									@endforeach
 								</tr>

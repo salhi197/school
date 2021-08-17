@@ -80,6 +80,7 @@
                             
                             
                             <option value="Secondaire"> Secondaire </option>
+                            <option value="Préscolaire"> Préscolaire </option>
                             <option value="Primaire"> Primaire </option>
                             <option value="Moyen"> Moyen </option>
                             <option value="Universitaire"> Universitaire </option>

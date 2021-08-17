@@ -85,11 +85,11 @@ class Classe extends Model
 		for ($i=0; $i < count($horaires) ; $i++) 
 		{ 
 			
-			if (in_array($horaires[$i], $le_jour)) 
+			if (in_array($horaires[$i],$le_jour)) 
 			{
-				
+
 				$to_return[$i] = $jourss[$k];
-				
+
 				$k++;
 
 				//
