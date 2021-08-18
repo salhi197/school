@@ -304,6 +304,8 @@ class SingleGroupeController extends Controller
 
         $groupe = $groupe[0];
 
+        $cycle = substr($groupe->niveau,2,2);
+
         $presences_mois = DB::select("select FLOOR((s.num-1)/4)+1 as mois,count(se.presence) as presences from seances_eleves se , seances s where se.id_seance=s.id and s.id_groupe = $id_groupe and se.presence=1 group by FLOOR((s.num-1)/4)+1");
 
         $numero_de_la_seance_dans_le_mois = (Groupe::current_seance($id_groupe));
@@ -313,11 +315,8 @@ class SingleGroupeController extends Controller
         $eleves_ne_payent_pas = (DB::select("select distinct e.nom,e.prenom from eleves e,seances_eleves se, seances s where (s.id=se.id_seance) and (s.id_groupe=$id_groupe) and (se.id_eleve=e.id) and (se.presence = 2) "));
 
         ini_set('display_errors', 1);
-            
-        $nbr = count($les_payements);
-
-    
-        return view('Home.payer_prof',compact('presences','groupe','le_mois','presences_mois','numero_de_la_seance_dans_le_mois','les_payements','eleves_ne_payent_pas','nbr')) ;
+                
+        return view('Home.payer_prof',compact('presences','groupe','le_mois','presences_mois','numero_de_la_seance_dans_le_mois','les_payements','eleves_ne_payent_pas','cycle')) ;
         
         //
 
@@ -327,7 +326,6 @@ class SingleGroupeController extends Controller
 
     public function payer_prof(Request $request)
     {
-
         $data = ($request->all());
         $num_mois = $data['num_mois'];
         $num_seance = $data['num_seance'];

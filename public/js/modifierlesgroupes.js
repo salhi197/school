@@ -11,6 +11,36 @@ function goto_the_link(objet)
 	// body...
 }
 
+function fit_tarif(objet) 
+{
+	
+	var niveau = ($(objet).find(":selected").val().substr(0,1));
+	
+	var cycle = ($(objet).find(":selected").val().substr(2,2));
+	
+	if (cycle=="AS") 
+	{
+
+		if (niveau==1 || niveau==2) 
+		{
+
+			$("#tarif").val(1800);
+
+			//
+		}
+		else
+		{
+
+			$("#tarif").val(2500);
+
+			//
+		}
+		//
+	}
+
+	// body...
+}
+
 function fit_prctg(objet) 
 {
 
@@ -88,6 +118,12 @@ function fit_prof(objet)
 		var cycle = "Moyen";
 	}
 
+	if(cycle.substr(2,2)=='PS')
+	{
+		var cycle = "Préscolaire";
+	}
+
+
 	if(cycle.substr(2,2)=='AP')
 	{
 		var cycle = "Primaire";
@@ -97,6 +133,8 @@ function fit_prof(objet)
 	{
 		var cycle = "Universitaire";
 	}
+
+
 
     $.ajax({
         headers: 

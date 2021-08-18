@@ -196,7 +196,7 @@ function afficher_payement_prof_2(objet,le_mois)
     			$("#payement_prof_effectuee"+le_mois).hide('slow', function() 
     			{
     				
-    				$("#payement_prof_effectuee"+le_mois).parent().text('Payement éffectué le : ' +data).css('color','green');
+    				$("#payement_prof_effectuee"+le_mois).parent().text(payement+' DA Payement éffectué le : ' +data).css('color','green');
 
     				//	
     			});

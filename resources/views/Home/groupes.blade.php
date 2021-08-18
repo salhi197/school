@@ -102,7 +102,7 @@
 
                         <label for="niveaudugroupe">Niveau </label>
 
-                        <select name="niveau" id="niveaudugroupe" class="form-control select2-show-search col-md-12">
+                        <select name="niveau" onchange="fit_tarif(this)" id="niveaudugroupe" class="form-control select2-show-search col-md-12">
                             
                             @foreach ($niveaux as $niveau)
                             

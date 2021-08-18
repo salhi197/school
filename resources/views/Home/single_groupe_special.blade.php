@@ -25,6 +25,15 @@
 								Tarif : {!! $groupe->tarif !!} DA 
 							</address>
 						</div>
+
+						<div style="cursor: pointer;" class="col-lg-6 ">
+
+							<a href="/home/groupes_special/{{$groupe->id}}/payement_prof">
+								<p class="h3 alert alert-info text-center">Payement des profs</p>
+							</a> 
+
+						</div>
+
 					</div>
 				</div>
 			<div class="row">

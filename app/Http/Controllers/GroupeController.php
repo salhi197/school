@@ -36,7 +36,7 @@ class GroupeController extends Controller
 
         $profs=DB::select("select * from profs where visible = 1");
 
-        $niveaux=DB::select("select * from niveaux where visible = 1");
+        $niveaux=DB::select("select * from niveaux where visible = 1 order by cycle,niveau,filiere");
         
         $eleves_groupe = DB::select("select s.id_groupe,count(DISTINCT s.id_groupe,e.id,e.nom,e.prenom,e.num_tel) as nb_eleves from eleves e, seances_eleves se , seances s where (s.id = se.id_seance and se.id_eleve=e.id ) group by s.id_groupe ");
 

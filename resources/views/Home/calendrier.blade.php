@@ -4,12 +4,11 @@
 
 @section('content')
 
-	<div class="page-header">
+	<div class="page-header row">
 		
-		<h4 class="page-title">Calendrier des salles / jours
-		</h4>
+		<h4 class="page-title col-md-6">Calendrier des salles / jours</h4>
 	</div>
-
+	<button type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-info col-md-3"  id="btnPrint_vendredi"> Imprimer </button>
 
 	<!-- vendredi OPEN -->
 	<div {{-- class="row" --}}>
@@ -18,8 +17,6 @@
 				<div class="card-header">
 					<h3 class="card-title row col-md-12">
 						<span class="col-md-5">Vendredi</span> 
-					
-						<button type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-info col-md-6"  id="btnPrint_vendredi"> Imprimer </button>
 					</h3>
 				</div>
 				<div {{-- class="table-responsive" --}} id="Vendredi">
@@ -94,13 +91,13 @@
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title" id="Samedi">Samedi</h3>
+					<h3 class="card-title">Samedi</h3>
 				</div>
-				<div {{-- class="table-responsive" --}}>
-					<table class="table card-table table-vcenter table-secondary">
+				<div {{-- class="table-responsive" --}} id="Samedi">
+					<table class="table card-table table-vcenter table-secondary" >
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th style="width:10%;">Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires <br> Samed </th>
 								
 								@foreach ($horaires_samedi as $horaire)
 									
@@ -167,13 +164,13 @@
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title" id="Dimanche">Dimanche</h3>
+					<h3 class="card-title" >Dimanche</h3>
 				</div>
-				<div {{-- class="table-responsive" --}}>
+				<div {{-- class="table-responsive" --}}  id="Dimanche" >
 					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th style="width:10%;">Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires <br> Dimanche </th>
 								
 								@foreach ($horaires_dimanche as $horaire)
 									
@@ -242,13 +239,13 @@
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title" id="Lundi">Lundi</h3>
+					<h3 class="card-title" >Lundi</h3>
 				</div>
-				<div {{-- class="table-responsive" --}}>
+				<div {{-- class="table-responsive" --}}  id="Lundi" >
 					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th style="width:10%;">Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires <br> Lundi </th>
 								
 								@foreach ($horaires_lundi as $horaire)
 									
@@ -320,13 +317,13 @@
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title" id="Mardi">Mardi</h3>
+					<h3 class="card-title" >Mardi</h3>
 				</div>
-				<div {{-- class="table-responsive" --}}>
+				<div {{-- class="table-responsive" --}}  id="Mardi" >
 					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th style="width:10%;">Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires <br> Mardi </th>
 								
 								@foreach ($horaires_mardi as $horaire)
 									
@@ -394,13 +391,13 @@
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title" id="Mercredi">Mercredi</h3>
+					<h3 class="card-title" >Mercredi</h3>
 				</div>
-				<div {{-- class="table-responsive" --}}>
+				<div {{-- class="table-responsive" --}}  id="Mercredi" >
 					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th style="width:10%;">Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires <br> Mercredi </th>
 								
 								@foreach ($horaires_mercredi as $horaire)
 									
@@ -465,13 +462,13 @@
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title" id="Jeudi">Jeudi</h3>
+					<h3 class="card-title" >Jeudi</h3>
 				</div>
-				<div {{-- class="table-responsive" --}}>
+				<div {{-- class="table-responsive" --}}  id="Jeudi" >
 					<table class="table card-table table-vcenter table-secondary">
 						<thead  class="bg-secondary text-white">
 							<tr>
-								<th style="width:10%;">Salles/Horaires</th>
+								<th style="width:10%;">Salles/Horaires <br> Jeudi </th>
 								
 								@foreach ($horaires_jeudi as $horaire)
 									
@@ -543,7 +540,7 @@
 		    console.log($("#btnPrint_vendredi").html());
 		    $("#btnPrint_vendredi").on('click',function(){
 		//            var divContents = $("#datable-1").html();
-		            $('#Vendredi').printThis();
+		            $('#Vendredi,#Samedi,#Dimanche,#Lundi,#Mardi,#Mercredi,#Jeudi').printThis();
 		    })
 		});
 

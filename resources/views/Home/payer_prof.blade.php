@@ -154,9 +154,17 @@
 												
 												@if ($presence_moi->mois == ($i+1))
 													
-													{!! $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) !!} DA
+													@if ($cycle!="PS")
+														
+														{!! $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) !!} DA
 
-													<input style="display:none;" type="number" id="le_payement_du_mois{{$i+1}}" value="{{ $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) }}">
+														<input style="display:none;" type="number" id="le_payement_du_mois{{$i+1}}" value="{{ $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) }}">
+													
+													@else
+
+														<input class="form-control" type="number" id="le_payement_du_mois{{$i+1}}" value="{{ $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) }}">
+													@endif
+
 
 													{{-- expr --}}
 												@endif
@@ -172,24 +180,24 @@
 
 											@if ($i<count($les_payements))
 												
-												<p style="color:green;">Payement éffectué le : {!! $les_payements[$i]->created_at !!} </p>
+												<p style="color:green;">{!! $les_payements[$i]->payement !!} DA | Payement éffectué le : {!! date_format(date_create($les_payements[$i]->created_at),"d/m/Y H:i:s") !!} </p>
 
 											@else
 
 												<label class="custom-switch">
 													
-													<input onchange="afficher_suur(this)" id="payement_prof{{$i}}" type="checkbox" class="custom-switch-input">
+													<input onchange="afficher_suur(this)" id="payement_prof{{$i+1}}" type="checkbox" class="custom-switch-input">
 
 													<span class="custom-switch-indicator"></span>
 													<span class="custom-switch-description">Payement éffectué</span>
 												</label>
 
 
-												<label id="payement_prof_effectuee{{$i}}" style="display:none;" class="custom-switch">
+												<label id="payement_prof_effectuee{{$i+1}}" style="display:none;" class="custom-switch">
 													
 													<input seance="{{$numero_de_la_seance_dans_le_mois }}" groupe="{{ $groupe->id }}" 
 															prof="{{ $groupe->prof }}" 
-															onchange="afficher_payement_prof_2(this,{{ $i }});" 
+															onchange="afficher_payement_prof_2(this,{{ $i+1 }});" 
 															type="checkbox"  
 															class="custom-switch-input">
 
@@ -199,6 +207,7 @@
 
 											 	{{-- expr --}}
 											@endif 
+
 
 											{{--  --}}
 										</td>
@@ -210,8 +219,6 @@
 
 											<td style="background:seagreen;" class="text-center">éffectué	</td>
 										@endif
-
-
 									</tr>
 
 									{{-- expr --}}

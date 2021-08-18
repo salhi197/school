@@ -153,7 +153,7 @@ class SpecialGroupeController extends Controller
         
         //dd($payements_prof);
 
-        $profs = DB::select("select * from profs order by nom,cycle,matiere");
+        $profs = DB::select("select * from profs where visible = 1 order by nom,cycle,matiere");
 
         $matieres = DB::select("select * from matieres order by nom");
         
@@ -354,7 +354,9 @@ class SpecialGroupeController extends Controller
 
         $num_seance_groupe = $num_seance_groupe[0]->numero_de_la_derniere_seance_du_groupe;
 
-        return view('Home.single_eleve_special',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe'));
+        $presences = DB::select("select s.id_prof,FLOOR((s.num-1)/4)+1 as mois,s.num,count(se.presence) as presences from seances_speciales_eleves se , seances_speciales s where se.id_seance_speciale=s.id and s.id_groupe_special = $id_groupe and se.presence=1 group by s.id_prof, FLOOR((s.num-1)/4)+1,s.num ");        
+        
+        return view('Home.single_eleve_special',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe','presences'));
 
         // code...
     }
@@ -453,6 +455,25 @@ class SpecialGroupeController extends Controller
         # code...
     }
 
+
+    public function payement_prof($id_groupe)
+    {  
+
+        $presences = DB::select("select s.id_prof,FLOOR((s.num-1)/4)+1 as mois,s.num,count(se.presence) as presences from seances_speciales_eleves se , seances_speciales s where se.id_seance_speciale=s.id and s.id_groupe_special = $id_groupe and se.presence=1 group by s.id_prof, FLOOR((s.num-1)/4)+1,s.num ");
+        
+        $presences_mois = DB::select("select FLOOR((s.num-1)/4)+1 as mois,count(se.presence) as presences from seances_speciales_eleves se , seances_speciales s where se.id_seance_speciale=s.id and s.id_groupe_special = $id_groupe and se.presence=1 group by FLOOR((s.num-1)/4)+1");           
+
+        $groupe = (DB::select("select * from special_groupes where id = \"$id_groupe\" "));
+        $groupe = $groupe[0];
+
+        $eleves_ne_payent_pas = (DB::select("select distinct e.nom,e.prenom from eleves e,seances_speciales_eleves se, seances_speciales s where (s.id=se.id_seance_speciale) and (s.id_groupe_special=$id_groupe) and (se.id_eleve=e.id) and (se.presence = 2) "));        
+        
+        $le_mois = Groupe::get_the_month_special($id_groupe);
+
+        return view('Home.payer_prof_special',compact('presences','groupe','eleves_ne_payent_pas','le_mois','presences_mois')) ;        
+        
+        // code...
+    }     
 
     //
 }
