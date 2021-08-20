@@ -23,7 +23,7 @@ class HomeController extends Controller
             ->where('id', 1)
             ->update(['password' => Hash::make($request['password']),'password_text' => $request['password']]);
 
-        session()->flash('notification.message' , 'Dawra : '.$request->matiere.' , '.$request->niveau.' Prof : '.$request->prof.' ajoutée avec succés');
+        session()->flash('notification.message' , 'Mot de passe Modifié');
         session()->flash('notification.type' , 'success'); 
         return back();            
     }
