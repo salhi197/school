@@ -9,5 +9,11 @@ Route::group(['middleware' => 'auth'], function ()
 
 	Route::get('/home/groupes_special/{id}/payement_prof','SpecialGroupeController@payement_prof');
 
+	Route::post('/home/groupes/modifier','SingleGroupeController@modifier_groupe');
+
+	Route::post('/home/groupes/fit_salle/modifier/ajax','SingleGroupeController@fit_salles');
+
+	Route::post('/home/single_eleve/supprimer/ajax','SingleGroupeController@supprimer_eleve');
+
 	//
 });	

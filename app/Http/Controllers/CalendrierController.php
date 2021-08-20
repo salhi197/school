@@ -27,7 +27,7 @@ class CalendrierController extends Controller
 
         $salles = DB::select("select * from classes where visible = 1 order by num");
 
-        $salles_profs_dimanche = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau,rank() over (partition by classe order by heure_debut asc) as ordre from groupes where visible = 1 and jour = 'Dimanche' order by classe,heure_debut"));
+        $salles_profs_dimanche = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Dimanche' order by classe,heure_debut"));
         
         $salles_profs_dimanche1 = (DB::select("select salle as classe,heure_debut,heure_fin,niveau from special_groupes where visible = 1 and jour = 'Dimanche' order by classe,heure_debut"));
 
@@ -43,7 +43,7 @@ class CalendrierController extends Controller
 
         /*****************************************************************************/
 
-        $salles_profs_lundi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau,rank() over (partition by classe order by heure_debut asc) as ordre from groupes where visible = 1 and jour = 'Lundi' order by classe,heure_debut"));
+        $salles_profs_lundi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Lundi' order by classe,heure_debut"));
 
         $salles_profs_lundi1 = (DB::select("select salle as classe,heure_debut,heure_fin,niveau from special_groupes where visible = 1 and jour = 'Lundi' order by classe,heure_debut"));
         
@@ -60,7 +60,7 @@ class CalendrierController extends Controller
 
         /*****************************************************************************/
 
-        $salles_profs_mardi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau,rank() over (partition by classe order by heure_debut asc) as ordre from groupes where visible = 1 and jour = 'Mardi' order by classe,heure_debut"));
+        $salles_profs_mardi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Mardi' order by classe,heure_debut"));
 
         $salles_profs_mardi1 = (DB::select("select salle as classe,heure_debut,heure_fin,niveau from special_groupes where visible = 1 and jour = 'Mardi' order by classe,heure_debut"));
 
@@ -76,7 +76,7 @@ class CalendrierController extends Controller
 
         /*****************************************************************************/
 
-        $salles_profs_mercredi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau,rank() over (partition by classe order by heure_debut asc) as ordre from groupes where visible = 1 and jour = 'Mercredi' order by classe,heure_debut"));
+        $salles_profs_mercredi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Mercredi' order by classe,heure_debut"));
         
         $salles_profs_mercredi1 = (DB::select("select salle as  classe,heure_debut,heure_fin,niveau from special_groupes where visible = 1 and jour = 'Mercredi' order by classe,heure_debut"));
 
@@ -92,7 +92,7 @@ class CalendrierController extends Controller
 
         /****************************************************************************/
 
-        $salles_profs_jeudi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau,rank() over (partition by classe order by heure_debut asc) as ordre from groupes where visible = 1 and jour = 'Jeudi' order by classe,heure_debut"));
+        $salles_profs_jeudi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Jeudi' order by classe,heure_debut"));
         
         $salles_profs_jeudi1 = (DB::select("select salle as classe,heure_debut,heure_fin,niveau from special_groupes where visible = 1 and jour = 'Jeudi' order by classe,heure_debut"));
 
@@ -108,7 +108,7 @@ class CalendrierController extends Controller
 
         /****************************************************************************/
 
-        $salles_profs_vendredi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau,rank() over (partition by classe order by heure_debut asc) as ordre from groupes where visible = 1 and jour = 'Vendredi' order by classe,heure_debut"));
+        $salles_profs_vendredi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Vendredi' order by classe,heure_debut"));
 
         $salles_profs_vendredi1 = (DB::select("select salle as classe,heure_debut,heure_fin,niveau from special_groupes where visible = 1 and jour = 'Vendredi' order by classe,heure_debut"));
 
@@ -124,7 +124,7 @@ class CalendrierController extends Controller
 
         /***************************************************************************/
 
-        $salles_profs_samedi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau,rank() over (partition by classe order by heure_debut asc) as ordre from groupes where visible = 1 and jour = 'Samedi' order by classe,heure_debut"));
+        $salles_profs_samedi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Samedi' order by classe,heure_debut"));
         
         $salles_profs_samedi1 = (DB::select("select salle as classe,heure_debut,heure_fin,niveau from special_groupes where visible = 1 and jour = 'Samedi' order by classe,heure_debut"));
 

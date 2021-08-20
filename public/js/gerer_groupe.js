@@ -348,5 +348,58 @@ function afficher_payement_prof_1(objet,le_mois)
 	//
 }
 
+function fit_salles() 
+{	
+	var $id_groupe = $("#id_groupe").val();
+	var $jour = $("#jourdugroupe").find(":selected").val();
+	var $debut = $("#heure_debutdugroupe").val();
+	var $fin = $("#heure_findugroupe").val();
+	var $salle = $("#salledugroupe").find(":selected").val();
+
+	if ($debut>=$fin) 
+	{
+		$("#heure_findugroupe").val("");
+	}
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/groupes/fit_salle/modifier/ajax",
+        data:{id_groupe:$id_groupe,jour:$jour,debut:$debut,fin:$fin,salle:$salle},
+
+        success:function(data) 
+        {
+
+        	if(data !== true)
+        	{
+
+				$("#salledugroupe").addClass("is-invalid state-invalid");        		
+				$(".invalid-feedback").remove();
+				$("#salledugroupe").after($('<div class="invalid-feedback">Il existe un groupe de : '+data.niveau+'<br> Matiere : '+data.matiere+'<br> Prof : '+data.prof+'<br> de : '+data.heure_debut.substr(0,5)+' à '+data.heure_fin.substr(0,5)+'</div>'));
+				
+        		//
+        	}
+        	else
+        	{
+
+        		$("#salledugroupe").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+        		$(".invalid-feedback").remove();        		
+
+        		//
+        	}
+
+        	//
+		}
+	})	
+
+
+
+	// body...
+}
+
+
 
   	

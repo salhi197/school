@@ -245,8 +245,8 @@ class SingleGroupeController extends Controller
         
         $seances_eleves = DB::select("select e.id as id_eleve,s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.presence,se.created_at from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) /*and ((FLOOR((s.num-1)/4)+1)=\"$this_mois\" or (FLOOR((s.num-1)/4)+1)=\"$this_mois-1\" or (FLOOR((s.num-1)/4)+1)=\"$this_mois+1\" )*/ order by e.nom,e.prenom,s.num");
         
-        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) order by e.nom,e.prenom ");
-
+        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, payment_groupes_eleves p where ( p.id_groupe = \"$id\"  and p.id_eleve=e.id ) order by e.nom,e.prenom ");
+        
         $nbr_seance_mois = (DB::select("select num as numero_de_la_seance_dans_le_mois from seances where id_groupe = \"$id\" order by num desc "));
 
         if (count($nbr_seance_mois)>0) 
@@ -361,6 +361,89 @@ class SingleGroupeController extends Controller
         DB::update("update eleves e set e.frais = e.frais+$frais where id = '$id_eleve' ");
 
         return back();
+
+        // code...
+    }
+
+    public function modifier_groupe(Request $request)
+    {
+        $pourcentage_ecole = 100-$request->pourcentage_prof;
+
+        $id_groupe = $request->id_groupe;
+
+        DB::update("update groupes set heure_debut = '$request->heure_debut',heure_fin = '$request->heure_fin',heure_fin = '$request->heure_fin',pourcentage_prof='$request->pourcentage_prof',pourcentage_ecole='$pourcentage_ecole',classe='$request->salle',prof='$request->prof',niveau='$request->niveau',matiere='$request->matiere',jour='$request->jour',tarif='$request->tarif' where id='$id_groupe' ");
+
+        return back();
+
+        // code...
+    }
+
+
+
+    public function fit_salles(Request $request)
+    {
+        
+        set_time_limit(0);
+
+        ini_set('memory_limit', '-1');
+
+        $annee_scolaire=(Groupe::get_annee_scolaire());
+
+        $dispo=(DB::select("select * from groupes where jour = \"$request->jour\" and classe=\"$request->salle\" and visible = 1 and id <> '$request->id_groupe' and annee_scolaire = \"$annee_scolaire\""));
+
+        $dispo1=(DB::select("select * from special_groupes where jour = \"$request->jour\" and salle=\"$request->salle\" and visible = 1 and id <> '$request->id_groupe' and annee_scolaire = \"$annee_scolaire\""));
+
+        $dispo = array_merge($dispo, $dispo1);
+
+        $debut = strtotime($request->debut);
+        $fin = strtotime($request->fin);
+
+        foreach ($dispo as $disp) 
+        {
+
+            $time_debut = strtotime($disp->heure_debut);
+            $time_fin = strtotime($disp->heure_fin);
+
+
+            if(($debut>=$time_debut && $fin<=$time_fin)||
+            ($time_debut<=$debut && $time_fin>=$fin)||
+            ($debut>=$time_debut && $debut<$time_fin && $fin>=$time_fin)||
+            ($debut<=$time_debut && $fin<=$time_fin && $fin>$time_debut)) 
+
+            {
+             
+                return response()->json($disp);
+
+                // code...
+            }
+
+            // code...
+        }
+        
+        return response()->json(true);
+        // code...
+    }
+
+
+    public function supprimer_eleve(Request $request)
+    {
+
+        $id_groupe = ((int)$request->id_groupe);
+
+        $id_eleve = ((int)$request->id_eleve);
+
+        $id_seances = (DB::select("select * from seances where id_groupe = $id_groupe "));
+
+        DB::delete("delete from payment_groupes_eleves where id_groupe=$id_groupe and id_eleve = $id_eleve ");
+
+        /*foreach ($id_seances as $id_seance) 
+        {
+            $id_seance=(int)($id_seance->id);
+
+            DB::delete("delete from seances_eleves where id_seance=$id_seance and id_eleve = $id_eleve ");
+
+            // code...
+        }*/
 
         // code...
     }

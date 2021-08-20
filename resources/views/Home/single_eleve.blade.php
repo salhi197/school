@@ -108,6 +108,41 @@
 
 							</tbody>
 						</table>
+
+						<button  data-toggle="modal" data-target="#myModalsup" class="btn btn-outline-danger col-md-12" >Supprimer L'élève</button>
+
+                        <div id="myModalsup" class="modal fade" role="dialog">
+
+                          <div class="modal-dialog modal-lg">
+
+                                <!-- Modal content-->
+
+                                <div class="modal-content">
+
+                                   <div class="modal-header">
+
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                        <h4 class="modal-title">Voulez-vous vraiment supprimer cet Elève ?</h4>
+                                  </div>
+
+                                  <div class="modal-body">
+
+                                        <a class="col-md-5 btn btn-danger" onclick="supprimereleve(event,this)"  data-dismiss="modal" style="color: #ffffff;" id_groupe="{{ $groupe->id }}" id="eleve{{$eleve->id}}">OUI,je supprime</a>
+
+                                        <a data-dismiss="modal" class="col-md-6  btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas supprimer</a>
+                                        {{--  --}}
+                                  </div>
+
+                                  <div class="modal-footer">
+
+                                        <a class="btn btn-warning" data-dismiss="modal" style="color: #ffffff;">Fermer</a>
+                                  </div>
+                                </div>
+                                {{--  --}}
+                          </div>
+
+
 					</div>
 				</div>
 

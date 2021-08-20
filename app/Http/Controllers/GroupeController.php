@@ -38,7 +38,7 @@ class GroupeController extends Controller
 
         $niveaux=DB::select("select * from niveaux where visible = 1 order by cycle,niveau,filiere");
         
-        $eleves_groupe = DB::select("select s.id_groupe,count(DISTINCT s.id_groupe,e.id,e.nom,e.prenom,e.num_tel) as nb_eleves from eleves e, seances_eleves se , seances s where (s.id = se.id_seance and se.id_eleve=e.id ) group by s.id_groupe ");
+        $eleves_groupe = DB::select("select p.id_groupe,count(DISTINCT p.id_groupe,e.id,e.nom,e.prenom,e.num_tel) as nb_eleves from eleves e,payment_groupes_eleves p where (p.id_eleve=e.id ) group by p.id_groupe ");
 
         return view('Home.groupes',compact('groupes','last_id','salles','matieres','profs','niveaux','annee_scolaire','eleves_groupe'));
 
@@ -183,8 +183,8 @@ class GroupeController extends Controller
         
         $seances_eleves = DB::select("select e.id as id_eleve,s.id_groupe,s.num as numero_de_la_seance_dans_le_mois,se.presence,se.created_at from seances s , seances_eleves se , eleves e where (s.id_groupe = \"$id\") and (se.id_seance=s.id) and (se.id_eleve = e.id) /*and ((FLOOR((s.num-1)/4)+1)=\"$this_mois\" or (FLOOR((s.num-1)/4)+1)=\"$this_mois-1\" or (FLOOR((s.num-1)/4)+1)=\"$this_mois+1\" )*/ order by e.nom,e.prenom,s.num");
         
-        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, seances_eleves se , seances s where ( s.id_groupe = \"$id\" and s.id = se.id_seance and se.id_eleve=e.id ) order by e.nom,e.prenom ");
-
+        $eleves_groupe = DB::select("select DISTINCT e.id,e.nom,e.prenom,e.num_tel from eleves e, payment_groupes_eleves p where (p.id_groupe = \"$id\" and p.id_eleve=e.id ) order by e.nom,e.prenom ");
+        
         $nbr_seance_mois = (DB::select("select num as numero_de_la_seance_dans_le_mois from seances where id_groupe = \"$id\" order by num desc "));
 
         if (count($nbr_seance_mois)>0) 
@@ -233,7 +233,15 @@ class GroupeController extends Controller
         
         //dd($payements_prof);
 
-        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel','eleves_gratuits','payements_prof'));
+        $salles=DB::select("select * from classes where visible =1 order by num");
+
+        $matieres=DB::select("select * from matieres /*where visible =1*/");
+
+        $profs=DB::select("select * from profs where visible = 1");
+
+        $niveaux=DB::select("select * from niveaux where visible = 1 order by cycle,niveau,filiere");        
+
+        return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel','eleves_gratuits','payements_prof','salles','matieres','profs','niveaux'));
 
         // code...
     }

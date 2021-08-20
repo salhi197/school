@@ -210,3 +210,35 @@ function afficher_payement_prof_2(objet,le_mois)
 
 	// body...
 }
+
+function supprimereleve(event,objet) 
+{
+
+	event.preventDefault();
+
+	var id_eleve = (objet.id.substr(5));
+
+	var id_groupe = $(objet).attr("id_groupe") ;
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/single_eleve/supprimer/ajax",
+        data:{id_eleve:id_eleve,id_groupe:id_groupe},
+
+        success:function(data) 
+        {
+
+        	window.location.href='/home/groupes/'+id_groupe;
+
+        	//
+		}
+	});	
+
+
+
+	// body...
+}

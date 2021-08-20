@@ -64,7 +64,7 @@
 
                         <label for="heure_debutdugroupe">Heure Début</label>
 
-                        <input type="time" min="08:00" onchange="fit_salles();" id="heure_debutdugroupe" required name="heure_debut" class="form-control col-md-12">
+                        <input type="time" onchange="fit_salles();" id="heure_debutdugroupe" required name="heure_debut" class="form-control col-md-12">
 
                         {{--  --}}
                     </div>
@@ -74,7 +74,7 @@
 
                         <label for="heure_findugroupe">Heure Fin</label>
 
-                        <input type="time" min="08:00" onchange="fit_salles();" id="heure_findugroupe" required name="heure_fin" class="form-control col-md-12">
+                        <input type="time" onchange="fit_salles();" id="heure_findugroupe" required name="heure_fin" class="form-control col-md-12">
 
                         {{--  --}}
                     </div>

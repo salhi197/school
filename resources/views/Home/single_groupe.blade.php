@@ -18,7 +18,10 @@
 					<hr>
 					<div class="row">
 						<div class="col-lg-6 ">
-							<p class="h3">Informations du Groupe : </p>
+							<p class="h3" style="cursor:pointer;"  data-toggle="modal" data-target="#myModal_modif" >Informations du Groupe : </p>
+
+							@include('includes.single_groupe.modifier_groupe',['salles'=>$salles,'niveaux'=>$niveaux,'matieres'=>$matieres,'profs'=>$profs,'groupe'=>$groupe])
+
 							<address>
 								Année scolaire : {!! $groupe->annee_scolaire !!}<br>
 								Niveau : {!! $groupe->niveau !!} <br>
