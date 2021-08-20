@@ -138,6 +138,7 @@ Route::post('/home/groupes_special/supprimer/ajax','SpecialGroupeController@supp
 Route::get('/home/caisse', 'CaisseController@index');
 
 Route::post('/home/saisir_frais', 'HomeController@saisir_frais');
+Route::post('/change/password', 'HomeController@ChangePassword');
 
      
 });

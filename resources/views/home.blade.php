@@ -140,18 +140,15 @@
                                                 <h5 class="text-uppercase"><strong>Information de connexion :</strong></h5>
                                             </div>
                                             <hr class="m-0 mb-3">
-                                                <form class="form-inline">
+                                                <form class="form-inline" id="change-password" method="post" action="/change/password">
                                                 {{ csrf_field() }}  
                                                 <div class="form-group col-md-4 col-sm-12">
                                                     <label for="nomduclasse">Nouveau Mot de passe  </label>
-                                                    <input type="text" id="nomduclasse" required="true" name="password" class="form-control">
+                                                    <input value="{{ $password_text }}" type="text" id="password" required="true" name="password" class="form-control">
                                                 </div>
-                                                <div class="form-group col-md-4 col-sm-12">
-                                                    <label for="minduclasse">Confirm Password</label>
-                                                    <input type="number" min="1" value="25" id="minduclasse" required name="min" class="form-control">
-                                                </div>
-                                                <a style="color: #2070F5; margin-top: 5%;" id="" data-dismiss="modal"  class="btn btn-outline-primary col-md-12">Ajouter</a>
-                                                </form>
+                                                <button class="btn btn-outline-primary" onclick="document.getElementById('change-password').submit();">Valider</button>
+
+                                            </form>
 
 
 
