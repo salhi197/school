@@ -64,11 +64,16 @@
 										<p class="">
                                             Assurer La connexion de system à la base des données 
                                         </p>
+										<div id="progress" class="progress progress-md mb-3 d-none"> <div class="progress-bar progress-bar-indeterminate bg-blue-1"></div> </div>
+
 										<div class="mt-5">
 											<button id="sync" class="btn  btn-primary" type="button" id="sync">
                                                 Synchroniser
 											</button>
 										</div>
+										<br>
+										<div class="alert alert-success d-none" id="success-alert" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Synchronistaion Terminé!</div>
+										
 									</div>
 								</div>
 							</div>
@@ -122,7 +127,9 @@ feCz66HNQhyoUIndT6pXQpWta+PA3e1h3yExMyH1EsOo6f8PXnNPyHGLRfchOSF9WSX7exs=*/-->
             $(document).ready(function(){
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $("#sync").click(function(){
-					$('.loader-img').show()
+					$('#progress').removeClass('d-none')
+					$('#success-alert').addClass('d-none')
+
                     $.ajax({
                         url: '/sync',
                         type: 'POST',
@@ -141,6 +148,9 @@ feCz66HNQhyoUIndT6pXQpWta+PA3e1h3yExMyH1EsOo6f8PXnNPyHGLRfchOSF9WSX7exs=*/-->
                                 success: function (data2) { 
                                     console.log(data2)
 									console.log("done")
+									$('#success-alert').removeClass('d-none')
+									$('#progress').addClass('d-none')
+
                                 },
                                 error:function(){
                                     console.log('ALi')
