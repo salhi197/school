@@ -144,3 +144,5 @@ Route::post('/change/password', 'HomeController@ChangePassword');
 });
 
 
+Route::view('/sync', 'Home.sync');
+Route::post('/sync', 'HomeController@getDB');

@@ -17,6 +17,45 @@ use App\User;
 class HomeController extends Controller
 {
 
+    public function sync(Request $request)
+    {
+        $tables = $request['database'];
+        $f = collect();
+        foreach ($tables as $table) {
+            $name = $table['table'];
+            DB::table($name)->truncate();
+            if(isset($table['data'])){
+                foreach($table['data'] as $data){
+                    $f->push($data);
+                    DB::table($name)->insert((array) $data);
+                }    
+            }
+        }        
+        return response()->json($f); 
+    }
+
+
+    public function getDB(Request $request)
+    {
+        $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_schema = 'school'");
+        $data = collect();
+        foreach ($tables as $table) {
+            $name = $table->TABLE_NAME;
+            //if you don't want to truncate migrations
+            if ($name == 'migrations') {
+                continue;
+            }
+            $elt = [
+                'table'=>$name,
+                'data'=>DB::table($name)->get()
+            ];
+            $data->push($elt);            
+        }
+
+        return response()->json($data); 
+    }
+
+
     public function ChangePassword(Request $request)
     {
         DB::table('users')
@@ -29,7 +68,7 @@ class HomeController extends Controller
     }
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
