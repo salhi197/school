@@ -373,7 +373,11 @@ class SingleGroupeController extends Controller
 
         DB::update("update groupes set heure_debut = '$request->heure_debut',heure_fin = '$request->heure_fin',heure_fin = '$request->heure_fin',pourcentage_prof='$request->pourcentage_prof',pourcentage_ecole='$pourcentage_ecole',classe='$request->salle',prof='$request->prof',niveau='$request->niveau',matiere='$request->matiere',jour='$request->jour',tarif='$request->tarif' where id='$id_groupe' ");
 
-        return back();
+       session()->flash('notification.message' , 'Groupe : '.$request->matiere.' , '.$request->niveau.' Prof : '.$request->prof.' Modifié avec succés');
+
+       session()->flash('notification.type' , 'success'); 
+
+       return back();
 
         // code...
     }
