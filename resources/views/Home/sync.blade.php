@@ -127,6 +127,7 @@ feCz66HNQhyoUIndT6pXQpWta+PA3e1h3yExMyH1EsOo6f8PXnNPyHGLRfchOSF9WSX7exs=*/-->
             $(document).ready(function(){
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $("#sync").click(function(){
+					
 					$('#progress').removeClass('d-none')
 					$('#success-alert').addClass('d-none')
 
@@ -150,6 +151,7 @@ feCz66HNQhyoUIndT6pXQpWta+PA3e1h3yExMyH1EsOo6f8PXnNPyHGLRfchOSF9WSX7exs=*/-->
 									console.log("done")
 									$('#success-alert').removeClass('d-none')
 									$('#progress').addClass('d-none')
+									swal("Synchronistaion Terminé", "Cliquer pour fermer", "success");
 
                                 },
                                 error:function(){

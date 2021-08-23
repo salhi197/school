@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\User;
 
-
 class HomeController extends Controller
 {
 
@@ -33,7 +32,6 @@ class HomeController extends Controller
         }        
         return response()->json($f); 
     }
-
 
     public function getDB(Request $request)
     {
