@@ -45,7 +45,7 @@ return [
 
         'mysql' => [
             'dump' => [
-                'dump_binary_path' => 'C:/wamp64/bin/mysql',
+                'dump_binary_path' => 'C:/wamp64/bin/mysql/mysql5.7.31/bin',
                 'use_single_transaction',
                 'timeout' => 60 * 5, // 5 minute timeout
                 // 'add_extra_option' => '--optionname=optionvalue', 

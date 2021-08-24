@@ -82,7 +82,7 @@
 
                         <label for="niveaudugroupe">Niveau </label>
 
-                        <select name="niveau" onchange="fit_tarif(this)" id="niveaudugroupe" class="form-control select2-show-search col-md-12">
+                        <select name="niveau" onchange="fit_tarif(this)" id="niveaudugroupe" class="form-control  col-md-12">
                             
                             <option value="{{ $groupe->niveau }}">{!! $groupe->niveau !!}</option>
 
@@ -126,7 +126,7 @@
 
                         <label for="profdugroupe"> Prof </label>
 
-                        <select name="prof" id="profdugroupe" class="form-control col-md-12 select2-show-search">
+                        <select name="prof" id="profdugroupe" class="form-control col-md-12 ">
                             
                             <option id="{{ $groupe->prof }}" value="{{ $groupe->prof }}">{!! $groupe->prof !!}</option>
 
