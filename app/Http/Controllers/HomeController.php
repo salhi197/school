@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function getDB(Request $request)
     {
-        $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_schema = 'school'");
+        $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_schema = 'schools'");
         $data = collect();
         foreach ($tables as $table) {
             $name = $table->TABLE_NAME;

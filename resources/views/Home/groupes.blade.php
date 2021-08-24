@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- PAGE-HEADER -->
-<div class="page-header">
+<div class="page-header" >
 	<h4 class="page-title">Groupes de l'année scolaire {!! $annee_scolaire !!}</h4>
 </div>
 <!-- PAGE-HEADER END -->

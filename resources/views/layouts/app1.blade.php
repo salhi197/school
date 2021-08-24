@@ -48,13 +48,6 @@
 
     <body class="default-header">
 
-        <!-- GLOBAL-LOADER -->
-
-        {{-- <div class="card-body">
-            <div class="dimmer active">
-                <div class="lds-hourglass"></div>
-            </div>
-        </div> --}}        
         <div id="global-loader">
             
 
@@ -62,9 +55,6 @@
                 <div class="lds-hourglass"></div>
                 <p class="blink" id="to_blink" style="font-weight: bold; animation: blinker 1s linear infinite; color: blueviolet; margin-left:35%; margin-top:-7%;">Veuiller Patientez ça peut prendre quelques secondes...</p>
             </div>
-
-
-            {{-- <img src="{{ asset('../../assets/images/svgs/loader.svg') }}" class="loader-img" alt="Loader"> --}}
         </div>
 
         <div class="page">
@@ -138,11 +128,6 @@
                         <div class="horizontal-mainwrapper container clearfix">
                             <nav class="horizontalMenu clearfix">
                                 <ul class="horizontalMenu-list">
-                                    {{-- <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fe fe-airplay"></i> Dashboard <i class="fa fa-angle-down horizontal-icon"></i></a>
-                                        <ul class="sub-menu">
-                                            <li aria-haspopup="true"><a href="index.html">Sass Dashboard</a></li>
-                                        </ul>
-                                    </li>--}}
                                     
                                     <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Profile</a></li>                                    
 
@@ -155,13 +140,6 @@
 
                                     <li aria-haspopup="true"><a href="/home/Enseignants" class=""><i class="fa fa-mortar-board"></i> Enseignants</a></li>
                                     
-{{--                                     <li aria-haspopup="true">
-                                        
-                                        <a href="/home/groupes" class="">
-                                            <i class="mdi mdi-account-multiple"></i> Groupes
-                                        </a>
-                                    </li>
- --}}
 
                                     <li aria-haspopup="true">
                                         

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
 <!-- PAGE-HEADER -->
 <div class="page-header">
 	<h4 class="page-title">Niveaux</h4>
@@ -21,7 +20,7 @@
 
 
 
-<a type="button" style="color: #ffffff; margin: 1% 0%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un Niveau </a>
+<a type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter un Niveau </a>
 
 <div id="myModal" class="modal fade" role="dialog">
 
