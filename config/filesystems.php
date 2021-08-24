@@ -56,7 +56,7 @@ return [
         ],
         'partitionD' => [
             'driver' => 'local',
-            'root'   => 'D:/',
+            'root'   => 'G:/',
         ],
         's3' => [
             'driver' => 's3',
