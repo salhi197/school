@@ -60,7 +60,7 @@
 									<div class="card-body">
 										<h2 class="display-2 mb-0 "><strong> System de Synchronistaion </strong></h2>
 										<div class="countdown-timer-wrapper">
-											<div id="launch_date"></div>
+											
 										</div>
 										<p class="">
                                             Assurer La connexion de system à la base des données 
