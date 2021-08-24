@@ -76,12 +76,12 @@
                             <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
                             
                             <a class="header-brand" href="index.html">
-                                <img src="{{ asset('../../assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="Solic logo">
+                                <img src="{{ asset('../../assets/images/brand/log.png') }}" class="header-brand-img desktop-logo" alt="Solic logo">
                                 <img src="{{ asset('../../assets/images/brand/logo-1.png') }}" class="header-brand-img mobile-view-logo" alt="Solic logo">
                             </a><!-- LOGO -->
 
                             <a class="header-brand header-brand2" href="index.html">
-                                <img src="{{ asset('../../assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="Solic logo">
+                                <img src="{{ asset('../../assets/images/brand/log.png') }}" class="header-brand-img desktop-logo" alt="Solic logo">
                                 <img src="{{ asset('../../assets/images/brand/logo-1.png') }}" class="header-brand-img mobile-view-logo" alt="Solic logo">
                             </a><!-- LOGO -->
                             <div class="d-flex order-lg-2 ml-auto header-right-icons header-search-icon">
@@ -102,6 +102,9 @@
                                             <small class="text-muted">App Developer</small>
                                         </div>
                                         <a class="dropdown-item" href="profile.html"><i class="mdi mdi-account-outline mr-2"></i> <span>My profile</span></a>
+
+                                        <a class="dropdown-item" href="/sync"><i class="mdi mdi-account-outline mr-2"></i> <span>Synchronisation</span></a>
+
                                         <a class="dropdown-item" href="/lang/ar"><i class="mdi mdi-account-outline mr-2"></i> <span>Arabe</span></a>
                                         <a class="dropdown-item" href="/lang/en"><i class="mdi mdi-account-outline mr-2"></i> <span>Englais</span></a>
 

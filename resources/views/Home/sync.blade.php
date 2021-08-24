@@ -37,6 +37,7 @@
 
 		<!-- Skin css-->
 		<link href="../../assets/skins/skins-modes/color1.css"  id="theme" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ asset('../../assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet" />
 
 	</head>
 
@@ -120,6 +121,9 @@ feCz66HNQhyoUIndT6pXQpWta+PA3e1h3yExMyH1EsOo6f8PXnNPyHGLRfchOSF9WSX7exs=*/-->
 
         <!-- CONSTRUCTION -->
 		<script src="../../assets/js/construction.js"></script>
+
+		<script src="{{ asset('../../assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('../../assets/js/sweet-alert.js') }}"></script>        
 
 		<!-- CUSTOM JS -->
 		<script src="../../assets/js/custom.js"></script>
