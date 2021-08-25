@@ -35,14 +35,15 @@ class HomeController extends Controller
 
     public function getDB(Request $request)
     {
-        $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_schema = 'schools'");
+        $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_schema = 'school'");
         $data = collect();
         foreach ($tables as $table) {
             $name = $table->TABLE_NAME;
             //if you don't want to truncate migrations
-            if ($name == 'migrations') {
+            if ($name == 'migrations' or $name=="users" or $name=="ecoles") {
                 continue;
             }
+            
             $elt = [
                 'table'=>$name,
                 'data'=>DB::table($name)->get()

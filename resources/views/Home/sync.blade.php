@@ -37,6 +37,7 @@
 
 		<!-- Skin css-->
 		<link href="../../assets/skins/skins-modes/color1.css"  id="theme" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ asset('../../assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet" />
 
 	</head>
 
@@ -59,7 +60,7 @@
 									<div class="card-body">
 										<h2 class="display-2 mb-0 "><strong> System de Synchronistaion </strong></h2>
 										<div class="countdown-timer-wrapper">
-											<div id="launch_date"></div>
+											
 										</div>
 										<p class="">
                                             Assurer La connexion de system à la base des données 
@@ -120,6 +121,9 @@ feCz66HNQhyoUIndT6pXQpWta+PA3e1h3yExMyH1EsOo6f8PXnNPyHGLRfchOSF9WSX7exs=*/-->
 
         <!-- CONSTRUCTION -->
 		<script src="../../assets/js/construction.js"></script>
+
+		<script src="{{ asset('../../assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('../../assets/js/sweet-alert.js') }}"></script>        
 
 		<!-- CUSTOM JS -->
 		<script src="../../assets/js/custom.js"></script>
