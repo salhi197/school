@@ -48,14 +48,20 @@
 
     <body class="default-header">
 
-        <div id="global-loader">
+        {{-- <div id="global-loader">
             
 
             <div style="margin-top: 18%;"class="dimmer active">
                 <div class="lds-hourglass"></div>
                 <p class="blink" id="to_blink" style="font-weight: bold; animation: blinker 1s linear infinite; color: blueviolet; margin-left:35%; margin-top:-7%;">Veuiller Patientez ça peut prendre quelques secondes...</p>
             </div>
+        </div> --}}
+
+        <!-- GLOBAL-LOADER -->
+        <div id="global-loader">
+            <img src="{{ asset('../../assets/images/svgs/loader.svg') }}" class="loader-img" alt="Loader">
         </div>
+
 
         <div class="page">
             <div class="page-main">
