@@ -93,7 +93,7 @@
 
 			                        <label for="num_tel">Num Tel</label>
 
-			                        <input type="tel" id="num_tel" name="num_tel" class="form-control col-md-12">
+			                        <input type="tel" onkeyup="verif_tel(this)" id="num_tel" name="num_tel" value="0" class="form-control col-md-12">
 
 			                        {{--  --}}
 			                    </div>

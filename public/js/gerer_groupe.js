@@ -112,6 +112,39 @@ function retour(objet)
 	//
 }
 
+function verif_tel(objet) 
+{
+
+	if($(objet).val()=="")
+	{
+
+		$(objet).val(0)	
+	}
+
+	if ($(objet).val().length>10 || !$.isNumeric($(objet).val()) ) 
+	{
+
+		$("#num_tel").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+
+		$("#btn_ajouter").hide('1000');
+
+		//
+	}
+	else
+	{
+
+		$("#num_tel").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+
+		$("#btn_ajouter").show('1000');
+
+		//
+	}
+
+
+
+	//
+}
+
 
 function valider_tous(objet) 
 {
