@@ -375,23 +375,23 @@
 
 	<script type="text/javascript">
 		
-		var numero_de_la_seance_dans_le_mois = {{ $numero_de_la_seance_dans_le_mois }};
+		/*var numero_de_la_seance_dans_le_mois = {{ $numero_de_la_seance_dans_le_mois }};
 
-		quel_mois = ( parseInt((numero_de_la_seance_dans_le_mois-1)/4))+1;
-
+		quel_mois = parseInt({{ $le_mois }});
+		
+		console.log(quel_mois);
+		
 		var nb_eleves = {{ count($eleves_groupe) }};
-
-		console.log(numero_de_la_seance_dans_le_mois);
 
 		for (var i = 0; i <nb_eleves; i++) 
 		{
 			
-			for (var j = 1; j <= 20; j++) 
+			for (var j = quel_mois-1; j <= quel_mois+1; j++) 
 			{
 				
-				var le_mois = "etudiant"+i+"-le_mois"+j;
-
-				document.getElementById(le_mois).style.display = "none";
+				var le_mois = "etudiant"+i+"-le_mois"+(j+1);
+				
+				//document.getElementById(le_mois).style.display = "none";
 
 				//
 			}
@@ -408,9 +408,9 @@
 				for (var j = quel_mois-1; j <= quel_mois; j++) 
 				{
 					
-					var le_mois = "etudiant"+i+"-le_mois"+j;
+					var le_mois = "etudiant"+i+"-le_mois"+(j+1);
 
-					document.getElementById(le_mois).style.display = "inline-block";
+					//document.getElementById(le_mois).style.display = "inline-block";
 
 					//
 				}
@@ -429,9 +429,9 @@
 				for (var j = 1; j <= 2; j++) 
 				{
 					
-					var le_mois = "etudiant"+i+"-le_mois"+j;
+					var le_mois = "etudiant"+i+"-le_mois"+(j+1);
 
-					document.getElementById(le_mois).style.display = "inline-block";
+					//document.getElementById(le_mois).style.display = "inline-block";
 
 					//
 				}
@@ -440,7 +440,7 @@
 			}
 
 			//
-		}
+		}*/
 
 		//
 	</script>
@@ -455,7 +455,7 @@
 	var nb_eleves = {{ count($eleves_groupe) }};
 
 	$(document).ready(function(){
-	    console.log($("#btnPrint").html());
+	    
 	    $("#btnPrint").on('click',function(){
 		// 		var divContents = $("#datable-1").html();
 	            $('#table-1').printThis();

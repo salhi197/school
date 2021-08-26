@@ -348,6 +348,110 @@ function afficher_payement_prof_1(objet,le_mois)
 	//
 }
 
+
+function fit_tarif(objet) 
+{
+	
+	var niveau = ($(objet).find(":selected").val().substr(0,1));
+	
+	var cycle = ($(objet).find(":selected").val().substr(2,2));
+	
+	if (cycle=="AS") 
+	{
+
+		if (niveau==1 || niveau==2) 
+		{
+
+			$("#tarif").val(1800);
+
+			//
+		}
+		else
+		{
+
+			$("#tarif").val(2500);
+
+			//
+		}
+		//
+	}
+
+	// body...
+}
+
+
+function fit_prof(objet) 
+{
+
+	var $matiere = $(objet).find(":selected").val();
+
+	var cycle = $("#niveaudugroupe").find(":selected").val();
+
+	if(cycle.substr(2,2)=='AS')
+	{
+		var cycle = "Secondaire";
+	}
+
+	if(cycle.substr(2,2)=='AM')
+	{
+		var cycle = "Moyen";
+	}
+
+	if(cycle.substr(2,2)=='PS')
+	{
+		var cycle = "Préscolaire";
+	}
+
+
+	if(cycle.substr(2,2)=='AP')
+	{
+		var cycle = "Primaire";
+	}
+
+	if(cycle.substr(2,2)=='Univ')
+	{
+		var cycle = "Universitaire";
+	}
+
+
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/groupes/get_profs/ajax",
+        data:{matiere:$matiere,cycle:cycle},
+
+        success:function(data) 
+        {
+
+        	$("#profdugroupe").html("");
+			
+        	var option = '';
+        	
+        	for (var i = 0; i < data.length; i++) 
+        	{
+				
+				option += '<option id='+data[i].nom+'-'+data[i].prenom+' value='+data[i].nom+'-'+data[i].prenom+'>'+data[i].nom+'-'+data[i].prenom+' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</option>'
+
+        		//
+        	}
+
+        	$("#profdugroupe").html(option);
+
+        	//
+		}
+	})	
+
+		
+
+	// body...
+}
+
+
+
 function fit_salles() 
 {	
 	var $id_groupe = $("#id_groupe").val();

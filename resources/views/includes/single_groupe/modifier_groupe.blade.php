@@ -166,7 +166,7 @@
 
                         <label for="tarif"> Tarif </label>
 
-                        <input type="number" min="0" value="1800" id="tarif" required name="tarif" value="{{ $groupe->tarif }}" class="form-control col-md-12">
+                        <input type="number" min="0" id="tarif" required name="tarif" value="{{ $groupe->tarif }}" class="form-control col-md-12">
 
                         {{--  --}}
                     </div>

@@ -311,14 +311,6 @@
         <script src="{{ asset('../../assets/plugins/multipleselect/multiple-select.js') }}"></script>
         <script src="{{ asset('../../assets/plugins/multipleselect/multi-select.js') }}"></script>
 
-        <!-- DEFAULT CALENDAR -->
-        {{-- <script src="{{ asset('../../assets/plugins/calendar/underscore-min.js') }}"></script>
-        <script src="{{ asset('../../assets/plugins/calendar/moment.js') }}"></script>
-        <script src="{{ asset('../../assets/plugins/calendar/clndr.js') }}"></script>
-        <script src="{{ asset('../../assets/plugins/calendar/demo.js') }}"></script>
-        <script src="{{ asset('../../assets/plugins/rating/jquery.rating-stars.js') }}"></script>
-        <script src="{{ asset('../../assets/plugins/calendar/calendar.min.js') }}"></script>
-        <script src="{{ asset('../../assets/plugins/calendar/defalutcal.js') }}"></script> --}}        
 
 
         @yield('scripts')

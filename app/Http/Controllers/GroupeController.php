@@ -240,7 +240,7 @@ class GroupeController extends Controller
         $profs=DB::select("select * from profs where visible = 1");
 
         $niveaux=DB::select("select * from niveaux where visible = 1 order by cycle,niveau,filiere");        
-
+        
         return view('Home.single_groupe',compact('groupe','eleves_groupe','seances_eleves','numero_de_la_seance_dans_le_mois','id','payments','ancien_payments','le_mois','nb_presences','numtel','eleves_gratuits','payements_prof','salles','matieres','profs','niveaux'));
 
         // code...
