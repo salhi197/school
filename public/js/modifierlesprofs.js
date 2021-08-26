@@ -104,6 +104,48 @@ function ajouterprof(event,ojbet)
 
 	var $tel = $("#telduprof").val();
 
+	if ($nom == "") 
+	{
+		$("#nomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+
+		return false;
+		//
+	}
+	else
+	{
+		$("#nomduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+		//
+	}
+
+
+	if ($prenom == "") 
+	{
+		$("#prenomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+
+		return false;
+		//
+	}
+	else
+	{
+		$("#prenomduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+		//
+	}
+
+
+	if ($tel == "") 
+	{
+		$("#telduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+
+		return false;
+		//
+	}
+	else
+	{
+		$("#telduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+		//
+	}
+
+
 	var $cycle = $("#cycleduprof").val();
 
 	var $matiere = $("#matiereduprof").val();

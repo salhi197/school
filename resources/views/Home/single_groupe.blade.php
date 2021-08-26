@@ -129,7 +129,7 @@
 
 								<input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter" id="btn_ajouter">
 
-								<p id="il_existe_deja" style="display:none; font-size: 1.2em;" class="invalid-feedback text-center">L'Elève existe déja</p>
+								{{-- <p id="il_existe_deja" style="font-size: 1.2em;" class="invalid-feedback text-center">L'Elève existe déja</p> --}}
 			                </form>
 			            </div> 
 

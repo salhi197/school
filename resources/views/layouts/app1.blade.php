@@ -59,7 +59,7 @@
 
         <!-- GLOBAL-LOADER -->
         <div id="global-loader">
-            <img src="{{ asset('../../assets/images/svgs/loader.svg') }}" class="loader-img" alt="Loader">
+            <img src="{{ asset('../../assets/images/svgs/Book.gif') }}" class="loader-img" alt="Loader">
         </div>
 
 

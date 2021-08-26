@@ -30,6 +30,8 @@ function verif_existance()
         			$("#btn_ajouter").show(1000);
         		});
 
+        		$("#btn_ajouter").show(1000);
+        		
         		$("#num_tel").val(data.num_tel);
 
         		if (data.frais==0 || data.frais===undefined) 
@@ -61,6 +63,10 @@ function verif_existance()
         			$("#il_existe_deja").show('1000');
         		});
 
+        		var element = $('<p id="il_existe_deja" style="font-size: 1.2em;" class="invalid-feedback text-center">L\'Elève existe déja</p>');
+
+        		$("#btn_ajouter").after(element);
+        		
         		$("#num_tel").val('');
 
         		$("#frais").hide(1000);
