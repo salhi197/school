@@ -34,7 +34,7 @@
 							<address>
 								Prof : {!! $groupe->prof !!}<br>
 								Num tel : {!! $numtel->tel !!} <br>
-								Pourcentage prof : {!! $groupe->pourcentage_prof !!} %<br>
+								{{-- Pourcentage prof : {!! $groupe->pourcentage_prof !!} %<br> --}}
 							</address>
 						</div>
 					</div>
