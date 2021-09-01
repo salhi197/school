@@ -16,7 +16,7 @@
         <link rel="shortcut icon" href="{{ asset('../../assets/images/brand/favicon.ico') }}" type="image/x-icon"/>
 
         <!-- TITLE -->
-        <title>My School</title>
+        <title> TASSHIL </title>
 
         <!-- DASHBOARD CSS -->
 
@@ -71,12 +71,12 @@
                         <div class="d-flex">
                             <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
                             
-                            <a class="header-brand" href="index.html">
+                            <a class="header-brand" href="/home">
                                 <img src="{{ asset('../../assets/images/brand/log.png') }}" class="header-brand-img desktop-logo" alt="Solic logo">
                                 <img src="{{ asset('../../assets/images/brand/logo-1.png') }}" class="header-brand-img mobile-view-logo" alt="Solic logo">
                             </a><!-- LOGO -->
 
-                            <a class="header-brand header-brand2" href="index.html">
+                            <a class="header-brand header-brand2" href="/home">
                                 <img src="{{ asset('../../assets/images/brand/log.png') }}" class="header-brand-img desktop-logo" alt="Solic logo">
                                 <img src="{{ asset('../../assets/images/brand/logo-1.png') }}" class="header-brand-img mobile-view-logo" alt="Solic logo">
                             </a><!-- LOGO -->
@@ -89,20 +89,20 @@
 
                                 <div class="dropdown d-md-flex header-settings">
                                     <a href="#" class="nav-link " data-toggle="dropdown">
-                                        <span><img src="{{ asset('../../assets/images/users/male/32.jpg') }}" alt="profile-user" class="avatar brround cover-image mb-0 ml-0"></span>
+                                        <span><img src="{{ asset('../../assets/images/users/male/32.ico') }}" alt="profile-user" class="avatar brround cover-image mb-0 ml-0"></span>
                                     </a>
                                     
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                         <div class="drop-heading  text-center border-bottom pb-3">
-                                            <h5 class="text-dark mb-1">Jonathan Mills</h5>
-                                            <small class="text-muted">App Developer</small>
+                                            <h5 class="text-dark mb-1">TASSHIL</h5>
+                                            <small class="text-muted">Logiciel De Gestion de l'école</small>
                                         </div>
-                                        <a class="dropdown-item" href="profile.html"><i class="mdi mdi-account-outline mr-2"></i> <span>My profile</span></a>
+                                        <a class="dropdown-item" href="/home"><i class="mdi mdi-account-outline mr-2"></i> <span>My profile</span></a>
 
                                         <a class="dropdown-item" href="/sync"><i class="mdi mdi-account-outline mr-2"></i> <span>Synchronisation</span></a>
 
-                                        <a class="dropdown-item" href="/lang/ar"><i class="mdi mdi-account-outline mr-2"></i> <span>Arabe</span></a>
-                                        <a class="dropdown-item" href="/lang/en"><i class="mdi mdi-account-outline mr-2"></i> <span>Englais</span></a>
+                                        {{-- <a class="dropdown-item" href="/lang/ar"><i class="mdi mdi-account-outline mr-2"></i> <span>Arabe</span></a> --}}
+                                        <a class="dropdown-item" href="/lang/en"><i class="mdi mdi-account-outline mr-2"></i> <span>Français</span></a>
 
                                         <a class="dropdown-item" onclick="event.preventDefault();
 
@@ -211,7 +211,7 @@
                 <div class="container">
                     <div class="row align-items-center flex-row-reverse">
                         <div class="col-md-12 col-sm-12 text-center">
-                            Copyright © 2021 <a href="#">Lotfi</a> Designed by <a href="#">Lotfi</a> All rights reserved.
+                            Copyright © 2021 <a href="#">TASSHIL</a> Designed by <a href="#">TASSHIL</a> All rights reserved.
                         </div>
                     </div>
                 </div>

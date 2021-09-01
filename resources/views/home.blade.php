@@ -18,11 +18,11 @@
                             <div class="col-lg-6 col-md-12">
                                 <div class="wideget-user-desc d-flex">
                                     <div class="wideget-user-img">
-                                        <img class="" src="../../assets/images/users/male/32.jpg" alt="img">
+                                        <img class="" src="../../assets/images/users/male/32.ico" alt="img">
                                     </div>
                                     <div class="user-wrap">
                                         <h4>Nom Ecole</h4>
-                                        <h6 class="text-muted mb-3">Member Since: November 2017</h6>
+                                        <h6 class="text-muted mb-3">Opérationel dés Aout 2021 </h6>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,9 @@
                                                     <td><strong>Location :</strong> Alger</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Languages :</strong> English, German, Spanish.</td>
+                                                    <td>
+                                                        <strong>Languages :</strong> English, German, Spanish.
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                             <tbody class="col-lg-12 col-xl-6 p-0">
@@ -76,33 +78,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <div class="media-heading mt-3">
-                                        <h5 class="text-uppercase"><strong>Business Contact Information</strong></h5>
-                                    </div>
-                                    <hr class="m-0">
-                                    <div class="table-responsive ">
-                                        <table class="table row table-borderless">
-                                            <tbody class="col-lg-12 col-xl-6 p-0">
-                                                <tr>
-                                                    <td><strong>Business Telephone:</strong> +245 256 2458 5586</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Business Mobile :</strong> +63 548 874 9658</td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody class="col-lg-12 col-xl-6 p-0">
-                                                <tr>
-                                                    <td><strong>Business Fax :</strong> +63 548 874 9658</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Managers Name :</strong> Daniell Marget</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="media-heading mt-3">
-                                        <h5 class="text-uppercase"><strong>Définir les frais d'inscriptions</strong></h5>
                                     </div>
                                     <hr class="m-0">
                                     <div class="table-responsive ">
