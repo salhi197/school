@@ -1,6 +1,6 @@
 @if ($le_mois<=2)
 	
-
+	
 	@for ($p = 0; $p <= 1 ; $p++)
 
 
@@ -11,7 +11,7 @@
 				<label class="form-check-label" for="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}">{!! ($m+1)%4 ? ($m+1)%4 : 4 !!}</label>
 																	
 				<div class="form-check form-check-inline">
-
+						
 					@if ($numero_de_la_seance_dans_le_mois == ($m+1))
 
 					  	<input class="form-check-input" type="checkbox" name="mois1" id="mois1-{{$eleves_groupe[$i]->id}}-{{$m+1}}" style="position:relative;">

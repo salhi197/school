@@ -407,7 +407,7 @@
 
 		console.log(numero_de_la_seance_dans_le_mois);
 
-		for (var i = 0; i <nb_eleves; i++) 
+		/*for (var i = 0; i <nb_eleves; i++) 
 		{
 			
 			for (var j = 1; j <= 20; j++) 
@@ -421,9 +421,9 @@
 			}
 
 			//
-		}
+		}*/
 
-		if (quel_mois >= 3) 
+		/*if (quel_mois >= 3) 
 		{
 
 			for (var i = 0; i <nb_eleves; i++) 
@@ -464,7 +464,7 @@
 			}
 
 			//
-		}
+		}*/
 
 		//
 	</script>
