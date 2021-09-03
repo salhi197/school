@@ -35,12 +35,12 @@ class CalendrierController extends Controller
 
         usort($salles_profs_dimanche, function($a, $b) {return strcmp($a->heure_debut, $b->heure_debut);});
 
-        $horaires_dimanche = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = '1' and jour = 'Dimanche' order by heure_debut"));
+        $horaires_dimanche = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = 1 and jour = 'Dimanche' order by heure_debut"));
 
-        $horaires_dimanche1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = '1' and jour = 'Dimanche' order by heure_debut"));
+        $horaires_dimanche1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = 1 and jour = 'Dimanche' order by heure_debut"));
 
         $horaires_dimanche = array_unique(array_merge($horaires_dimanche,$horaires_dimanche1), SORT_REGULAR);        
-
+        
         /*****************************************************************************/
 
         $salles_profs_lundi = (DB::select("select classe,matiere,prof,heure_debut,heure_fin,niveau from groupes where visible = 1 and jour = 'Lundi' order by classe,heure_debut"));
@@ -51,9 +51,9 @@ class CalendrierController extends Controller
 
         usort($salles_profs_lundi, function($a, $b) {return strcmp($a->heure_debut, $b->heure_debut);});
 
-        $horaires_lundi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = '1' and jour = 'Lundi' order by heure_debut"));
+        $horaires_lundi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = 1 and jour = 'Lundi' order by heure_debut"));
 
-        $horaires_lundi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = '1' and jour = 'Lundi' order by heure_debut"));
+        $horaires_lundi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = 1 and jour = 'Lundi' order by heure_debut"));
 
         $horaires_lundi = array_unique(array_merge($horaires_lundi,$horaires_lundi1), SORT_REGULAR);
 
@@ -68,9 +68,9 @@ class CalendrierController extends Controller
 
         usort($salles_profs_mardi, function($a, $b) {return strcmp($a->heure_debut, $b->heure_debut);});
         
-        $horaires_mardi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = '1' and jour = 'Mardi' order by heure_debut"));
+        $horaires_mardi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = 1 and jour = 'Mardi' order by heure_debut"));
 
-        $horaires_mardi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = '1' and jour = 'Mardi' order by heure_debut"));
+        $horaires_mardi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = 1 and jour = 'Mardi' order by heure_debut"));
 
         $horaires_mardi = array_unique(array_merge($horaires_mardi,$horaires_mardi1), SORT_REGULAR);
 
@@ -84,9 +84,9 @@ class CalendrierController extends Controller
 
         usort($salles_profs_mercredi, function($a, $b) {return strcmp($a->heure_debut, $b->heure_debut);});
 
-        $horaires_mercredi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = '1' and jour = 'Mercredi' order by heure_debut"));
+        $horaires_mercredi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = 1 and jour = 'Mercredi' order by heure_debut"));
 
-        $horaires_mercredi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = '1' and jour = 'Mercredi' order by heure_debut"));
+        $horaires_mercredi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = 1 and jour = 'Mercredi' order by heure_debut"));
 
         $horaires_mercredi = array_unique(array_merge($horaires_mercredi,$horaires_mercredi1), SORT_REGULAR);
 
@@ -100,9 +100,9 @@ class CalendrierController extends Controller
 
         usort($salles_profs_jeudi, function($a, $b) {return strcmp($a->heure_debut, $b->heure_debut);});
 
-        $horaires_jeudi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = '1' and jour = 'Jeudi' order by heure_debut"));
+        $horaires_jeudi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = 1 and jour = 'Jeudi' order by heure_debut"));
 
-        $horaires_jeudi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = '1' and jour = 'Jeudi' order by heure_debut"));
+        $horaires_jeudi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = 1 and jour = 'Jeudi' order by heure_debut"));
 
         $horaires_jeudi = array_unique(array_merge($horaires_jeudi,$horaires_jeudi1), SORT_REGULAR);
 
@@ -116,9 +116,9 @@ class CalendrierController extends Controller
 
         usort($salles_profs_vendredi, function($a, $b) {return strcmp($a->heure_debut, $b->heure_debut);});
         
-        $horaires_vendredi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = '1' and jour = 'Vendredi' order by heure_debut"));
+        $horaires_vendredi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = 1 and jour = 'Vendredi' order by heure_debut"));
 
-        $horaires_vendredi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = '1' and jour = 'Vendredi' order by heure_debut"));
+        $horaires_vendredi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = 1 and jour = 'Vendredi' order by heure_debut"));
 
         $horaires_vendredi = array_unique(array_merge($horaires_vendredi,$horaires_vendredi1), SORT_REGULAR);
 
@@ -132,9 +132,9 @@ class CalendrierController extends Controller
 
         usort($salles_profs_samedi, function($a, $b) {return strcmp($a->heure_debut, $b->heure_debut);});
 
-        $horaires_samedi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = '1' and jour = 'Samedi' order by heure_debut"));
+        $horaires_samedi = (DB::select("select distinct heure_debut,heure_fin from groupes where visible = 1 and jour = 'Samedi' order by heure_debut"));
 
-        $horaires_samedi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = '1' and jour = 'Samedi' order by heure_debut"));
+        $horaires_samedi1 = (DB::select("select distinct heure_debut,heure_fin from special_groupes where visible = 1 and jour = 'Samedi' order by heure_debut"));
 
         $horaires_samedi = array_unique(array_merge($horaires_samedi,$horaires_samedi1), SORT_REGULAR);
 
