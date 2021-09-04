@@ -252,7 +252,7 @@
                                         </td>
 
                                         <td> 
-                                            <span>{!! $dawra->pourcentage_ecole  !!}%</span>                              
+                                            <span>{!! 100-$dawra->pourcentage_prof  !!}%</span>                              
                                         </td>
                                         <td> 
                                             <span>{{$dawra->getNbreleve() ?? 0}}</span>                              
