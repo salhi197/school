@@ -46,7 +46,7 @@
 
                         <label for="nomduprof">Nom </label>
 
-                        <input type="text" id="nomduprof" required="true" name="nom" class="form-control">
+                        <input type="text" onkeyup="verif_prof();" id="nomduprof" required="true" name="nom" class="form-control">
 
                         {{--  --}}
                     </div>
@@ -56,7 +56,7 @@
 
                         <label for="prenomduprof">Prénom</label>
 
-                        <input type="text" id="prenomduprof" required name="prenom" class="form-control">
+                        <input type="text" onkeyup="verif_prof();" id="prenomduprof" required name="prenom" class="form-control">
 
                         {{--  --}}
                     </div>
@@ -66,7 +66,7 @@
 
                         <label for="telduprof">Num Tél</label>
 
-                        <input type="tel" id="telduprof" required name="tel" class="form-control">
+                        <input type="tel" onkeyup="verif_tel(this);" id="telduprof" required name="tel" class="form-control">
 
                         {{--  --}}
                     </div>
@@ -110,7 +110,7 @@
                     </div>
 
 
-                  	<a style="color: #2070F5; margin-top: 5%;" id="ajout{{ $last_id }}" data-dismiss="modal" onclick="ajouterprof(event,this)" class="btn btn-outline-primary col-md-12">Ajouter</a>
+                  	<a style="color: #2070F5; margin-top: 5%;" id="ajout{{ $last_id }}" data-dismiss="modal" onclick="ajouterprof(event,this)" class="btn btn-outline-primary col-md-12 btn_ajouter">Ajouter</a>
                 </form>
 
                 {{--  --}}

@@ -83,7 +83,7 @@
                             <div class="d-flex order-lg-2 ml-auto header-right-icons header-search-icon">
                                 <div class="dropdown d-md-flex">
                                     <a class="nav-link icon full-screen-link nav-link-bg" id="fullscreen-button">
-                                        <i class="fe fe-maximize-2" ></i>
+                                        <i class="fe fe-maximize-2"></i>
                                     </a>
                                 </div><!-- FULL-SCREEN -->
 
@@ -163,6 +163,11 @@
                                             <li aria-haspopup="true">
                                                 <a href="/home/groupes_special">Groupe Spécial</a>
                                             </li>
+
+                                            {{-- <li aria-haspopup="true">
+                                                <a href="/home/particuliers">Particulier</a>
+                                            </li> --}}
+
 
                                             <li aria-haspopup="true">
                                                 <a href="/home/calendrier">Calendrier</a>

@@ -53,14 +53,16 @@ class Eleve extends Model
         if (count($last)>0) 
         {
             
-            $id_eleve = $last[0]->id;         
+            $id_eleve = $last[0]->id;
+
+            DB::update("update eleves set frais = frais+'$frais' where id = '$id_eleve'");
 
             // code...
         }
         else
         {
     
-            DB::insert("insert into eleves(nom,prenom,num_tel,frais) values(\"$nom\",\"$prenom\",\"$num_tel\",\"$frais\") ");
+            DB::insert("insert into eleves(nom,prenom,num_tel,frais) values(\"$nom\",\"$prenom\",\"$num_tel\",'$frais') ");
 
             $last = DB::select("select * from eleves order by id desc");
 
@@ -163,7 +165,7 @@ class Eleve extends Model
 
         $last = (DB::select("select * from eleves where (nom=\"$nom\" and prenom=\"$prenom\")or(nom=\"$prenom\" and nom=\"$prenom\") "));
 
-        
+        dd(count($last)>0);
         if (count($last)>0) 
         {
             

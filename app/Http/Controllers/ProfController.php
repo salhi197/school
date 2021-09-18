@@ -42,6 +42,32 @@ class ProfController extends Controller
     public function supprimer(Request $request)
     {
 
+        $prof = DB::select("select * from profs where id = '$request->id' ");
+
+        if (count($prof)>0) 
+        {
+            $prof = $prof[0];
+            
+            $nom = $prof->nom;
+
+            $prenom = $prof->prenom;
+
+            $prof = $nom."-".$prenom;
+
+            $groupes = DB::select("select * from groupes where prof = '$prof' and visible = 1 ");
+
+            if(count($groupes)>0)
+            {
+
+                return response()->json(false);
+
+                //
+            }
+
+            // code...
+        }
+
+
     	DB::update("update profs set visible = 0 where id = \"$request->id\" ");
 
     	# code...
@@ -59,6 +85,36 @@ class ProfController extends Controller
     	DB::insert("insert into profs(nom,prenom,cycle,tel,matiere) values(\"$nom\",\"$prenom\",\"$cycle\",\"$tel\",\"$matiere\")");
 
     	# code...
+    }
+
+    public function verif_existance(Request $request)
+    {
+
+        $data = ($request->all());
+
+        $nom = $data['nom'];
+
+        $prenom = $data['prenom'];
+
+        $prof = DB::select("select * from profs where (nom=\"$nom\" and prenom=\"$prenom\") or (prenom=\"$nom\" and nom=\"$prenom\")");
+
+        if(count($prof)>0)
+        {
+
+            return response()->json(false);
+
+            //
+        }
+        else
+        {
+
+            return response()->json(true);
+
+            //
+        }
+
+
+        // code...
     }
 
     //

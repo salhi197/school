@@ -41,6 +41,94 @@ function modifierprof(event,objet)
 	// body... 
 }
 
+function verif_prof() 
+{
+	
+ 	var nom = $("#nomduprof").val();
+
+ 	var prenom = $("#prenomduprof").val();
+
+ 	if (nom.includes("-") || nom.includes("1")|| nom.includes("2")|| nom.includes("3")|| nom.includes("4")|| nom.includes("5")|| nom.includes("6")|| nom.includes("7")|| nom.includes("8")|| nom.includes("9")|| nom.includes("0")) 
+ 	{
+ 		$("#nomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+ 		$(".btn_ajouter").hide('1000');
+ 		return false;
+ 	}
+ 	else
+ 	{
+		$("#nomduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid"); 		
+		$(".btn_ajouter").show('1000');		
+ 	}
+
+ 	if (prenom.includes("-") || nom.includes("1")|| nom.includes("2")|| nom.includes("3")|| nom.includes("4")|| nom.includes("5")|| nom.includes("6")|| nom.includes("7")|| nom.includes("8")|| nom.includes("9")|| nom.includes("0")) 
+ 	{
+ 		$("#prenomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+ 		$(".btn_ajouter").hide('1000');
+ 		return false; 		
+ 	}
+ 	else
+ 	{
+		$("#prenomduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid"); 		
+		$(".btn_ajouter").show('1000');		
+ 	}
+
+
+
+    $.ajax({
+        headers: 
+        {
+           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },                    
+        type:"POST",
+        url:"/home/Enseignants/verif_existance/ajax",
+        data:{nom:nom,prenom:prenom},
+
+        success:function(data) 
+        {
+
+        	if (data==true) 
+        	{
+
+        		$("#nomduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+        		$("#prenomduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+        		
+        		$("#il_existe_deja").hide('1000', function() 
+        		{
+        			$(".btn_ajouter").show(1000);
+        		});
+
+        		$(".btn_ajouter").show(1000);
+
+        		//
+        	}
+        	else
+        	{
+
+        		$("#nomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+        		$("#prenomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+        		
+        		$(".btn_ajouter").hide('1000', function() 
+        		{
+        			$("#il_existe_deja").show('1000');
+        		});
+
+        		var element = $('<p id="il_existe_deja" style="font-size: 1.2em;" class="invalid-feedback text-center">Le Prof existe déja</p>');
+
+        		$(".btn_ajouter").after(element);
+        		
+
+        		//	
+        	}
+
+        	//
+		}
+	});	
+
+
+
+	//
+}
+
 function supprimerprof (event,objet) 
 {
 
@@ -66,14 +154,27 @@ function supprimerprof (event,objet)
         success:function(data) 
         {
 
-			$(id_hide).hide(1000);
+        	if(data!==false)
+        	{
+	
+				$(id_hide).hide(1000);
 
-        	$("#suppression_effectue").show(1000,function()
-        	{  
+	        	$("#suppression_effectue").show(1000,function()
+	        	{  
 
-        		setTimeout(function() { $("#suppression_effectue").hide(1000);}, 5000);
-        		
-        	});
+	        		setTimeout(function() { $("#suppression_effectue").hide(1000);}, 5000);
+	        		
+	        	});
+
+        	}
+        	else
+        	{
+
+				swal("Suppression Impossible", "Vous Pouvez pas supprimer, ce prof a un groupe", "error");
+
+        		//	
+        	}	
+
 
         	//
 		}
@@ -81,6 +182,40 @@ function supprimerprof (event,objet)
 
 	// body... 
 }
+
+function verif_tel(objet) 
+{
+
+	if($(objet).val()=="")
+	{
+
+		$(objet).val(0)	
+	}
+
+	if ($(objet).val().length>10 || !$.isNumeric($(objet).val()) ) 
+	{
+
+		$("#telduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
+
+		$(".btn_ajouter").hide('1000');
+
+		//
+	}
+	else
+	{
+
+		$("#telduprof").removeClass("is-invalid state-invalid").addClass("is-valid state-valid");
+
+		$(".btn_ajouter").show('1000');
+
+		//
+	}
+
+
+
+	//
+}
+
 
 function ajouterprof(event,ojbet) 
 {
@@ -104,7 +239,7 @@ function ajouterprof(event,ojbet)
 
 	var $tel = $("#telduprof").val();
 
-	if ($nom == "") 
+	if ($nom == "" || $nom.includes("-")) 
 	{
 		$("#nomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
 
@@ -118,7 +253,7 @@ function ajouterprof(event,ojbet)
 	}
 
 
-	if ($prenom == "") 
+	if ($prenom == "" || $prenom.includes("-")) 
 	{
 		$("#prenomduprof").removeClass("is-valid state-valid").addClass("is-invalid state-invalid");
 

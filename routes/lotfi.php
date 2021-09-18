@@ -15,5 +15,9 @@ Route::group(['middleware' => 'auth'], function ()
 
 	Route::post('/home/single_eleve/supprimer/ajax','SingleGroupeController@supprimer_eleve');
 
+	Route::get('/home/particuliers','ParticulierController@index');
+
+	Route::post('/home/Enseignants/verif_existance/ajax','ProfController@verif_existance');
+
 	//
 });	
