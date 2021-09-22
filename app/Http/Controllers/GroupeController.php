@@ -19,7 +19,7 @@ class GroupeController extends Controller
 
     public function groupes()
     {
-        
+
         set_time_limit(0);
 
         ini_set('memory_limit', '-1');
@@ -124,6 +124,14 @@ class GroupeController extends Controller
         set_time_limit(0);
 
         ini_set('memory_limit', '-1');
+        
+        if($request->type_payement=="salaire")
+        {
+
+            $request->pourcentage_prof = $request->salaire_prof;
+
+            //
+        }
 
         $annee_scolaire=(Groupe::get_annee_scolaire());
 

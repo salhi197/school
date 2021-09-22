@@ -157,11 +157,46 @@
                         {{--  --}}
                     </div>
 
+
                     <div class="form-group col-md-4 col-sm-12">
+
+                        <div class="col-md-6 form-check">
+                        
+                            <input class="form-control" required type="radio" name="type_payement" value="pourcentage" id="pourcentage">
+                            
+                            <label class="form-check-label" for="pourcentage">
+                                %Pourcentage
+                            </label>
+                        </div>
+
+
+                        <div class="col-md-6 form-check">
+                        
+                            <input class="form-control" required type="radio" name="type_payement" value="salaire" id="salaire">
+                            
+                            <label class="form-check-label" for="salaire">
+                                Salaire DA
+                            </label>
+                        </div>
+
+                    </div> 
+
+
+                    <div style="display:none;" class="form-group col-md-4 col-sm-12">
 
                         <label for="pourcentage_profdugroupe"> % Prof </label>
 
-                        <input type="number" onchange="fit_prctg(this);" value="50" min="30" max="100" id="pourcentage_profdugroupe" required name="pourcentage_prof" class="form-control col-md-12">
+                        <input type="number" value="50" min="30" max="100" id="pourcentage_profdugroupe" name="pourcentage_prof" required class="form-control col-md-12">
+
+                        {{--  --}}
+                    </div>
+
+
+                    <div style="display:none;" class="form-group col-md-4 col-sm-12">
+
+                        <label for="salaire_profdugroupe"> Salaire DA </label>
+
+                        <input type="number" min="0" id="salaire_profdugroupe" name="salaire_prof" required class="form-control col-md-12">
 
                         {{--  --}}
                     </div>
@@ -178,7 +213,7 @@
 
                     <div class="form-group col-md-4 col-sm-12">
 
-                        <label for="tarif"> Tarif </label>
+                        <label for="tarif"> Tarif Mensuel DA</label>
 
                         <input type="number" min="0" value="1800" id="tarif" required name="tarif" class="form-control col-md-12">
 
@@ -282,8 +317,8 @@
                                 <th style="cursor: pointer;" class="wd-15p">Matière</th>
                                 <th style="cursor: pointer;" class="wd-15p">Niveau</th>
                                 <th style="cursor: pointer;" class="wd-15p">Prof</th>
-                                <th style="cursor: pointer;" class="wd-15p">%_Prof</th>
-                                <th style="cursor: pointer;" class="wd-15p">%_école</th>
+                                <th style="cursor: pointer;" class="wd-15p">%/salaire_Prof</th>
+                                <th style="cursor: pointer;" class="wd-15p">Payement</th>
                                 <th style="cursor: pointer;" class="wd-15p">NB</th>
 								<th style="cursor: pointer;" class="wd-15p">Création</th>
                                 {{-- <th style="cursor: pointer;" class="wd-15p">Actions</th> --}}
@@ -337,12 +372,42 @@
                                         </td>
 
 
-                                        <td> 
-                                            <span>{!! $groupes[$i]->pourcentage_prof  !!}%</span>                              
+                                        <td class="text-center"> 
+
+                                            @if ($groupes[$i]->pourcentage_prof<100)
+    
+                                                <span>
+                                                    {!! $groupes[$i]->pourcentage_prof  !!}%
+                                                </span>                              
+                                             
+                                             @else   
+
+                                                <span>
+                                                    {!! $groupes[$i]->pourcentage_prof !!} DA
+                                                </span>                              
+
+                                             
+                                                {{-- expr --}}
+                                            @endif
+
                                         </td>
 
-                                        <td> 
-                                            <span>{!! $groupes[$i]->pourcentage_ecole  !!}%</span>                              
+                                        <td class="text-center"> 
+                                            @if ($groupes[$i]->pourcentage_prof<100)
+    
+                                                <span>
+                                                    Pourcentage
+                                                </span>                              
+                                             
+                                             @else   
+
+                                                <span>
+                                                    Salaire
+                                                </span>                              
+
+                                             
+                                                {{-- expr --}}
+                                            @endif
                                         </td>
 
                                         <td> 
@@ -379,7 +444,7 @@
 			</div>
 			<!-- TABLE WRAPPER -->
 		</div>
-		<script src="{{ asset('js/modifierlesgroupes.js') }}"></script>
+		
 		<!-- SECTION WRAPPER -->
 	</div>
 </div>
@@ -388,17 +453,17 @@
 
 
 @section('scripts')
-<script type="text/javascript">
+    
+    <script src="{{ asset('js/modifierlesgroupes.js') }}"></script>
 
-$(document).ready(function(){
-    console.log($("#btnPrint").html());
-    $("#btnPrint").on('click',function(){
-//            var divContents = $("#datable-1").html();
-            $('#datable-1').printThis();
-    })
-});
+    <script type="text/javascript">
 
-
-
-</script>
+        $(document).ready(function(){
+            console.log($("#btnPrint").html());
+            $("#btnPrint").on('click',function(){
+        //            var divContents = $("#datable-1").html();
+                    $('#datable-1').printThis();
+            })
+        });
+    </script>
 @endsection

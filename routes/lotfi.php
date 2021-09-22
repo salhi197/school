@@ -19,5 +19,7 @@ Route::group(['middleware' => 'auth'], function ()
 
 	Route::post('/home/Enseignants/verif_existance/ajax','ProfController@verif_existance');
 
+	Route::post('/home/groupes/{id_groupe}/eleve/{id_eleve}/modif_num','SingleGroupeController@modifier_eleve');
+
 	//
 });	

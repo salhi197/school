@@ -2,6 +2,41 @@
 
 @section('content')
 	
+	<div style="display:none;" class="card-body">
+		<button id="my_modal" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal3">View modal</button>
+	</div>
+
+
+	<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"  aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="example-Modal3">Modifier Numéro de Téléphone</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<form method="post" action="/home/groupes/{{$groupe->id}}/eleve/{{$eleve->id}}/modif_num">
+
+					<div class="modal-body">
+							<div class="form-group">
+								<label for="numtel" class="form-control-label">Num Tel</label>
+								<input value="{{ $eleve->num_tel }}" name="numtel" type="number" class="form-control" id="numtel">
+							</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Enregistrer</button>
+					</div>
+				</form>
+					
+				
+			</div>
+		</div>
+	</div>
+
 	<div class="page-header">
 		
 		<h4 class="page-title">Détails sur le payement de l'élève : {!! $eleve->nom !!} {!! $eleve->prenom !!}</h4>
@@ -23,7 +58,7 @@
 
 						<div class="col-lg-6 ">
 							<p class="h3">Informations sur l'élève : </p>
-							<address>
+							<address ondblclick="ajouternumtel();">
 								Nom : {!! $eleve->nom !!}<br>
 								Prénom : {!! $eleve->prenom !!}<br>
 								Numéro tel : {!! $eleve->num_tel !!}<br>

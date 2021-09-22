@@ -1,6 +1,23 @@
 document.getElementById("modif_effectue").style.display = 'none';
 document.getElementById("suppression_effectue").style.display = 'none';
 
+
+$('input[name="type_payement"]').on('change', function() 
+{
+
+	var type = $('input[name="type_payement"]:checked').val();
+
+	var to_show = "#"+type+"_profdugroupe";
+
+	$("#pourcentage_profdugroupe").parent().hide('slow');
+	$("#salaire_profdugroupe").parent().hide('slow');
+
+	$(to_show).parent().show('slow');
+
+	//
+});
+
+
 function goto_the_link(objet) 
 {
 

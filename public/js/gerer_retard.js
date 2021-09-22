@@ -20,6 +20,14 @@ function hide_or_show_tarif(objet)
 	//
 }
 
+function ajouternumtel() 
+{
+	
+	$('#my_modal').trigger('click');
+
+	//
+}
+
 function suur(objet) 
 {
 

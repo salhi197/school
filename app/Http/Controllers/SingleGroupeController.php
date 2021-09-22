@@ -452,5 +452,15 @@ class SingleGroupeController extends Controller
         // code...
     }
 
+    public function modifier_eleve($id_groupe,$id_eleve,Request $request)
+    {
+        
+        DB::update("update eleves set num_tel = $request->numtel where id = '$id_eleve' ");
+
+        return back();
+
+        // code...
+    }
+
     //
 }

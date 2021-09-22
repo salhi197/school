@@ -300,28 +300,36 @@
 							<label style="margin-right: 8%;  cursor: pointer;" groupe="{{ $groupe->id }}" prof="{{ $groupe->prof }}" onclick="afficher_payement_prof_1(this,{{ $nb_presence->num_mois }})" class="col-md-5 alert alert-warning" id="payement_prof_mois{{$nb_presence->num_mois}}">
 						@endif
 
-
-							Payement Du prof mois {!! $nb_presence->num_mois !!} :  
-
-							
-							{!! ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) !!} DA
-							<input style="display:none;" id="le_payement_du_mois{{$nb_presence->num_mois}}" type="number" value="{{ ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) }}">
-							
-							<label style="display:none;" class="custom-switch">
+							@if ($groupe->pourcentage_prof<100)
 								
-								<input seance="{{$numero_de_la_seance_dans_le_mois }}" 	 		groupe="{{ $groupe->id }}" 
-										prof="{{ $groupe->prof }}" 
-										onchange="afficher_payement_prof_2(this,{{$nb_presence->num_mois }});" 
-										id="payement_prof_effectuee{{$nb_presence->num_mois}}" 
-										type="checkbox" 
-										name="custom-switch-checkbox" 
-										class="custom-switch-input">
+								Payement Du prof mois {!! $nb_presence->num_mois !!} :  
 
-								<span class="custom-switch-indicator"></span>
-								<span class="custom-switch-description">Payement éffectué</span>
-							</label>
+								{!! ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) !!} DA
+								<input style="display:none;" id="le_payement_du_mois{{$nb_presence->num_mois}}" type="number" value="{{ ($nb_presence->nb_presence)*($groupe->tarif/4)*(($groupe->pourcentage_prof)/100) }}">
+								
+								<label style="display:none;" class="custom-switch">
+									
+									<input seance="{{$numero_de_la_seance_dans_le_mois }}" 	 		groupe="{{ $groupe->id }}" 
+											prof="{{ $groupe->prof }}" 
+											onchange="afficher_payement_prof_2(this,{{$nb_presence->num_mois }});" 
+											id="payement_prof_effectuee{{$nb_presence->num_mois}}" 
+											type="checkbox" 
+											name="custom-switch-checkbox" 
+											class="custom-switch-input">
 
-							{{--  --}}
+									<span class="custom-switch-indicator"></span>
+									<span class="custom-switch-description">Payement éffectué</span>
+								</label>
+
+							 @else
+
+							 	Payement Du prof mois {!! $nb_presence->num_mois !!} :  
+
+								{!! $groupe->pourcentage_prof !!} DA
+								<input style="display:none;" id="le_payement_du_mois{{$nb_presence->num_mois}}" type="number" value="{{ $groupe->pourcentage_prof }}">
+
+								{{-- expr --}}
+							@endif
 						</label>
 
 						{{-- expr --}}

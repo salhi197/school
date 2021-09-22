@@ -26,7 +26,15 @@
 							<p class="h3">Informations sur le Prof : </p>
 							<address>
 								Nom : {!! $groupe->prof !!}<br>
-								Poucentage Prof : {!! $groupe->pourcentage_prof !!} %<br>
+								@if ($groupe->pourcentage_prof<100)
+									
+									Poucentage Prof : {!! $groupe->pourcentage_prof !!} %
+									<br>
+								 @else
+								 	Salaire Prof : {!! $groupe->pourcentage_prof !!} DA
+									<br>
+									{{-- expr --}}
+								@endif
 							</address>
 						</div>
 
@@ -64,7 +72,14 @@
 									<th class="text-center">Séance 3</th>
 									<th class="text-center">Séance 4</th>
 									<th class="text-center">Total Présences</th>
-									<th class="text-center">{!! $groupe->pourcentage_prof !!}% Prof</th>
+									@if ($groupe->pourcentage_prof<100)
+										
+										<th class="text-center">{!! $groupe->pourcentage_prof !!}% Prof</th>
+									 @else
+
+									 	<th class="text-center">Salaire</th>
+										{{-- expr --}}
+									@endif
 									<th class="text-center">Date</th>
 									<th class="text-center">Signature</th>
 								</tr>
@@ -156,9 +171,21 @@
 													
 													@if ($cycle!="PS")
 														
-														{!! $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) !!} DA
+														@if ($groupe->pourcentage_prof<100)
+	
+															{!! $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) !!} DA
 
-														<input style="display:none;" type="number" id="le_payement_du_mois{{$i+1}}" value="{{ $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) }}">
+															<input style="display:none;" type="number" id="le_payement_du_mois{{$i+1}}" value="{{ $presence_moi->presences*($groupe->tarif/4)*($groupe->pourcentage_prof/100) }}">
+														 @else															
+
+															{!! $groupe->pourcentage_prof !!} DA
+
+															<input style="display:none;" type="number" id="le_payement_du_mois{{$i+1}}" value="{{ $groupe->pourcentage_prof }}">
+														 
+
+															{{-- expr --}}
+														@endif
+
 													
 													@else
 
