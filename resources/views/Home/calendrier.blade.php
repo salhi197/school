@@ -11,7 +11,7 @@
 	<button type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-info col-md-3"  id="btnPrint_vendredi"> Imprimer </button>
 
 	<!-- vendredi OPEN -->
-	<div {{-- class="row" --}}>
+	<div {{-- class="row" --}} style="border:black solid 2px;">
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
@@ -82,12 +82,15 @@
 	</div>
 	<!-- vendredi CLOSED -->
 
+	<hr>
+	<hr>
+
 
 
 
 
 	<!-- samedi OPEN -->
-	<div {{-- class="row" --}}>
+	<div {{-- class="row" --}} style="border:black solid 2px;">
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
@@ -156,11 +159,14 @@
 	</div>
 	<!-- samedi CLOSED -->
 
+	<hr>
+	<hr>
+
 
 
 
 	<!-- Dimanche OPEN -->
-	<div {{-- class="row" --}}>
+	<div {{-- class="row" --}} style="border:black solid 2px;">
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
@@ -232,10 +238,13 @@
 	</div>
 	<!-- Dimanche CLOSED -->
 
+	<hr>
+	<hr>
+
 
 
 	<!-- lundi OPEN -->
-	<div {{-- class="row" --}}>
+	<div {{-- class="row" --}} style="border:black solid 2px;">
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
@@ -310,10 +319,13 @@
 	</div>
 	<!-- lundi CLOSED -->
 
+	<hr>
+	<hr>
+
 
 
 	<!-- mardi OPEN -->
-	<div {{-- class="row" --}}>
+	<div {{-- class="row" --}} style="border:black solid 2px;">
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
@@ -384,10 +396,13 @@
 	</div>
 	<!-- mardi CLOSED -->
 
+	<hr>
+	<hr>
+
 
 
 	<!-- mercredi OPEN -->
-	<div {{-- class="row" --}}>
+	<div {{-- class="row" --}} style="border:black solid 2px;">
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
@@ -455,10 +470,13 @@
 	</div>
 	<!-- mercredi CLOSED -->
 
+	<hr>
+	<hr>
+
 
 
 	<!-- jeudi OPEN -->
-	<div {{-- class="row" --}}>
+	<div {{-- class="row" --}} style="border:black solid 2px;">
 		<div {{-- class="col-md-12 col-lg-12" --}}>
 			<div class="card">
 				<div class="card-header">
@@ -527,6 +545,9 @@
 		</div>
 	</div>
 	<!-- jeudi CLOSED -->
+
+	<hr>
+	<hr>
 
 	{{--  --}}
 @endsection

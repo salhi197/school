@@ -155,7 +155,11 @@
                                         </a>
                                         
                                         <ul class="sub-menu">
-                                            
+                                                
+                                            <li aria-haspopup="true">
+                                                <a href="/home/inscriptions">Inscriptions</a>
+                                            </li>
+
                                             <li aria-haspopup="true">
                                                 <a href="/home/groupes">Groupe</a>
                                             </li>
@@ -315,6 +319,13 @@
 
         <script src="{{ asset('../../assets/plugins/multipleselect/multiple-select.js') }}"></script>
         <script src="{{ asset('../../assets/plugins/multipleselect/multi-select.js') }}"></script>
+
+        <!-- ECHART JS -->
+        <script src="{{ asset('../../assets/js/echarts.js') }}"></script>
+
+        <!-- ECHART PLUGIN -->
+        <script src="{{ asset('../../assets/plugins/echarts/echarts.js') }}"></script>
+
 
 
 

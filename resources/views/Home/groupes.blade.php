@@ -186,7 +186,7 @@
 
                         <label for="pourcentage_profdugroupe"> % Prof </label>
 
-                        <input type="number" value="50" min="30" max="100" id="pourcentage_profdugroupe" name="pourcentage_prof" required class="form-control col-md-12">
+                        <input type="number" value="50" min="30" max="100" id="pourcentage_profdugroupe" name="pourcentage_prof" class="form-control col-md-12">
 
                         {{--  --}}
                     </div>
@@ -196,7 +196,7 @@
 
                         <label for="salaire_profdugroupe"> Salaire DA </label>
 
-                        <input type="number" min="0" id="salaire_profdugroupe" name="salaire_prof" required class="form-control col-md-12">
+                        <input type="number" min="0" id="salaire_profdugroupe" name="salaire_prof" class="form-control col-md-12">
 
                         {{--  --}}
                     </div>
