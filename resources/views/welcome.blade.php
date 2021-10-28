@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -80,7 +79,6 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" href="/">
-                <img alt="Image placeholder" src="Welcome/assets/img/brand/logo.png" id="navbar-logo">
             </a>
             <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +90,14 @@
                 <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
 
                     <li class="nav-item ">
-                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link" href="#">0557015468 / 0794498727</a>
+                    </li>
+                    <li class="nav-item badge badge-primary " >
+                        <a class="nav-link text-white" href="/home">تجربة البرنامج</a>
+                    </li>
+                    <li class="nav-item text-primary" >
+                        
+                        <a class="nav-link " href="https://web.facebook.com/tasshildz"><i class="fa fa-facebook " style="color:blue"> </i></a>
                     </li>
 
                 </ul>
@@ -105,28 +110,30 @@
     <section class="slice py-7">
         <div class="container">
             <div class="row row-grid align-items-center">
+                <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
+                    <!-- Heading -->
+                    <h3 class="display-4 text-right text-md-left mb-3">
+                    🏫 برنامج Tasshil  
+                    <br>
+                    لادارة‍ المدارس الخاصة والمراكز التدريبية والتعليمية وروض الأطفال 
+                    </h3>
+                    <!-- Text -->
+                    <p class="lead text-center text-md-left text-muted">
+                        امكانية تحميل البرنامج و تجربته لمدة ثلاثين يوم كاملة 
+                    </p>
+                    <!-- Buttons -->
+                    <div class="text-center text-md-left mt-5">
+                        <a href="/home" class="btn btn-primary btn-icon">
+                            <span class="btn-inner--text">تجربة البرنامج اونلاين </span>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="col-12 col-md-5 col-lg-6 order-md-2 text-center">
                     <!-- Image -->
                     <figure class="w-100">
                         <img alt="Image placeholder" src="Welcome/assets/img/svg/illustrations/illustration-1.svg" class="img-fluid mw-md-120">
                     </figure>
-                </div>
-                <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
-                    <!-- Heading -->
-                    <h3 class="display-4 text-center text-md-left mb-3">
-                        Logiciel de gestion des écoles de cours de soutiens <strong class="text-primary">TASSHIL</strong>
-                    </h3>
-                    <!-- Text -->
-                    <p class="lead text-center text-md-left text-muted">
-                        Gérer l'école avec Une grande Simplicité, Facilité et Fiabilité 
-                    </p>
-                    <!-- Buttons -->
-                    <div class="text-center text-md-left mt-5">
-                        <a href="/home" class="btn btn-primary btn-icon">
-                            <span class="btn-inner--text">Commencer</span>
-                            <span class="btn-inner--icon"><i data-feather="chevron-right"></i></span>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -197,6 +204,11 @@
             'width': '1em',
             'height': '1em'
         })
+$(function() {
+  $('#mylist li a').hover(function() {
+    $('#rotateImg').toggleClass('rotate');
+  });
+});        
     </script>
 </body>
 
