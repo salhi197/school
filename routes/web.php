@@ -93,6 +93,8 @@ Route::get('/home/dawra/{id_dawra}/eleve/{id_eleve}','DawraController@historique
 
 Route::get('/lang/{lang}', 'LangController@setLang');
 
+Route::get('/home/inscription', 'InscriptionController@index');
+
 
 
 
