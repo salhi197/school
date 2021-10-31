@@ -15,6 +15,16 @@ class Inscriptions extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nom')->nullable();
+            $table->string('prenom')->nullable();
+            $table->text('telephone1')->nullable();
+            $table->text('telephone2')->nullable();
+            $table->text('photo')->nullable();
+            $table->date('naissance')->nullable();
+            $table->string('niveau')->nullable();
+            $table->longText('matieres')->nullable();
+            
+            
             
             $table->timestamps();
         });

@@ -3,11 +3,14 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-	<h4 class="page-title">Groupes de l'année scolaire {!! $annee_scolaire !!}</h4>
+	<h4 class="page-title">
+        Liste des Inscriptions : 
+
+    </h4>
 </div>
 <!-- PAGE-HEADER END -->
 
-<div id="modif_effectue" class="alert alert-icon alert-success" role="alert">
+<!-- <div id="modif_effectue" class="alert alert-icon alert-success" role="alert">
 	<i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i> 
 	Dawra Modifiée avec succée
 </div>
@@ -15,10 +18,9 @@
 <div id="suppression_effectue" class="alert alert-icon alert-warning" role="alert">
 	<i class="fa fa-exclamation mr-2" aria-hidden="true"></i> 
 	Vous venez de supprimer une Dawra
-</div>
+</div> -->
 
 <a type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Ajouter </a>
-<button type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary"  id="btnPrint"> Imprimer </button>
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -27,17 +29,38 @@
                 <a type="button" class="close" data-dismiss="modal">&times;</a>
           	</div>
             <div class="modal-body">
-                <form class="form-inline" method="POST" action="/home/dawra/ajouter">
+                <form class="form-inline" method="POST" action="/home/inscriptions/ajouter">
                     {{ csrf_field() }}  
-
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label for="salledugroupe">Photo :   </label>
+                        <input type="file" min="" required name="photo" class="col-md-12">
+                    </div>
 
                     <div class="form-group col-md-4 col-sm-12">
+                        <label for="salledugroupe">Nom  </label>
+                        <input type="text" min="" required name="nom" class="form-control col-md-12">
+                    </div>
 
-                        <label for="salledugroupe">Nombre Séances </label>
-                        <input type="number" min="" onchange="fit_salles();" id="heure_findugroupe" required name="nbrseances" class="form-control col-md-12">
-
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label for="salledugroupe">Prénom :   </label>
+                        <input type="text" min="" required name="prenom" class="form-control col-md-12">
                     </div>
                     
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label for="salledugroupe">Genre :   </label>
+                        <select name="sexe" class="form-control">
+                            <option value="femme">Fille</option>
+                            <option value="homme">Garçon</option>
+                        </select>
+                    </div>
+                    
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label for="salledugroupe">Téléphone :   </label>
+                        <input type="text" min="" required name="telephone" class="form-control col-md-12">
+                    </div>
+
+
                     <div class="form-group col-md-4 col-sm-12">
                         <label for="niveaudugroupe">Niveau </label>
                         <select name="niveau" id="niveaudugroupe" class="form-control select2-show-search col-md-12">
@@ -45,79 +68,21 @@
                                 <option value="{{ $niveau->niveau }}-{{ $niveau->cycle}}-{{$niveau->filiere }}">{!! $niveau->niveau !!}-{!! $niveau->cycle !!}-{!! $niveau->filiere !!}</option>
                             @endforeach                                                        
                         </select>
-
-                        {{--  --}}
                     </div>
 
 
                     <div class="form-group col-md-4 col-sm-12">
-
                         <label for="matieredugroupe">Matière </label>
-
-                        <select name="matiere" onchange="fit_prof(this)" id="matieredugroupe" class="form-control col-md-12 ">
-                            
+                        <select name="matieres[]" id="matieredugroupe" class="form-control  select2-show-search  col-md-12 " multiple>
                             @foreach ($matieres as $matiere)
-                            
                                 <option value="{{ $matiere->nom }}">{!! $matiere->nom !!}</option>
-                            
                             @endforeach                            
-                            
-                            
-                            {{--  --}}
                         </select>
-
-                        {{--  --}}
                     </div>
+                    <input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn text-white btn-primary col-md-12" value="Ajouter">
 
-
-                    <div class="form-group col-md-4 col-sm-12">
-                        <label for="profdugroupe"> Prof </label>
-                        <select name="prof" id="profdugroupe" class="form-control col-md-12 select2-show-search">
-                            @foreach ($profs as $prof)
-                                <option id="{{ $prof->nom }}-{{ $prof->prenom }}" value="{{ $prof->nom }}-{{ $prof->prenom }}">{!! $prof->nom !!}-{!! $prof->prenom !!} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</option>
-                            @endforeach                            
-                            {{--  --}}
-                        </select>
-
-                        {{--  --}}
-                    </div>
-
-                    <div class="form-group col-md-4 col-sm-12">
-
-                        <label for="pourcentage_profdugroupe"> % Prof </label>
-
-                        <input type="number" onchange="fit_prctg(this);" value="50" min="30" max="100" id="pourcentage_profdugroupe" required name="pourcentage_prof" class="form-control col-md-12">
-
-                        {{--  --}}
-                    </div>
-
-
-                    <div style="display:none;" class="form-group col-md-4 col-sm-12">
-
-                        <label for="pourcentage_ecoledugroupe"> % Ecole </label>
-
-                        <input type="number" disabled value="50" id="pourcentage_ecoledugroupe" required name="pourcentage_ecole" class="form-control col-md-12">
-
-                        {{--  --}}
-                    </div>
-
-                    <div class="form-group col-md-4 col-sm-12">
-
-                        <label for="tarif"> Tarif </label>
-
-                        <input type="number" min="0" value="1800" id="tarif" required name="tarif" class="form-control col-md-12">
-
-                        {{--  --}}
-                    </div>
-
-
-
-                    <input type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12" value="Ajouter">
-
-                  	{{-- <a style="color: #2070F5; margin-top: 5%;" id="ajout{{ $last_id }}" data-dismiss="modal" onclick="ajoutergroupe(event,this)" class="btn btn-outline-primary col-md-12">Ajouter</a> --}}
                 </form>
 
-                {{--  --}}
           </div>
 
           <div class="modal-footer">
@@ -128,7 +93,7 @@
 
         </div>
 
-        {{--  --}}
+        
   </div>
 
 </div>                    
@@ -188,7 +153,7 @@
 					
 					<span id="alert" class="alert alert-sccess"> </span> 
 
-					{{--  --}}
+					
 				</div>
 			</div>
 			
@@ -214,9 +179,9 @@
                         
                         <tbody id="all_the_groupes">
 
-                            @foreach($dawrates as $key=>$dawra)
+                            @foreach($inscriptions as $key=>$inscription)
 
-                                <tr onclick="goto_the_link(this);" style="cursor:pointer;" id="groupe{{$dawra->id}}">
+                                <tr onclick="goto_the_link(this);" style="cursor:pointer;" id="groupe{{$inscription->id}}">
 
                                     <form>
 
@@ -227,7 +192,7 @@
                                         </td>
 
                                         <td>
-                                            <span>{!! $dawra->nbrseances  !!}</span>
+                                            <span>{!! $inscription->nbrseances  !!}</span>
                                         </td>
 
 
@@ -235,39 +200,39 @@
 
                                         <td> 
                                             
-                                            <span>{!! $dawra->matiere ?? "vide" !!}</span>
+                                            <span>{!! $inscription->matiere ?? "vide" !!}</span>
                                         </td>
 
                                         <td> 
-                                            <span>{!! $dawra->niveau  !!}</span>                              
+                                            <span>{!! $inscription->niveau  !!}</span>                              
                                         </td>
 
                                         <td> 
-                                            <span>{!! $dawra->prof  !!}</span>                              
+                                            <span>{!! $inscription->prof  !!}</span>                              
                                         </td>
 
 
                                         <td> 
-                                            <span>{!! $dawra->pourcentage_prof  !!}%</span>                              
+                                            <span>{!! $inscription->pourcentage_prof  !!}%</span>                              
                                         </td>
 
                                         <td> 
-                                            <span>{!! 100-$dawra->pourcentage_prof  !!}%</span>                              
+                                            <span>{!! 100-$inscription->pourcentage_prof  !!}%</span>                              
                                         </td>
                                         <td> 
-                                            <span>{{$dawra->getNbreleve() ?? 0}}</span>                              
+                                            <span>{{$inscription->getNbreleve() ?? 0}}</span>                              
                                         </td>
 
                                         <td> 
                                             
-                                            <span>{!! substr(date('d/m/Y H:i:s',strtotime($dawra->created_at)),0,10) !!}</span>
+                                            <span>{!! substr(date('d/m/Y H:i:s',strtotime($inscription->created_at)),0,10) !!}</span>
                                         </td>
 
 {{--                                         <td> 
 
-                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$dawra->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
+                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$inscription->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
 
-                                            <div id="myModalsup-{{$dawra->id}}" class="modal fade" role="dialog">
+                                            <div id="myModalsup-{{$inscription->id}}" class="modal fade" role="dialog">
 
                                               <div class="modal-dialog modal-lg">
 
@@ -282,7 +247,7 @@
 
                                                       <div class="modal-body">
 
-                                                            <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$dawra->id}}">OUI,je supprime</a>
+                                                            <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$inscription->id}}">OUI,je supprime</a>
 
                                                             <a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas supprimer</a>
 
@@ -298,20 +263,18 @@
                                             </div>                    
                                         </td>
  --}}                                    </form>
-                                    {{--  --}}
+                                    
                                 </tr>
                                 
                                 {{-- expr --}}
                             @endforeach
-                            {{--  --}}
+                            
                         </tbody>
  					</table>
 				</div>
 			</div>
 			<!-- TABLE WRAPPER -->
 		</div>
-		<script src="{{ asset('js/modifierlesgroupes.js') }}"></script>
-		<script src="{{ asset('js/modifierdawarates.js') }}"></script>
 		<!-- SECTION WRAPPER -->
 	</div>
 </div>
