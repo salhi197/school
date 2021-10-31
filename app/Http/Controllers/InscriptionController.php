@@ -40,8 +40,9 @@ class InscriptionController extends Controller
         $inscription->photo = $request['photo'];
         $inscription->naissance = $request['naissance'];
         $inscription->niveau = $request['niveau'];
-        $inscription->matieres = $request['matieres'];
+        $inscription->matieres = json_encode($request['matieres']);
         $inscription->save();
+        
 
         if($request->file('photo')){
             // dd('sa');

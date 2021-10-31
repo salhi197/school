@@ -23,9 +23,7 @@ class Inscriptions extends Migration
             $table->date('naissance')->nullable();
             $table->string('niveau')->nullable();
             $table->longText('matieres')->nullable();
-            
-            
-            
+                        
             $table->timestamps();
         });
         

@@ -33,17 +33,17 @@
                     {{ csrf_field() }}  
                     <div class="form-group col-md-4 col-sm-12">
                         <label for="salledugroupe">Photo :   </label>
-                        <input type="file" min="" required name="photo" class="col-md-12">
+                        <input type="file" min=""  name="photo" class="col-md-12">
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
                         <label for="salledugroupe">Nom  </label>
-                        <input type="text" min="" required name="nom" class="form-control col-md-12">
+                        <input type="text" min=""  name="nom" class="form-control col-md-12">
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
                         <label for="salledugroupe">Prénom :   </label>
-                        <input type="text" min="" required name="prenom" class="form-control col-md-12">
+                        <input type="text" min=""  name="prenom" class="form-control col-md-12">
                     </div>
                     
                     <div class="form-group col-md-4 col-sm-12">
@@ -180,93 +180,7 @@
                         <tbody id="all_the_groupes">
 
                             @foreach($inscriptions as $key=>$inscription)
-
-                                <tr onclick="goto_the_link(this);" style="cursor:pointer;" id="groupe{{$inscription->id}}">
-
-                                    <form>
-
-                                        {{ csrf_field() }}  
-
-                                        <td>
-                                            {{$key+1}}
-                                        </td>
-
-                                        <td>
-                                            <span>{!! $inscription->nbrseances  !!}</span>
-                                        </td>
-
-
-
-
-                                        <td> 
-                                            
-                                            <span>{!! $inscription->matiere ?? "vide" !!}</span>
-                                        </td>
-
-                                        <td> 
-                                            <span>{!! $inscription->niveau  !!}</span>                              
-                                        </td>
-
-                                        <td> 
-                                            <span>{!! $inscription->prof  !!}</span>                              
-                                        </td>
-
-
-                                        <td> 
-                                            <span>{!! $inscription->pourcentage_prof  !!}%</span>                              
-                                        </td>
-
-                                        <td> 
-                                            <span>{!! 100-$inscription->pourcentage_prof  !!}%</span>                              
-                                        </td>
-                                        <td> 
-                                            <span>{{$inscription->getNbreleve() ?? 0}}</span>                              
-                                        </td>
-
-                                        <td> 
-                                            
-                                            <span>{!! substr(date('d/m/Y H:i:s',strtotime($inscription->created_at)),0,10) !!}</span>
-                                        </td>
-
-{{--                                         <td> 
-
-                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModalsup-{{$inscription->id}}" style="color: #fff;" onclick="event.preventDefault();"> Archiver</a>
-
-                                            <div id="myModalsup-{{$inscription->id}}" class="modal fade" role="dialog">
-
-                                              <div class="modal-dialog modal-lg">
-
-                                                    <!-- Modal content-->
-
-                                                    <div class="modal-content">
-
-                                                       <div class="modal-header">
-
-                                                            <h4 class="modal-title">Voulez-vous vraiment Archiver ce Groupe ?</h4>
-                                                      </div>
-
-                                                      <div class="modal-body">
-
-                                                            <a class="col-md-5 col-sm-12 btn btn-danger" onclick="supprimergroupe(event,this)" data-dismiss="modal" style="color: #ffffff;" id="mod{{$inscription->id}}">OUI,je supprime</a>
-
-                                                            <a data-dismiss="modal" class="col-md-6 col-sm-12 btn btn-primary" style="color: #ffffff;" >NON,je ne veux pas supprimer</a>
-
-                                                      </div>
-
-                                                      <div class="modal-footer">
-
-                                                            <a class="btn btn-warning" data-dismiss="modal" style="color: #ffffff;">Fermer</a>
-                                                      </div>
-                                                    </div>
-
-                                              </div>
-                                            </div>                    
-                                        </td>
- --}}                                    </form>
-                                    
-                                </tr>
                                 
-                                {{-- expr --}}
                             @endforeach
                             
                         </tbody>
