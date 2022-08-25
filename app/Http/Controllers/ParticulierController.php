@@ -49,7 +49,7 @@ class ParticulierController extends Controller
             ])
         );        
         $pdf->setPaper('A6', 'potrait');
-        return $pdf->download('bon.pdf');
+        // return $pdf->download('bon.pdf');
         return $pdf->stream("bon.pdf",array("Attachment"=>0));;
         
         // code...
