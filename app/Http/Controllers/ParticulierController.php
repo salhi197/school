@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use PDF;
 
+
 use App\Eleve;
 
 use App\Groupe;
@@ -33,18 +34,22 @@ class ParticulierController extends Controller
 
         $pdf = PDF::loadView("bon",compact('data'));
 
-        $contxt = stream_context_create([
-            'ssl' => [
-            'verify_peer' => FALSE,
-            'verify_peer_name' => FALSE,
-            'allow_self_signed'=> TRUE
-            ]
-        ]);
         
-        //$pdf->set_options(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
 
+        //$pdf = $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+       
+        $pdf->getDomPDF()->setHttpContext(
+            stream_context_create([
+                'ssl' => [
+                    'allow_self_signed'=> TRUE,
+                    'verify_peer' => FALSE,
+                    'verify_peer_name' => FALSE,
+                ]
+            ])
+        );        
         $pdf->setPaper('A6', 'potrait');
-        
+        return $pdf->download('bon.pdf');
         return $pdf->stream("bon.pdf",array("Attachment"=>0));;
         
         // code...

@@ -19,7 +19,7 @@
 
 	The english Gate
 
-	<img src="/logo_english_gate.svg'" alt="image">
+	<img src="logo_english_gate.png" width="100px" alt="image">
 
 	<h3>Eleve : {!! $eleve->nom !!} {!! $eleve->prenom !!}</h3>
 	
