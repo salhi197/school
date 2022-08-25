@@ -21,62 +21,84 @@ class CaisseController extends Controller
 
         $annee_scolaire = Groupe::get_annee_scolaire();
 
-        $recettes_semaines_groupe = (DB::select("select week(pg.created_at) as semaine,sum(payement) as montant from payment_groupes_eleves pg, groupes g where (pg.id_groupe=g.id) and (g.annee_scolaire = '$annee_scolaire') group by semaine order by semaine"));
+        $recettes_semaines_groupe = (DB::select("select sum(payement) as montant from payment_groupes_eleves pg, groupes g where (pg.id_groupe=g.id) and (g.annee_scolaire = '$annee_scolaire') and date(pg.created_at) = date(now()) "));
         
-        $recettes_semaines_groupe_special = (DB::select("select week(pg.created_at) as semaine,sum(payement) as montant from payement_groupe_special_eleve pg, special_groupes g where (pg.id_groupe_special=g.id) and (g.annee_scolaire = '$annee_scolaire') group by semaine order by semaine"));
+        $recettes_semaines_groupe_special = (DB::select("select sum(payement) as montant from payement_groupe_special_eleve pg, special_groupes g where (pg.id_groupe_special=g.id) and (g.annee_scolaire = '$annee_scolaire') and (date(pg.created_at) = date(now()))"));
 
-        $recettes_semaines_dawra = (DB::select("select week(created_at) as semaine,sum(montant) as montant from dawrapayments group by semaine order by semaine"));
+        $recettes_semaines_dawra = (DB::select("select sum(montant) as montant from dawrapayments where (date(created_at) = date(now())) "));
+        
+        $recette_frais = DB::select("select sum(frais) as montant from eleves where date(updated_at=date(now())) ");
 
-        $recette_frais = DB::select("select week(updated_at) as semaine, sum(frais) as montant from eleves group by semaine order by semaine");
+        $sum = 0;
 
-        $les_semaines = [];
-        $i=0;
-
-        $sums=[];
-        $j=0;
-
-        foreach($recettes_semaines_groupe as $semaine)
+        foreach (array_merge($recettes_semaines_groupe,$recettes_semaines_groupe_special,$recettes_semaines_dawra,$recette_frais) as $mont) 
         {
-
-            $les_semaines[$i] = $semaine->semaine;
-            $i++;
-            
-            $sum=0;
-
-            foreach (array_merge($recettes_semaines_groupe,$recettes_semaines_groupe_special,$recettes_semaines_dawra,$recette_frais) as $mont) 
+               
+            if ($mont->montant != null) 
             {
-                   
-                if ($mont->semaine == $semaine->semaine) 
-                {
 
-                    $sum=$sum+$mont->montant;
+                $sum=$sum+$mont->montant;
 
-                    $sums[$j] = $sum;
-
-                    // code...
-                }
-
-                //
+                // code...
             }
 
-            $j++;
+            //
+        }
 
-            #
-        }        
-
-        $semaine_courante = (DB::select("select week(now()) as semaine_courante"));
-
-        $semaine_courante = $semaine_courante[0]->semaine_courante;
-
-        $key = array_search ($semaine_courante, $les_semaines);
-
-        $montant_semaine = isset($sums[$key]) ? $sums[$key] : 0;
+        $depenses_payement_profs = DB::select("select sum(payement) as depense_payement_profs from payement_profs where date(created_at) = date(now())");
         
-        $les_semaines = json_encode($les_semaines);
-        
-        $sums = json_encode($sums);
+        $depenses_payement_profs = $depenses_payement_profs[0]->depense_payement_profs;
 
-        return view('Home.caisse',compact('les_semaines','sums','semaine_courante','montant_semaine'));
+
+        $depense_autre = DB::select("select sum(montant) as depense_autre from depenses where date(created_at) = date(now())");
+
+        $depense_autre = $depense_autre[0]->depense_autre;
+
+        $today = date('Y-m-d');
+        
+        return view('Home.caisse',compact('recettes_semaines_groupe','recettes_semaines_groupe_special','recettes_semaines_dawra','recette_frais','sum','depenses_payement_profs','depense_autre','today'));
+
+        // code...
+    }
+
+    public function ajout_depense(Request $request)
+    {
+
+        $montant = $request->montant;
+
+        $commentaire = $request->commentaire;
+
+        DB::insert("insert into depenses(montant,commentaire) values('$montant','$commentaire')");
+
+        return back();
+
+        //
+    }
+
+    public function get_recettes(Request $request)
+    {
+
+        $recettes_groupes=(DB::select("select e.id,e.nom,e.prenom,pg.payement,pg.id_groupe from payment_groupes_eleves pg, eleves e where (pg.payement<>0) and (pg.id_eleve=e.id) and date(pg.created_at)=date(now())"));
+
+        $recettes_dawarat = DB::select("select e.id,e.nom,e.prenom,d.montant,id_dawra from dawrapayments d , eleves e where (d.id_eleve=e.id) and date(d.created_at)=date(now())");
+        
+        $recette_frais = DB::select("select id,nom,prenom,frais as montant from eleves where date(updated_at)=date(now()) and frais<>0 ");
+        
+        $recettes = (object) ['recettes_groupes'=>$recettes_groupes,'recettes_dawarat'=>$recettes_dawarat,'recette_frais'=>$recette_frais];
+
+        return response()->json($recettes);
+
+        // code...
+    }
+
+    public function get_depenses(Request $request)
+    {
+
+        $depenses = DB::select("select p.nom,p.prenom,payement from payement_profs pf, profs p where (p.id=pf.id_prof) and date(pf.created_at) = date(now())");
+
+        
+        dump($depenses);
+        die();
 
         // code...
     }

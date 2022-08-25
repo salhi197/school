@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\Input;
 class GroupeController extends Controller
 {
 
+    public function inscription()
+    {
+
+        return view('Home.inscription');
+
+
+        // code...
+    }
+
     public function groupes()
     {
 

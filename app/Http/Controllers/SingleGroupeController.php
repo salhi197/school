@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Groupe;
+use App\Eleve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -183,7 +184,9 @@ class SingleGroupeController extends Controller
 
         $frais = $frais[0]->frais;
 
-        return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe','frais'));
+        $autres_groupes = (Eleve::get_allgroupes_of_one_eleve($id_eleve,$id_groupe));
+
+        return view('Home.single_eleve',compact('groupe','eleve','payement_eleve','seances_eleves','le_mois','les_presences','les_absences','retards','current','num_seance_groupe','frais','autres_groupes'));
 
         // code...
     }

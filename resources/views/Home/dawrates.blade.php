@@ -74,7 +74,7 @@
                         <label for="profdugroupe"> Prof </label>
                         <select name="prof" id="profdugroupe" class="form-control col-md-12 select2-show-search">
                             @foreach ($profs as $prof)
-                                <option id="{{ $prof->nom }}-{{ $prof->prenom }}" value="{{ $prof->nom }}-{{ $prof->prenom }}">{!! $prof->nom !!}-{!! $prof->prenom !!} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</option>
+                                <option id="{{ $prof->nom }}-{{ $prof->prenom }}" value="{{ $prof->nom }}-{{ $prof->prenom }}">{!! $prof->nom !!}-{!! $prof->prenom !!} </option>
                             @endforeach                            
                             {{--  --}}
                         </select>
@@ -323,6 +323,12 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+
+    $('.select2-show-search').select2({
+        'width': '100%'
+    });
+
+
     console.log($("#btnPrint").html());
     $("#btnPrint").on('click',function(){
 //            var divContents = $("#datable-1").html();

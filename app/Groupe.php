@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Input;
 class Groupe extends Model
 {
     
+    public static function get_matiere($id_groupe)
+    {
+
+        $matiere = DB::select("select g.matiere from groupes g where g.id = $id_groupe");
+        
+        return $matiere[0]->matiere;
+
+        //
+    }
+
     public static function all_groupes()
     {
 

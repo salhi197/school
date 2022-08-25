@@ -1,3 +1,35 @@
+function imprimer_bon(objet) 
+{
+	
+	$id_eleve = ( $(objet).attr("eleve") );
+	$id_groupe = ( $(objet).attr("groupe") );
+	$mois = ( $(objet).attr("mois") );
+
+	montant=$("#input_payement"+$id_eleve).val();
+
+    $.ajax({
+	        headers: 
+	        {
+	           'X-CSRF-TOKEN': $('input[name="_token"]').val()
+	        },                    
+	        type:"POST",
+	        url:"/home/single_groupe/imprimer_bon/ajax",
+	        data:{id_eleve:$id_eleve,id_groupe:$id_groupe,mois:$mois,montant:montant},
+
+	        success:function(data) 
+	        {
+
+
+
+	        	//
+	        }
+
+	        //
+        });
+
+	//
+}
+
 function verif_existance() 
 {
  	

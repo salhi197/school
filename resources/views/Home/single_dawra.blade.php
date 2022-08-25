@@ -156,7 +156,7 @@
 				
 				<div class="table-responsive">
 					
-					<table data-page-length='50' id="datable-1" class="table table-striped table-bordered text-nowrap w-100">
+					<table data-page-length='50' id="datable-1" class="table table-striped table-bordered text-nowrap w-100" style="overflow:scroll;">
 						<thead>
 							<tr>
 								<th style="cursor: pointer;" class="wd-15p">N°</th>

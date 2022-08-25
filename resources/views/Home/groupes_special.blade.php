@@ -336,10 +336,19 @@
 @section('scripts')
 <script type="text/javascript">
 
-$(document).ready(function(){
+$(document).ready(function()
+{
+
+    
+    $('.select2-show-search').select2({
+        'width': '100%'
+    });
+    
+
+
     console.log($("#btnPrint").html());
     $("#btnPrint").on('click',function(){
-//            var divContents = $("#datable-1").html();
+        var divContents = $("#datable-1").html();
             $('#datable-1').printThis();
     })
 });

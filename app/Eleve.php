@@ -17,6 +17,17 @@ use Illuminate\Support\Facades\Input;
 class Eleve extends Model
 {
 
+    public static function get_allgroupes_of_one_eleve($id_eleve,$id_groupe)
+    {
+
+        $id_groupes = DB::select("select distinct g.id from groupes g, seances s, seances_eleves se 
+            where (g.id=s.id_groupe and s.id = se.id_seance and se.id_eleve = $id_eleve and g.id<>$id_groupe) ");
+
+        return $id_groupes;
+
+        //
+    }
+
     public static function add_eleve($id_groupe,$nom,$prenom,$num_tel,$payement,$cotisations,$frais)
     {
 
@@ -165,7 +176,7 @@ class Eleve extends Model
 
         $last = (DB::select("select * from eleves where (nom=\"$nom\" and prenom=\"$prenom\")or(nom=\"$prenom\" and nom=\"$prenom\") "));
 
-        dd(count($last)>0);
+        
         if (count($last)>0) 
         {
             

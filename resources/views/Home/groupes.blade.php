@@ -46,7 +46,7 @@
 
                         <label for="jourdugroupe">jour </label>
 
-                        <select id="jourdugroupe" onchange="fit_salles();" required="true" name="jour" class="form-control col-md-12">
+                        <select id="jourdugroupe" onchange="fit_salles();" required="true" name="jour" class="form-control col-md-12 select2-show-search">
                             <option value="Dimanche"> Dimanche </option>
                             <option value="Lundi"> Lundi </option>
                             <option value="Mardi"> Mardi </option>
@@ -84,7 +84,7 @@
 
                         <label for="salledugroupe">salle </label>
 
-                        <select id="salledugroupe" onchange="fit_salles();" required="true" name="salle" class="form-control col-md-12">
+                        <select id="salledugroupe" onchange="fit_salles();" required="true" name="salle" class="form-control col-md-12 select2-show-search">
 
                             @foreach ($salles as $salle)
                                 
@@ -102,7 +102,7 @@
 
                         <label for="niveaudugroupe">Niveau </label>
 
-                        <select name="niveau" onchange="fit_tarif(this)" id="niveaudugroupe" class="form-control col-md-12">
+                        <select name="niveau" onchange="fit_tarif(this)" id="niveaudugroupe" class="form-control col-md-12 select2-show-search">
                             
                             @foreach ($niveaux as $niveau)
                             
@@ -122,7 +122,7 @@
 
                         <label for="matieredugroupe">Matière </label>
 
-                        <select name="matiere" onchange="fit_prof(this)" id="matieredugroupe" class="form-control col-md-12 ">
+                        <select name="matiere" onchange="fit_prof(this)" id="matieredugroupe" class="form-control col-md-12 select2-show-search">
                             
                             @foreach ($matieres as $matiere)
                             
@@ -142,7 +142,7 @@
 
                         <label for="profdugroupe"> Prof </label>
 
-                        <select name="prof" id="profdugroupe" class="form-control col-md-12">
+                        <select name="prof" id="profdugroupe" class="form-control col-md-12 select2-show-search">
                             
                             @foreach ($profs as $prof)
                             
@@ -458,7 +458,15 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function(){
+        $(document).ready(function()
+        {
+
+            $('.select2-show-search').select2({
+                'width': '100%'
+            });
+            
+
+
             console.log($("#btnPrint").html());
             $("#btnPrint").on('click',function(){
         //            var divContents = $("#datable-1").html();

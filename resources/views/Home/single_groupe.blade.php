@@ -197,7 +197,7 @@
 
                                 <tr id="l_eleve{{$eleves_groupe[$i]->id}}">
 
-                                    <form>
+                                    <div>
 
                                         {{ csrf_field() }}  
 
@@ -249,7 +249,7 @@
                                         </td>
 
 		                            	{{--  --}}
-                                    </form>
+                                    </div>
                                     {{--  --}}
                                 </tr>
                                 {{-- expr --}}
