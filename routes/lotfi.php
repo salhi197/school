@@ -33,6 +33,17 @@ Route::group(['middleware' => 'auth'], function ()
 
 	Route::get('/home/imprimer_bon/{id_eleve}/{id_groupe}/{montant}','ParticulierController@bon');
 
+	Route::get('/home/imprimer_bon/{id_eleve}/{id_groupe}/{mois}/{montant}','ParticulierController@bon');
+
+	Route::post('/home/caisse/filter','CaisseController@filter');
+
+	Route::get('/home/imprimer_bon_dawra/{id_eleve}/{id_dawra}/{montant}','ParticulierController@bon_dawra');
 	
+	Route::get('/home/imprimer_bon_frais/{id_eleve}/{montant}/{updated_at}','ParticulierController@bon_frais');
+
+	Route::post('/home/get_payment/ajax','HomeController@get_all_payement_eleve');
+
+	Route::post('/home/imprimer_bon/eleve/all','HomeController@imprimer_bon_payement_eleve');
+
 	//
 });	

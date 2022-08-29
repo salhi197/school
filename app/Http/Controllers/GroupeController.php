@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Groupe;
 use App\Eleve;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -272,7 +273,15 @@ class GroupeController extends Controller
 
         ini_set('max_input_vars', '500000000');
 
+        $id_groupe = $id;
+        
         Eleve::add_eleve($id,$request->nom,$request->prenom,$request->num_tel,$request->payment,$request->cotisations,$request->frais);
+            
+        $eleve = DB::select("select * from eleves order by id desc limit 1");
+        
+        $id_eleve = $eleve[0]->id;
+        
+        return Redirect::to('/home/imprimer_bon/'.$id_eleve.'/'.$id_groupe.'/'.$request->payment);
 
         return back();
 

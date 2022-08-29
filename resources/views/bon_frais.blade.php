@@ -9,7 +9,6 @@
 
 
 	<?php use App\Eleve; ?>
-	<?php use App\Groupe; ?>
 
 	<?php $eleve = Eleve::find($data['id_eleve']); ?>
 
@@ -23,8 +22,9 @@
 	
 	<h3 style="border:solid black 1px;">Montant payé : {!! $data['montant'] !!} DA</h3>
 	
-	<h3>Mois N : {!! $data['mois'] !!} | Groupe : #{!! $data['id_groupe'] !!} </h3> 
-	<h3> Matière : {!! Groupe::get_matiere($data['id_groupe']) !!} </h3>
+	<h3>Payé le : {!! $data['updated_at'] !!} </h3> 
+	
+	<h3> Frais d'inscriptions </h3>
 
 	<?php date_default_timezone_set("Africa/Algiers"); ?>
 

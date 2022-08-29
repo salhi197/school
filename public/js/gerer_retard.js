@@ -123,6 +123,8 @@ function completer_payement(objet)
 	        success:function(data) 
 	        {
 
+	        	window.open('/home/imprimer_bon/'+id_eleve+'/'+id_groupe+'/'+num_mois+'/'+payement,'_blank');
+
 	        	location.reload();
 
 	        	//

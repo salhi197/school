@@ -67,7 +67,7 @@
 
 			            <div class="modal-body">
 
-			                <form class="form-inline" method="POST" action="/home/groupes/{{$id}}/ajouter">
+			                <form id="ajout" class="form-inline" method="POST" action="/home/groupes/{{$id}}/ajouter">
 
 			                	{{ csrf_field() }}  
 
@@ -501,11 +501,22 @@
 	
 	});
 
-	
-	
-
-
-
-
+	/**/
 </script>
+
+<script>
+	
+	function manage_add()
+	{
+	    
+	    $('#ajout').submit();
+		
+	    setTimeout(location.reload(),5000);
+
+		// body...	    
+	}
+	
+	/**/
+</script>
+
 @endsection

@@ -34,7 +34,7 @@
 @if ($il_paye==0)
 	
 
-	<form class="form-inline" method="POST" action="/imprimer_bon">	
+	<form target="_blank" class="form-inline" method="POST" action="/imprimer_bon">	
 
 		{{ csrf_field() }} 		
 
