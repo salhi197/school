@@ -230,7 +230,7 @@
                 </form>
 
 
-                <form style="margin-top:2%;" class="col-md-12 row" method="post" action="/home/imprimer_bon/eleve/all">
+                <form style="margin-top:2%;" target="_blank" class="col-md-12 row" method="post" action="/home/imprimer_bon/eleve/all">
 
                     {{ csrf_field() }}
 
@@ -316,6 +316,8 @@
         
         function edit_eleve(objet) 
         {
+
+            $("#payements_eleve").html("");
         
             var id_eleve = (objet.id.substr(6));
 
@@ -340,8 +342,6 @@
 
         function show_payement()
         {
-
-            $("#payements_eleve").html("");
             
             var id_eleve = $("#id").val();
             var date_debut = $("#date_debut").val();
