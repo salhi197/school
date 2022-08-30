@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function ()
 
 	Route::post('/home/groupes/{id_groupe}/eleve/{id_eleve}/modif_num','SingleGroupeController@modifier_eleve');
 
-	Route::post('/home/caisse/ajout_depense','CaisseController@ajout_depense');
+	Route::post('/home/caisse/filter/ajout_depense','CaisseController@ajout_depense');
 
 	Route::post('/home/caisse/depenses','CaisseController@get_recettes');
 
@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function ()
 	Route::post('/home/get_payment/ajax','HomeController@get_all_payement_eleve');
 
 	Route::post('/home/imprimer_bon/eleve/all','HomeController@imprimer_bon_payement_eleve');
+
+	Route::post('/home/edit_eleve','HomeController@edit_eleve');
 
 	//
 });	

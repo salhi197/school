@@ -106,10 +106,10 @@ class HomeController extends Controller
         $date_debut = $request->date_debut;
         $date_fin = $request->date_fin;
 
-        $payements_groupes = DB::select("select distinct e.nom,e.prenom,g.id as id_groupe,g.matiere,se.payement,se.created_at
-            from eleves e,seances_eleves se,groupes g,seances s
-            where (e.id = $id_eleve) and (s.id = se.id_seance) and (s.id_groupe = g.id) and (se.id_eleve = e.id) and (se.payement <> 0) and(date(se.created_at) between '$date_debut' and '$date_fin') 
-            order by se.created_at asc ");
+        $payements_groupes = DB::select("select distinct e.nom,e.prenom,g.id as id_groupe,g.matiere,pge.payement,pge.created_at
+            from eleves e,groupes g,payment_groupes_eleves pge
+            where (e.id = $id_eleve) and (pge.id_groupe = g.id) and (pge.id_eleve = e.id) and (pge.payement <> 0) and(date(pge.created_at) between '$date_debut' and '$date_fin') 
+            order by pge.created_at asc ");
 
         $payements_dawarat = DB::select("select distinct e.nom,e.prenom,d.id as id_dawra,d.matiere,dp.montant,dp.created_at
             from eleves e,dawrapayments dp,dawras d
@@ -137,10 +137,10 @@ class HomeController extends Controller
 
         $eleve = Eleve::find($id_eleve);
 
-        $payements_groupes = DB::select("select distinct e.nom,e.prenom,g.id as id_groupe,g.matiere,se.payement,se.created_at
-            from eleves e,seances_eleves se,groupes g,seances s
-            where (e.id = $id_eleve) and (s.id = se.id_seance) and (s.id_groupe = g.id) and (se.id_eleve = e.id) and (se.payement <> 0) and(date(se.created_at) between '$date_debut' and '$date_fin') 
-            order by se.created_at asc ");
+        $payements_groupes = DB::select("select distinct e.nom,e.prenom,g.id as id_groupe,g.matiere,pge.payement,pge.created_at
+            from eleves e,payment_groupes_eleves pge,groupes g
+            where (e.id = $id_eleve) and (pge.id_eleve = e.id) and (pge.payement <> 0) and(date(pge.created_at) between '$date_debut' and '$date_fin') 
+            order by pge.created_at asc ");
 
         $payements_dawarat = DB::select("select distinct e.nom,e.prenom,d.id as id_dawra,d.matiere,dp.montant,dp.created_at
             from eleves e,dawrapayments dp,dawras d
@@ -172,6 +172,22 @@ class HomeController extends Controller
         // return $pdf->download('bon.pdf');
         return $pdf->stream("bon.pdf",array("Attachment"=>0));;
 
+
+        // code...
+    }
+
+    public function edit_eleve(Request $request)
+    {
+
+        $id_eleve = $request->id;
+        $nom_eleve = $request->nom;
+        $prenom_eleve = $request->prenom;
+        $num_tel_eleve = $request->num_tel;
+        $frais_eleve = $request->frais;
+
+        DB::update("update eleves set nom = '$nom_eleve' , prenom = '$prenom_eleve' , num_tel = '$num_tel_eleve' , frais = '$frais_eleve' , updated_at = now() where id = $id_eleve ");
+
+        return back();
 
         // code...
     }

@@ -135,7 +135,7 @@
                             <nav class="horizontalMenu clearfix">
                                 <ul class="horizontalMenu-list">
                                     
-                                    <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Profile</a></li>                                    
+                                    <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Eleves</a></li>                                    
 
 
                                     <li aria-haspopup="true"><a href="/home/classes" class=""><i class="pe-7s-culture"></i> {{ trans('main.Salles') }}</a></li>

@@ -17,8 +17,8 @@
 	<h3>Elève : {!! $eleve->nom !!} {!! $eleve->prenom !!}</h3>
 
 	<img style="margin-top:1%;" src="logo_english_gate.jpg" width="300" height="120" alt="English Gate">
-
-    <table style="margin-top:2%; width: 100%; text-align: center;" width="100%" border="0.1" class="text-center table">
+	<h5 style="">Imprimé le : {!! Date('d/m/Y H:i:s') !!} </h5>
+    <table style="float:left; margin-top:2%; width: 100%; text-align: center;" width="100%" border="0.1" class="text-center table">
         
         <thead>
             <tr>
@@ -73,7 +73,6 @@
         </tbody>
 
     </table>
-
 
 </body>
 </html>

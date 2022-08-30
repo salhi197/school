@@ -157,7 +157,7 @@
 
 
 
-<a id="btn_modal" type="button" style="color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Détails sur l'élève </a>
+<a id="btn_modal" type="button" style="display: none; color: #ffffff; margin-top: 5%; margin-bottom:1%;" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="mdi mdi-plus"></i> Détails sur l'élève </a>
 
 <div id="myModal" class="modal fade" role="dialog">
 
@@ -174,7 +174,7 @@
 
             <div class="modal-body">
 
-                <form class="form-inline">
+                <form class="form-inline" method="POST" action="/home/edit_eleve">
 
                     {{ csrf_field() }}  
 
@@ -226,7 +226,7 @@
                     </div>
 
 
-                    <a style="color: #2070F5; margin-top: 5%;" id="ajout" data-dismiss="modal" onclick="ajouterprof(event,this)" class="btn btn-outline-primary col-md-12 btn_ajouter">Valider</a>
+                    <button type="submit" style="color: #2070F5; margin-top: 5%;" class="btn btn-outline-primary col-md-12 btn_ajouter">Valider</button>
                 </form>
 
 
@@ -256,7 +256,7 @@
 
                     <table style="margin-top:2%;" class="text-center table table-striped table-bordered text-nowrap w-100">
                         
-                        <thead>
+                        <thead id="thead">
                             <tr>
                                 
                                 <th>Le</th>
@@ -268,7 +268,7 @@
 
                         </thead>
 
-                        <tbody id="payements_eleve">
+                        
                             
 
                         </tbody>
@@ -306,7 +306,7 @@
 
 
 
-
+    <button id="payements_all" style="display:none;" onclick="show_payement();">appler show</button>
 
 
 
@@ -317,8 +317,11 @@
         function edit_eleve(objet) 
         {
 
-            $("#payements_eleve").html("");
-        
+
+            $("#payements_eleve").remove();
+
+            $("#thead").after("<tbody id='payements_eleve'>  </tbody>");
+                
             var id_eleve = (objet.id.substr(6));
 
             var frais = $("#frais_eleve"+id_eleve).text();

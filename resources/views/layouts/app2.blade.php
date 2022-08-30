@@ -120,7 +120,7 @@
                                         </ul>
                                     </li>--}}
                                     
-                                    <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Profile</a></li>                                    
+                                    <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Eleves</a></li>                                    
 
 
                                     <li aria-haspopup="true"><a href="/home/classes" class=""><i class="pe-7s-culture"></i> Salles</a></li>

@@ -87,7 +87,7 @@
 
 						            <div class="modal-body">
 
-						                <form class="form-inline" method="POST" action="/home/caisse/ajout_depense">
+						                <form class="form-inline" method="POST" action="/home/caisse/filter/ajout_depense">
 
 						                    {{ csrf_field() }}  
 

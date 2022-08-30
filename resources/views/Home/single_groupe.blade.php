@@ -67,7 +67,7 @@
 
 			            <div class="modal-body">
 
-			                <form id="ajout" class="form-inline" method="POST" action="/home/groupes/{{$id}}/ajouter">
+			                <form id="ajout" target="_blank" class="form-inline" method="POST" action="/home/groupes/{{$id}}/ajouter">
 
 			                	{{ csrf_field() }}  
 
