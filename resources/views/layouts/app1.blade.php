@@ -67,10 +67,12 @@
             <div class="page-main">
                 <!-- HEADER -->
                 <div class="header hor-top-header">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="d-flex">
                             <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
-                            
+                            <div class="col-md-2">
+                                    <input class="form-control" id="input_id" placeholder="scanner :" autofocus type="text"/>
+                                </div> 
                             <a class="header-brand" href="/home">
                                 <img src="{{ asset('../../assets/images/brand/log.png') }}" class="header-brand-img desktop-logo" alt="Solic logo">
                                 <img src="{{ asset('../../assets/images/brand/logo-1.png') }}" class="header-brand-img mobile-view-logo" alt="Solic logo">
@@ -119,6 +121,7 @@
                                         {{--  --}}
                                     </div>
                                 </div>
+                                
 
                                 <!-- SIDE-MENU -->
                                 {{--  --}}
@@ -135,7 +138,7 @@
                             <nav class="horizontalMenu clearfix">
                                 <ul class="horizontalMenu-list">
                                     
-                                    <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Eleves</a></li>                                    
+                                    <li aria-haspopup="true"><a href="/home" class=""><i class="ti-user"></i>Profile</a></li>                                    
 
 
                                     <li aria-haspopup="true"><a href="/home/classes" class=""><i class="pe-7s-culture"></i> {{ trans('main.Salles') }}</a></li>
@@ -189,6 +192,7 @@
                                 </ul>
                             </nav>
                             <!-- NAV END -->
+                            
                         </div>
                     </div>
                 </div>
@@ -325,7 +329,32 @@
 
         <!-- ECHART PLUGIN -->
         <script src="{{ asset('../../assets/plugins/echarts/echarts.js') }}"></script>
+        <script>
+            $('#input_id').on('change',function(){
+            console.log('saz')
+            if($('#input_id').val().length >0){
+                let number = parseInt($('#input_id').val(), 10);
 
+                /**
+                 * هاد البارتي خليها نفيريفي المتركول ادا يكزيستي بجافا سكريبت قبل ما تبعتو
+                 */
+                // let matricules = [788];
+                //console.log(matricules);
+                // var res = false;
+                // matricules.map(function (matricule) {
+                //     res = res || matricule.matricule == number;
+                // });          
+                // console.log(res)
+                // if(res==false){
+                //     // toastr.error('Carte Non valide')
+                //     $('#input_id').val("")
+                // }else{
+                    window.location.href = 'http://localhost/gym/membre/compte/'+number;
+                // }
+            }
+            });
+
+        </script>
 
 
 
